@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadlineApp", "ReadlineApp\ReadlineApp.csproj", "{3FE3A14D-0891-4B8C-A656-71B5D6861762}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3FE3A14D-0891-4B8C-A656-71B5D6861762}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FE3A14D-0891-4B8C-A656-71B5D6861762}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FE3A14D-0891-4B8C-A656-71B5D6861762}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FE3A14D-0891-4B8C-A656-71B5D6861762}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2E5CD51F-8033-4BA0-9D7A-DEDBB664A893}
+	EndGlobalSection
+EndGlobal
