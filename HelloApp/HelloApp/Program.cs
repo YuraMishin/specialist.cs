@@ -10,9 +10,9 @@ namespace HelloApp
     class Program
     {
         /// <summary>
-        /// Method is the entry point.
+        /// Programm entry point.
         /// </summary>
-        /// <param name="args">CLI params</param>
+        /// <param name="args">Command line parameters</param>
         static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
