@@ -1,4 +1,7 @@
-# specialist.cs
+# C#/.Net Developer
+
+![Photo](https://github.com/YuraMishin/specialist.cs/blob/master/img/avatar.jpg)![Photo](https://github.com/YuraMishin/specialist.cs/blob/master/img/ms_logo.jpg)
+## Common
 + [convertbinary.com/alphabet/](https://www.convertbinary.com/alphabet/)
 + [binarytranslator.com](https://www.binarytranslator.com/)
 + [metanit.com](https://metanit.com/sharp/)
@@ -13,3 +16,5 @@
 + [Identify and customize keyboard shortcuts in Visual Studio](https://docs.microsoft.com/en-us/visualstudio/ide/identifying-and-customizing-keyboard-shortcuts-in-visual-studio?view=vs-2019)
 + [Document your code with XML comments](https://docs.microsoft.com/en-us/dotnet/csharp/codedoc)
 + [NuGet package manager](https://www.nuget.org/)
+## Patterns
++ [Принцип хорошего кода DRY (dont repeat yourself)]()
