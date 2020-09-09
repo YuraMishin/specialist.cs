@@ -17,4 +17,4 @@
 + [Document your code with XML comments](https://docs.microsoft.com/en-us/dotnet/csharp/codedoc)
 + [NuGet package manager](https://www.nuget.org/)
 ## Patterns
-+ [Принцип хорошего кода DRY (dont repeat yourself)]()
++ [РџСЂРёРЅС†РёРї С…РѕСЂРѕС€РµРіРѕ РєРѕРґР°. DRY](https://www.youtube.com/watch?v=NWemqNMCesQ)
