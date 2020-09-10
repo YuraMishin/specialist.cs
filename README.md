@@ -10,11 +10,15 @@
 + [bootboxjs](http://bootboxjs.com/)
 + [datatables.net](https://datatables.net/)
 + [twitter / typeahead.js](https://github.com/twitter/typeahead.js)
++ [toastr non-blocking notifications](https://github.com/CodeSeven/toastr)
++ [Adobe Colors](https://color.adobe.com/ru/explore/most-popular/?time=all)
 ## MS
 + [Documentation .Net](https://docs.microsoft.com/en-us/dotnet/api/)
 + [Custom date and time format strings](https://docs.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings)
 + [Identify and customize keyboard shortcuts in Visual Studio](https://docs.microsoft.com/en-us/visualstudio/ide/identifying-and-customizing-keyboard-shortcuts-in-visual-studio?view=vs-2019)
 + [Document your code with XML comments](https://docs.microsoft.com/en-us/dotnet/csharp/codedoc)
 + [NuGet package manager](https://www.nuget.org/)
++ [.Net Core](https://dotnet.microsoft.com/download)
++ [Visual Studio 2019](https://visualstudio.microsoft.com/ru/downloads/)
 ## Patterns
 + [Принцип хорошего кода. DRY](https://www.youtube.com/watch?v=NWemqNMCesQ)
