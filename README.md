@@ -7,12 +7,6 @@
 + [binarytranslator.com](https://www.binarytranslator.com/)
 + [metanit.com](https://metanit.com/sharp/)
 + [ASCII Code](https://www.ascii-code.com/)
-+ [Free themes for Bootstrap](https://bootswatch.com/)
-+ [bootboxjs](http://bootboxjs.com/)
-+ [datatables.net](https://datatables.net/)
-+ [twitter / typeahead.js](https://github.com/twitter/typeahead.js)
-+ [toastr non-blocking notifications](https://github.com/CodeSeven/toastr)
-+ [Adobe Colors](https://color.adobe.com/ru/explore/most-popular/?time=all)
 ## Microsoft
 + [Documentation .Net](https://docs.microsoft.com/en-us/dotnet/api/)
 + [Custom date and time format strings](https://docs.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings)
@@ -21,6 +15,15 @@
 + [NuGet package manager](https://www.nuget.org/)
 + [.Net Core](https://dotnet.microsoft.com/download)
 + [Visual Studio 2019](https://visualstudio.microsoft.com/ru/downloads/)
+## Web-design
++ [Bootstrap](https://getbootstrap.com/)
++ [Free themes for Bootstrap](https://bootswatch.com/)
++ [bootboxjs](http://bootboxjs.com/)
++ [sweetalert](https://sweetalert2.github.io/)
++ [datatables.net](https://datatables.net/)
++ [twitter / typeahead.js](https://github.com/twitter/typeahead.js)
++ [toastr non-blocking notifications](https://github.com/CodeSeven/toastr)
++ [Adobe Colors](https://color.adobe.com/ru/explore/most-popular/?time=all)
 ## Паттерны
 ### Принципы ООП
 + [1. Инкапсуляция](https://www.youtube.com/watch?v=EvGi6XDgV7w)
