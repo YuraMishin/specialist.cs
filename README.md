@@ -14,7 +14,9 @@
 + [NuGet package manager](https://www.nuget.org/)
 + [.Net Core](https://dotnet.microsoft.com/download)
 + [Visual Studio 2019](https://visualstudio.microsoft.com/ru/downloads/)
++ [Razor Pages with Entity Framework Core in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/data/ef-rp/intro?view=aspnetcore-3.1&tabs=visual-studio)
 ## Web-design
++ [Laravel Framework](https://laravel.com/)
 + [Bootstrap](https://getbootstrap.com/)
 + [Free themes for Bootstrap](https://bootswatch.com/)
 + [bootboxjs](http://bootboxjs.com/)
