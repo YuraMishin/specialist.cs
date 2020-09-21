@@ -1,7 +1,6 @@
-
 # C#/.Net Developer
 
-![Photo](https://github.com/YuraMishin/specialist.cs/blob/master/img/avatar.jpg)![Photo](https://github.com/YuraMishin/specialist.cs/blob/master/img/ms_logo.jpg)
+![Photo](https://github.com/YuraMishin/specialist.cs/blob/master/img/avatar.jpg)![Photo](https://github.com/YuraMishin/specialist.cs/blob/master/img/ms_logo.jpg)![Photo](https://github.com/YuraMishin/specialist.cs/blob/master/img/specialist.jpg)
 ## Общее
 + [convertbinary.com/alphabet/](https://www.convertbinary.com/alphabet/)
 + [binarytranslator.com](https://www.binarytranslator.com/)
