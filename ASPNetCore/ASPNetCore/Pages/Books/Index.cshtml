@@ -11,35 +11,48 @@
     Create / Update a Book
   </a>
 </p>
-@if (Model.Books.Any())
-{
-  <table class="table table-striped border">
-    <tr class="table-secondary">
-      <th>
-        <label asp-for="Books.FirstOrDefault().Name"></label>
-      </th>
-      <th>
-        Edit
-      </th>
-    </tr>
-    @foreach (var book in Model.Books)
-    {
-      <tr>
-        <td>
-          @Html.DisplayFor(model => book.Name)
-        </td>
-        <td>
-          <a asp-page="Upsert"
-             asp-route-id="@book.Id"
-             class="btn btn-success btn-sm text-white">
-            Edit
-          </a>
-        </td>
+<form method="post">
+  @if (Model.Books.Any())
+  {
+    <table class="table table-striped border">
+      <tr class="table-secondary">
+        <th>
+          <label asp-for="Books.FirstOrDefault().Name"></label>
+        </th>
+        <th>
+          Edit
+        </th>
+        <th>
+          Delete
+        </th>
       </tr>
-    }
-  </table>
-}
-else
-{
-  <p>No books available.</p>
-}
+      @foreach (var book in Model.Books)
+      {
+        <tr>
+          <td>
+            @Html.DisplayFor(model => book.Name)
+          </td>
+          <td>
+            <a asp-page="Upsert"
+               asp-route-id="@book.Id"
+               class="btn btn-success btn-sm text-white">
+              Edit
+            </a>
+          </td>
+          <td>
+            <button asp-page-handler="Delete"
+                    asp-route-id="@book.Id"
+                    onclick="return confirm('Are you sure?')"
+                    class="btn btn-danger btn-sm">
+              Delete
+            </button>
+          </td>
+        </tr>
+      }
+    </table>
+  }
+  else
+  {
+    <p>No books available.</p>
+  }
+</form>
