@@ -1,0 +1,30 @@
+@page
+@using System.Linq
+@model ASPNetCore.Pages.Books.IndexModel
+@{
+  ViewData["Title"] = "Index";
+}
+
+<h1>Books</h1>
+@if (Model.Books.Any())
+{
+  <table class="table table-striped border">
+    <tr class="table-secondary">
+      <th>
+        <label asp-for="Books.FirstOrDefault().Name"></label>
+      </th>
+    </tr>
+    @foreach (var book in Model.Books)
+    {
+      <tr>
+        <td>
+          @Html.DisplayFor(model => book.Name)
+        </td>
+      </tr>
+    }
+  </table>
+}
+else
+{
+  <p>No books available.</p>
+}
