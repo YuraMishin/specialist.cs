@@ -6,6 +6,11 @@
 }
 
 <h1>Books</h1>
+<p>
+  <a asp-page="Upsert">
+    Create / Update a Book
+  </a>
+</p>
 @if (Model.Books.Any())
 {
   <table class="table table-striped border">
@@ -13,12 +18,22 @@
       <th>
         <label asp-for="Books.FirstOrDefault().Name"></label>
       </th>
+      <th>
+        Edit
+      </th>
     </tr>
     @foreach (var book in Model.Books)
     {
       <tr>
         <td>
           @Html.DisplayFor(model => book.Name)
+        </td>
+        <td>
+          <a asp-page="Upsert"
+             asp-route-id="@book.Id"
+             class="btn btn-success btn-sm text-white">
+            Edit
+          </a>
         </td>
       </tr>
     }
