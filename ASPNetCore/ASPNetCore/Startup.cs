@@ -27,6 +27,7 @@ namespace ASPNetCore
             Configuration.GetConnectionString("DefaultConnection")));
       //
       services.AddRazorPages().AddRazorRuntimeCompilation();
+      services.AddControllersWithViews();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,7 +51,11 @@ namespace ASPNetCore
 
       app.UseAuthorization();
 
-      app.UseEndpoints(endpoints => { endpoints.MapRazorPages(); });
+      app.UseEndpoints(endpoints =>
+      {
+        endpoints.MapRazorPages();
+        endpoints.MapControllers();
+      });
     }
   }
 }
