@@ -38,5 +38,34 @@ namespace ASPNetCore.Controllers
         data = await _db.Book.ToListAsync()
       });
     }
+
+    /// <summary>
+    /// Method delete a book
+    /// </summary>
+    /// <param name="id">Id</param>
+    /// <returns>IActionResult</returns>
+    [HttpDelete]
+    public async Task<IActionResult> Delete(int id)
+    {
+      var bookFromDb =
+        await _db.Book.FirstOrDefaultAsync(book => book.Id == id);
+      if (bookFromDb == null)
+      {
+        return Json(new
+        {
+          success = false,
+          message = "Error while Deleting"
+        });
+      }
+
+      _db.Book.Remove(bookFromDb);
+      await _db.SaveChangesAsync();
+
+      return Json(new
+      {
+        success = true,
+        message = "Delete successful"
+      });
+    }
   }
 }
