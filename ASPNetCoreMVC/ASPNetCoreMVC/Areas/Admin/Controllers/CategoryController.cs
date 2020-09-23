@@ -1,4 +1,5 @@
 using ASPNetCoreMVC.Data;
+using ASPNetCoreMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
@@ -41,6 +42,25 @@ namespace ASPNetCoreMVC.Areas.Admin.Controllers
     public IActionResult Create()
     {
       return View();
+    }
+
+    /// <summary>
+    /// Method saves category
+    /// </summary>
+    /// <param name="category">Category</param>
+    /// <returns>IActionResult</returns>
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Store(Category category)
+    {
+      if (ModelState.IsValid)
+      {
+        _db.Categories.Add(category);
+        await _db.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
+      }
+
+      return View("Create", category);
     }
   }
 }
