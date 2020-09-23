@@ -3,5 +3,36 @@
   ViewData["Title"] = "Index";
   Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Index</h1>
+<div class="border backgroundWhite">
+  <div class="row">
+    <div class="col-6">
+      <h2 class="text-info">Category List</h2>
+    </div>
+    <div class="col-6 text-right">
+      <partial name="_CreateButtonPartial" />
+    </div>
+  </div>
+  <div>
+    @if (Model.Any())
+    {
+      <table class="table table-striped border">
+        <tr class="table-secondary">
+          <th>@Html.DisplayNameFor(category => category.Name)</th>
+          <th></th>
+          <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+          <tr>
+            <td>@Html.DisplayFor(categories => item.Name)</td>
+            <td>EDIT | DELETE | Details</td>
+          </tr>
+        }
+      </table>
+    }
+    else
+    {
+      <p>No category exists...</p>
+    }
+  </div>
+</div>

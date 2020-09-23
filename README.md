@@ -26,6 +26,7 @@
 + [twitter / typeahead.js](https://github.com/twitter/typeahead.js)
 + [toastr non-blocking notifications](https://github.com/CodeSeven/toastr)
 + [Adobe Colors](https://color.adobe.com/ru/explore/most-popular/?time=all)
++ [Font awesome](https://fontawesome.com/)
 ## Паттерны
 ### Принципы ООП
 + [1. Инкапсуляция](https://www.youtube.com/watch?v=EvGi6XDgV7w)
