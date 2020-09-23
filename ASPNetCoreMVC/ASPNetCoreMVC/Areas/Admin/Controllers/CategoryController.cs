@@ -33,5 +33,14 @@ namespace ASPNetCoreMVC.Areas.Admin.Controllers
     {
       return View(await _db.Categories.ToListAsync());
     }
+
+    /// <summary>
+    /// Method displays Create UI
+    /// </summary>
+    /// <returns></returns>
+    public IActionResult Create()
+    {
+      return View();
+    }
   }
 }
