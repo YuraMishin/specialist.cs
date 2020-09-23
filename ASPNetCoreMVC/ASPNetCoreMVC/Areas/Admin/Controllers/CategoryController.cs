@@ -62,5 +62,45 @@ namespace ASPNetCoreMVC.Areas.Admin.Controllers
 
       return View("Create", category);
     }
+
+    /// <summary>
+    /// Method shows UI to edit category
+    /// </summary>
+    /// <param name="id">Id</param>
+    /// <returns>IActionResult</returns>
+    public async Task<IActionResult> Edit(int? id)
+    {
+      if (id == null)
+      {
+        return NotFound();
+      }
+
+      var category = await _db.Categories.FindAsync(id);
+      if (category == null)
+      {
+        return NotFound();
+      }
+
+      return View(category);
+    }
+
+    /// <summary>
+    /// Method updates category
+    /// </summary>
+    /// <param name="category">Category</param>
+    /// <returns>IActionResult</returns>
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(Category category)
+    {
+      if (ModelState.IsValid)
+      {
+        _db.Categories.Update(category);
+        await _db.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
+      }
+
+      return View(category);
+    }
   }
 }
