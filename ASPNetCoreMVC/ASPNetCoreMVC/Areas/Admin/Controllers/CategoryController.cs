@@ -102,5 +102,46 @@ namespace ASPNetCoreMVC.Areas.Admin.Controllers
 
       return View(category);
     }
+
+    /// <summary>
+    /// Method shows UI to delete category
+    /// </summary>
+    /// <param name="id">Id</param>
+    /// <returns>IActionResult</returns>
+    public async Task<IActionResult> Delete(int? id)
+    {
+      if (id == null)
+      {
+        return NotFound();
+      }
+
+      var category = await _db.Categories.FindAsync(id);
+      if (category == null)
+      {
+        return NotFound();
+      }
+
+      return View(category);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(int? id)
+    {
+      if (id == null)
+      {
+        return NotFound();
+      }
+
+      var category = await _db.Categories.FindAsync(id);
+      if (category == null)
+      {
+        return View();
+      }
+
+      _db.Categories.Remove(category);
+      await _db.SaveChangesAsync();
+      return RedirectToAction(nameof(Index));
+    }
   }
 }

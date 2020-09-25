@@ -18,6 +18,7 @@ namespace ASPNetCoreMVC.Models
     /// <summary>
     /// Name
     /// </summary>
+    [Display(Name = "Category Name")]
     [Required]
     [StringLength(50)]
     public string Name { get; set; }
