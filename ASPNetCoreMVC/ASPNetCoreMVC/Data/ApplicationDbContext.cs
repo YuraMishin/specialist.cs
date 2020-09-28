@@ -20,6 +20,11 @@ namespace ASPNetCoreMVC.Data
     public DbSet<SubCategory> SubCategories { get; set; }
 
     /// <summary>
+    /// MenuItems table
+    /// </summary>
+    public DbSet<MenuItem> MenuItems { get; set; }
+
+    /// <summary>
     /// Constructor
     /// </summary>
     /// <param name="options">DbContext</param>

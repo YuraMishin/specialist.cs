@@ -28,7 +28,7 @@
                  aria-expanded="false"
                  href="#"
                  class="nav-link dropdown-toggle">
-                Content Management
+                CMS
               </a>
               <div class="dropdown-menu" area-labelledby="navbarDropDownMenuLink">
                 <a asp-action="Index"
@@ -42,6 +42,12 @@
                    asp-area="Admin"
                    class="dropdown-item">
                   Sub Category
+                </a>
+                <a asp-action="Index"
+                   asp-controller="MenuItem"
+                   asp-area="Admin"
+                   class="dropdown-item">
+                  MenuItem
                 </a>
               </div>
             </li>
@@ -69,6 +75,7 @@
       &copy; 2020 - ASPNetCoreMVC
     </div>
   </footer>
+  <script src="https://cdn.tiny.cloud/1/ef9gc2yqkveqimt3dpnjpl5cdju4shgu08kwuq96wncfx0qw/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
   <script src="~/lib/jquery/dist/jquery.min.js"></script>
   <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="~/js/site.js" asp-append-version="true"></script>

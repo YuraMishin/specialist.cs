@@ -28,6 +28,7 @@
 + [Adobe Colors](https://color.adobe.com/ru/explore/most-popular/?time=all)
 + [Font awesome](https://fontawesome.com/)
 + [Emmet](https://docs.emmet.io/cheat-sheet/)
++ [TinyMCE](https://www.tiny.cloud/)
 ## Паттерны
 ### Принципы ООП
 + [1. Инкапсуляция](https://www.youtube.com/watch?v=EvGi6XDgV7w)
