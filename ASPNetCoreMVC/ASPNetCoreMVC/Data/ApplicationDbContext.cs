@@ -15,6 +15,11 @@ namespace ASPNetCoreMVC.Data
     public DbSet<Category> Categories { get; set; }
 
     /// <summary>
+    /// SubCategories table
+    /// </summary>
+    public DbSet<SubCategory> SubCategories { get; set; }
+
+    /// <summary>
     /// Constructor
     /// </summary>
     /// <param name="options">DbContext</param>

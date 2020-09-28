@@ -42,3 +42,4 @@
 ### Принципы хорошего кода
 + [DRY](https://www.youtube.com/watch?v=NWemqNMCesQ)
 + [KISS](https://www.youtube.com/watch?v=rix-fkrloq4)
++ [YAGNI](https://www.youtube.com/watch?v=Ot2eB07rjcI)
