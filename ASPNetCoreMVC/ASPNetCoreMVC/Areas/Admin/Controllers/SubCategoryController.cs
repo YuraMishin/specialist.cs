@@ -161,10 +161,10 @@ namespace ASPNetCoreMVC.Areas.Admin.Controllers
     }
 
     /// <summary>
-    /// todo
+    /// Method edits subcategory
     /// </summary>
-    /// <param name="model"></param>
-    /// <returns></returns>
+    /// <param name="model">SubCategoryAndCategoryViewModel</param>
+    /// <returns>IActionResult</returns>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(SubCategoryAndCategoryViewModel model)
@@ -184,7 +184,8 @@ namespace ASPNetCoreMVC.Areas.Admin.Controllers
         }
         else
         {
-          var subCatFromDb = await _db.SubCategories.FindAsync(model.SubCategory.Id);
+          var subCatFromDb =
+            await _db.SubCategories.FindAsync(model.SubCategory.Id);
           subCatFromDb.Name = model.SubCategory.Name;
           await _db.SaveChangesAsync();
           return RedirectToAction(nameof(Index));
@@ -201,6 +202,29 @@ namespace ASPNetCoreMVC.Areas.Admin.Controllers
         StatusMessage = StatusMessage
       };
       return View("Edit", modelVM);
+    }
+
+    /// <summary>
+    /// Method displays subcategory details UI 
+    /// </summary>
+    /// <param name="id">Id</param>
+    /// <returns>IActionResult</returns>
+    public async Task<IActionResult> Details(int? id)
+    {
+      if (id == null)
+      {
+        return NotFound();
+      }
+
+      var subCategory = await _db.SubCategories
+        .Include(s => s.Category)
+        .SingleOrDefaultAsync(m => m.Id == id);
+      if (subCategory == null)
+      {
+        return NotFound();
+      }
+
+      return View(subCategory);
     }
   }
 }
