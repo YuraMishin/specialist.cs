@@ -26,6 +26,7 @@ namespace ASPNetCoreMVC
               Configuration.GetConnectionString("DefaultConnection")));
       services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
           .AddEntityFrameworkStores<ApplicationDbContext>();
+      // add mvc services
       services.AddControllersWithViews();
       services.AddRazorPages();
     }

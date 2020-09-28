@@ -126,5 +126,81 @@ namespace ASPNetCoreMVC.Areas.Admin.Controllers
                              select subCategory).ToListAsync();
       return Json(new SelectList(subCategories, "Id", "Name"));
     }
+
+    /// <summary>
+    /// Method displays Edit subcategory UI
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public async Task<IActionResult> Edit(int? id)
+    {
+      if (id == null)
+      {
+        return NotFound();
+      }
+
+      var subCategory =
+        await _db.SubCategories.SingleOrDefaultAsync(m => m.Id == id);
+      if (subCategory == null)
+      {
+        return NotFound();
+      }
+
+      var model = new SubCategoryAndCategoryViewModel
+      {
+        CategoryList = await _db.Categories.ToListAsync(),
+        SubCategory = subCategory,
+        SubCategoryList = await _db.SubCategories
+          .OrderBy(p => p.Name)
+          .Select(p => p.Name)
+          .Distinct()
+          .ToListAsync()
+      };
+
+      return View(model);
+    }
+
+    /// <summary>
+    /// todo
+    /// </summary>
+    /// <param name="model"></param>
+    /// <returns></returns>
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(SubCategoryAndCategoryViewModel model)
+    {
+      if (ModelState.IsValid)
+      {
+        var doesSCExists = _db.SubCategories.Include(s => s.Category)
+          .Where(s =>
+            s.Name == model.SubCategory.Name &&
+            s.Category.Id == model.SubCategory.CategoryId);
+        if (doesSCExists.Any())
+        {
+          var categoryName = doesSCExists.First().Category.Name;
+          StatusMessage =
+            String.Format(
+              $"Error: Sub Category exists under {categoryName} category. Please use another name.");
+        }
+        else
+        {
+          var subCatFromDb = await _db.SubCategories.FindAsync(model.SubCategory.Id);
+          subCatFromDb.Name = model.SubCategory.Name;
+          await _db.SaveChangesAsync();
+          return RedirectToAction(nameof(Index));
+        }
+      }
+
+      var modelVM = new SubCategoryAndCategoryViewModel()
+      {
+        CategoryList = await _db.Categories.ToListAsync(),
+        SubCategory = model.SubCategory,
+        SubCategoryList = await _db.SubCategories.OrderBy(p => p.Name)
+          .Select(p => p.Name)
+          .ToListAsync(),
+        StatusMessage = StatusMessage
+      };
+      return View("Edit", modelVM);
+    }
   }
 }
