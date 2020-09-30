@@ -26,6 +26,11 @@ namespace ASPNetCoreMVC.Data
     /// </summary>
     public DbSet<MenuItem> MenuItems { get; set; }
 
+    /// <summary>
+    /// Coupons table
+    /// </summary>
+    public DbSet<Coupon> Coupons { get; set; }
+
     #endregion
 
     /// <summary>
