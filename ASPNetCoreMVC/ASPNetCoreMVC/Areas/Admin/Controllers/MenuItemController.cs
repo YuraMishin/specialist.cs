@@ -146,6 +146,7 @@ namespace ASPNetCoreMVC.Areas.Admin.Controllers
       {
         return NotFound();
       }
+
       return View(MenuItemVM);
     }
 
@@ -173,6 +174,7 @@ namespace ASPNetCoreMVC.Areas.Admin.Controllers
           .ToListAsync();
         return View(MenuItemVM);
       }
+
       // img saving
       var webRootPath = _hostingEnvironment.WebRootPath;
       var files = HttpContext.Request.Form.Files;
@@ -198,8 +200,10 @@ namespace ASPNetCoreMVC.Areas.Admin.Controllers
           files[0].CopyTo(filesStream);
         }
 
-        menuItenFromDb.Image = @"\img\" + MenuItemVM.MenuItem.Id + extension_new;
+        menuItenFromDb.Image =
+          @"\img\" + MenuItemVM.MenuItem.Id + extension_new;
       }
+
       menuItenFromDb.Name = MenuItemVM.MenuItem.Name;
       menuItenFromDb.Description = MenuItemVM.MenuItem.Description;
       menuItenFromDb.Price = MenuItemVM.MenuItem.Price;
@@ -209,6 +213,30 @@ namespace ASPNetCoreMVC.Areas.Admin.Controllers
 
       await _db.SaveChangesAsync();
       return RedirectToAction(nameof(Index));
+    }
+
+    /// <summary>
+    /// Method shows UI to edit menu item
+    /// </summary>
+    /// <param name="id">Id</param>
+    /// <returns>IActionResult</returns>
+    public async Task<IActionResult> Details(int? id)
+    {
+      if (id == null)
+      {
+        return NotFound();
+      }
+      MenuItemVM.MenuItem = await _db.MenuItems
+        .Include(m => m.Category)
+        .Include(m => m.SubCategory)
+        .SingleOrDefaultAsync(m => m.Id == id);
+
+      if (MenuItemVM.MenuItem == null)
+      {
+        return NotFound();
+      }
+
+      return View(MenuItemVM);
     }
   }
 }
