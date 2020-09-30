@@ -9,6 +9,8 @@ namespace ASPNetCoreMVC.Data
   /// </summary>
   public class ApplicationDbContext : IdentityDbContext
   {
+    #region DbTables
+
     /// <summary>
     /// Categories table
     /// </summary>
@@ -23,6 +25,8 @@ namespace ASPNetCoreMVC.Data
     /// MenuItems table
     /// </summary>
     public DbSet<MenuItem> MenuItems { get; set; }
+
+    #endregion
 
     /// <summary>
     /// Constructor
