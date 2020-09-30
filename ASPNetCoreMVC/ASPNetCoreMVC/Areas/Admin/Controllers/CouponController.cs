@@ -162,6 +162,7 @@ namespace ASPNetCoreMVC.Areas.Admin.Controllers
       {
         return NotFound();
       }
+
       var coupon = await _db.Coupons
         .FirstOrDefaultAsync(m => m.Id == id);
       if (coupon == null)
@@ -170,6 +171,40 @@ namespace ASPNetCoreMVC.Areas.Admin.Controllers
       }
 
       return View(coupon);
+    }
+
+    /// <summary>
+    /// Method shows UI to delete coupon
+    /// </summary>
+    /// <param name="id">id</param>
+    /// <returns>IActionResult</returns>
+    public async Task<IActionResult> Delete(int? id)
+    {
+      if (id == null)
+      {
+        return NotFound();
+      }
+      var coupon = await _db.Coupons.SingleOrDefaultAsync(m => m.Id == id);
+      if (coupon == null)
+      {
+        return NotFound();
+      }
+      return View(coupon);
+    }
+
+    /// <summary>
+    /// Method removes coupon
+    /// </summary>
+    /// <param name="id">id</param>
+    /// <returns>IActionResult</returns>
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeletePost(int id)
+    {
+      var coupons = await _db.Coupons.SingleOrDefaultAsync(m => m.Id == id);
+      _db.Coupons.Remove(coupons);
+      await _db.SaveChangesAsync();
+      return RedirectToAction(nameof(Index));
     }
   }
 }
