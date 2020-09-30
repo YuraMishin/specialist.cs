@@ -150,5 +150,26 @@ namespace ASPNetCoreMVC.Areas.Admin.Controllers
 
       return View(coupon);
     }
+
+    /// <summary>
+    /// Method displays UI to view coupon details
+    /// </summary>
+    /// <param name="id">id</param>
+    /// <returns>IActionResult</returns>
+    public async Task<IActionResult> Details(int? id)
+    {
+      if (id == null)
+      {
+        return NotFound();
+      }
+      var coupon = await _db.Coupons
+        .FirstOrDefaultAsync(m => m.Id == id);
+      if (coupon == null)
+      {
+        return NotFound();
+      }
+
+      return View(coupon);
+    }
   }
 }
