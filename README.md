@@ -6,6 +6,8 @@
 + [binarytranslator.com](https://www.binarytranslator.com/)
 + [metanit.com](https://metanit.com/sharp/)
 + [ASCII Code](https://www.ascii-code.com/)
++ [pastebin.com](https://pastebin.com/)
++ [carbon.now.sh](https://carbon.now.sh/)
 ## Microsoft
 + [Microsoft Documentation](https://docs.microsoft.com/en-us/)
 + [Documentation .Net](https://docs.microsoft.com/en-us/dotnet/api/)
