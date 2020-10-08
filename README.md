@@ -8,6 +8,7 @@
 + [ASCII Code](https://www.ascii-code.com/)
 + [pastebin.com](https://pastebin.com/)
 + [carbon.now.sh](https://carbon.now.sh/)
++ [Таблица символов Юникода](https://unicode-table.com/ru/)
 ## Microsoft
 + [Microsoft Documentation](https://docs.microsoft.com/en-us/)
 + [Documentation .Net](https://docs.microsoft.com/en-us/dotnet/api/)
