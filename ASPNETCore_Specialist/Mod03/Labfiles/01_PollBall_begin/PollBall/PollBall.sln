@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PollBall", "PollBall\PollBall.csproj", "{ACCB7175-DA5B-4A02-8497-A4ED70BA324B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ACCB7175-DA5B-4A02-8497-A4ED70BA324B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACCB7175-DA5B-4A02-8497-A4ED70BA324B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACCB7175-DA5B-4A02-8497-A4ED70BA324B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACCB7175-DA5B-4A02-8497-A4ED70BA324B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FC4F4439-B034-4346-9ABC-A12D7201360B}
+	EndGlobalSection
+EndGlobal
