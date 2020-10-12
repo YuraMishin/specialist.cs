@@ -1,8 +1,8 @@
-using System;
 using ButterfliesShop.Models;
 using ButterfliesShop.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -49,7 +49,33 @@ namespace ButterfliesShop.Controllers
       Butterfly requestedButterfly = _data.GetButterflyById(id);
       if (requestedButterfly != null)
       {
-        return null;
+        string webRootpath = _environment.WebRootPath;
+        string folderPath = "\\images\\";
+        string fullPath =
+          webRootpath + folderPath + requestedButterfly.ImageName;
+        if (System.IO.File.Exists(fullPath))
+        {
+          FileStream fileOnDisk = new FileStream(fullPath, FileMode.Open);
+          byte[] fileBytes;
+          using (BinaryReader br = new BinaryReader(fileOnDisk))
+          {
+            fileBytes = br.ReadBytes((int)fileOnDisk.Length);
+          }
+
+          return File(fileBytes, requestedButterfly.ImageMimeType);
+        }
+        else
+        {
+          if (requestedButterfly.PhotoFile.Length > 0)
+          {
+            return File(requestedButterfly.PhotoFile,
+              requestedButterfly.ImageMimeType);
+          }
+          else
+          {
+            return NotFound();
+          }
+        }
       }
       else
       {
@@ -73,7 +99,8 @@ namespace ButterfliesShop.Controllers
         if (butterfly.PhotoAvatar != null && butterfly.PhotoAvatar.Length > 0)
         {
           butterfly.ImageMimeType = butterfly.PhotoAvatar.ContentType;
-          butterfly.ImageName = Path.GetFileName(butterfly.PhotoAvatar.FileName);
+          butterfly.ImageName =
+            Path.GetFileName(butterfly.PhotoAvatar.FileName);
           butterfly.Id = lastButterfly.Id + 1;
           _butterfliesQuantityService.AddButterfliesQuantityData(butterfly);
           using (var memoryStream = new MemoryStream())
@@ -81,11 +108,14 @@ namespace ButterfliesShop.Controllers
             butterfly.PhotoAvatar.CopyTo(memoryStream);
             butterfly.PhotoFile = memoryStream.ToArray();
           }
+
           _data.AddButterfly(butterfly);
           return RedirectToAction("Index");
         }
+
         return View(butterfly);
       }
+
       return View(butterfly);
     }
   }
