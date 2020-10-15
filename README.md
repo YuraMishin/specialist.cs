@@ -4,11 +4,12 @@
 ## Общее
 + [convertbinary.com/alphabet/](https://www.convertbinary.com/alphabet/)
 + [binarytranslator.com](https://www.binarytranslator.com/)
-+ [metanit.com](https://metanit.com/sharp/)
++ [Язык программирования C# и платформа .NET](https://metanit.com/sharp/)
 + [ASCII Code](https://www.ascii-code.com/)
 + [pastebin.com](https://pastebin.com/)
 + [carbon.now.sh](https://carbon.now.sh/)
 + [Таблица символов Юникода](https://unicode-table.com/ru/)
++ [Уроки по C# и платформе .NET Framework](https://professorweb.ru/)
 ## Microsoft
 + [Microsoft Documentation](https://docs.microsoft.com/en-us/)
 + [Documentation .Net](https://docs.microsoft.com/en-us/dotnet/api/)
