@@ -9,6 +9,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ASPNetCoreMVC.Areas.Admin.Controllers
 {
@@ -16,6 +17,7 @@ namespace ASPNetCoreMVC.Areas.Admin.Controllers
   /// Class implements MenuItem controller
   /// </summary>
   [Area("Admin")]
+  [Authorize(Roles = SD.ManagerUser)]
   public class MenuItemController : Controller
   {
     /// <summary>

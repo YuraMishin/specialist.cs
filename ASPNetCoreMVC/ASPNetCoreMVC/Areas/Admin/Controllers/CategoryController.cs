@@ -3,12 +3,15 @@ using ASPNetCoreMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using ASPNetCoreMVC.Utility;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ASPNetCoreMVC.Areas.Admin.Controllers
 {
   /// <summary>
   /// Class implements Category Controller
   /// </summary>
+  [Authorize(Roles = SD.ManagerUser)]
   [Area("Admin")]
   public class CategoryController : Controller
   {

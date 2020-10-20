@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using ASPNetCoreMVC.Utility;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ASPNetCoreMVC.Areas.Admin.Controllers
 {
@@ -12,6 +14,7 @@ namespace ASPNetCoreMVC.Areas.Admin.Controllers
   /// Class implements Coupon controller
   /// </summary>
   [Area("Admin")]
+  [Authorize(Roles = SD.ManagerUser)]
   public class CouponController : Controller
   {
     /// <summary>
@@ -184,11 +187,13 @@ namespace ASPNetCoreMVC.Areas.Admin.Controllers
       {
         return NotFound();
       }
+
       var coupon = await _db.Coupons.SingleOrDefaultAsync(m => m.Id == id);
       if (coupon == null)
       {
         return NotFound();
       }
+
       return View(coupon);
     }
 

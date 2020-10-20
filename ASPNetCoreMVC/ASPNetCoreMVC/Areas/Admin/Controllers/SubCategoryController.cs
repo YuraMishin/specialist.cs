@@ -1,6 +1,8 @@
 using ASPNetCoreMVC.Data;
 using ASPNetCoreMVC.Models;
 using ASPNetCoreMVC.Models.ViewModels;
+using ASPNetCoreMVC.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +17,7 @@ namespace ASPNetCoreMVC.Areas.Admin.Controllers
   /// Class implements SubCategory Controller
   /// </summary>
   [Area("Admin")]
+  [Authorize(Roles = SD.ManagerUser)]
   public class SubCategoryController : Controller
   {
     /// <summary>
@@ -122,8 +125,8 @@ namespace ASPNetCoreMVC.Areas.Admin.Controllers
     {
       var subCategories = new List<SubCategory>();
       subCategories = await (from subCategory in _db.SubCategories
-                             where subCategory.CategoryId == id
-                             select subCategory).ToListAsync();
+        where subCategory.CategoryId == id
+        select subCategory).ToListAsync();
       return Json(new SelectList(subCategories, "Id", "Name"));
     }
 

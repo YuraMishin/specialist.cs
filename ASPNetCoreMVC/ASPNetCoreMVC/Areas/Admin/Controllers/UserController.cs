@@ -1,4 +1,6 @@
 using ASPNetCoreMVC.Data;
+using ASPNetCoreMVC.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,7 +14,7 @@ namespace ASPNetCoreMVC.Areas.Admin.Controllers
   /// Class implements UserController
   /// </summary>
   [Area("Admin")]
-  // [Authorize(Roles = SD.ManagerUser)]
+  [Authorize(Roles = SD.ManagerUser)]
   public class UserController : Controller
   {
     /// <summary>
