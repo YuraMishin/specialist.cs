@@ -35,6 +35,10 @@ namespace ASPNetCoreMVC.Data
     /// Extends AspNetUsers table 
     /// </summary>
     public DbSet<ApplicationUser> ApplicationUser { get; set; }
+    /// <summary>
+    /// ShoppingCarts table
+    /// </summary>
+    public DbSet<ShoppingCart> ShoppingCarts { get; set; }
 
     #endregion
 
