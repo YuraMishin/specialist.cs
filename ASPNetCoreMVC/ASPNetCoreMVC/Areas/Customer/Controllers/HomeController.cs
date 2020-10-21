@@ -1,6 +1,7 @@
 using ASPNetCoreMVC.Data;
 using ASPNetCoreMVC.Models;
 using ASPNetCoreMVC.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -62,12 +63,35 @@ namespace ASPNetCoreMVC.Areas.Customer.Controllers
       return View();
     }
 
+    /// <summary>
+    /// Method displays shopping cart details UI
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    [Authorize]
+    public async Task<IActionResult> Details(int id)
+    {
+      var menuItemFromDb = await _db.MenuItems
+        .Include(m => m.Category)
+        .Include(m => m.SubCategory)
+        .Where(m => m.Id == id)
+        .FirstOrDefaultAsync();
+
+      ShoppingCart cartObj = new ShoppingCart()
+      {
+        MenuItem = menuItemFromDb,
+        MenuItemId = menuItemFromDb.Id
+      };
+
+      return View(cartObj);
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None,
       NoStore = true)]
     public IActionResult Error()
     {
       return View(new ErrorViewModel
-      { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
     }
   }
 }
