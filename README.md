@@ -19,7 +19,8 @@
 + [Document your code with XML comments](https://docs.microsoft.com/en-us/dotnet/csharp/codedoc)
 + [NuGet package manager](https://www.nuget.org/)
 + [.Net Core](https://dotnet.microsoft.com/download)
-+ [Visual Studio 2019](https://visualstudio.microsoft.com/ru/downloads/)
++ [Visual Studio](https://visualstudio.microsoft.com/ru/downloads/)
++ [Visual Studio Code](https://code.visualstudio.com/download)
 + [ASP.Net Core Documentation](https://docs.microsoft.com/ru-ru/aspnet/core/?view=aspnetcore-3.1)
 + [Razor Pages with Entity Framework Core in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/data/ef-rp/intro?view=aspnetcore-3.1&tabs=visual-studio)
 ## Web-design
@@ -39,6 +40,12 @@
 + [Emmet](https://docs.emmet.io/cheat-sheet/)
 + [TinyMCE](https://www.tiny.cloud/)
 + [JQuery](https://code.jquery.com/)
++ [Angular](https://angular.io/)
++ [React](https://en.reactjs.org/)
++ [Vue](https://vuejs.org/)
+## Database and SQL
++ [Microsoft SQL Server Express](https://www.microsoft.com/en-Us/download/details.aspx?id=55994)
++ [PostgreSQL](https://www.postgresql.org/download/)
 ## Паттерны
 ### Принципы ООП
 + [1. Инкапсуляция](https://www.youtube.com/watch?v=EvGi6XDgV7w)
