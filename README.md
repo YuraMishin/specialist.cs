@@ -27,6 +27,7 @@
 + [NodeJS](https://nodejs.org/en/)
 + [Npm](https://www.npmjs.com/)
 + [Bower](https://bower.io/)
++ [Yarn](https://yarnpkg.com/)
 + [Laravel Framework](https://laravel.com/)
 + [Bootstrap](https://getbootstrap.com/)
 + [Free themes for Bootstrap](https://bootswatch.com/)
