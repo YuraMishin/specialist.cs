@@ -44,6 +44,9 @@
 + [Angular](https://angular.io/)
 + [React](https://en.reactjs.org/)
 + [Vue](https://vuejs.org/)
++ [BabelJS](https://babeljs.io/repl)
++ [Zondicons](https://www.zondicons.com/)
++ [EmotionJS](https://github.com/emotion-js/emotion)
 ## Database and SQL
 + [Microsoft SQL Server Express](https://www.microsoft.com/en-Us/download/details.aspx?id=55994)
 + [PostgreSQL](https://www.postgresql.org/download/)
