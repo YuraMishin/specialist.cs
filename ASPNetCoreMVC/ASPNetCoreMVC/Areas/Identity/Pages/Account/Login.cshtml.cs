@@ -8,6 +8,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using ASPNetCoreMVC.Data;
+using ASPNetCoreMVC.Models;
+using ASPNetCoreMVC.Utility;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace ASPNetCoreMVC.Areas.Identity.Pages.Account
 {
@@ -17,14 +22,16 @@ namespace ASPNetCoreMVC.Areas.Identity.Pages.Account
     private readonly UserManager<IdentityUser> _userManager;
     private readonly SignInManager<IdentityUser> _signInManager;
     private readonly ILogger<LoginModel> _logger;
+    private readonly ApplicationDbContext _db;
 
     public LoginModel(SignInManager<IdentityUser> signInManager,
       ILogger<LoginModel> logger,
-      UserManager<IdentityUser> userManager)
+      UserManager<IdentityUser> userManager, ApplicationDbContext db)
     {
       _userManager = userManager;
       _signInManager = signInManager;
       _logger = logger;
+      _db = db;
     }
 
     [BindProperty] public InputModel Input { get; set; }
@@ -76,6 +83,14 @@ namespace ASPNetCoreMVC.Areas.Identity.Pages.Account
           Input.Password, Input.RememberMe, lockoutOnFailure: true);
         if (result.Succeeded)
         {
+          var user = await _db.Users.Where(u => u.Email == Input.Email)
+            .FirstOrDefaultAsync();
+
+          List<ShoppingCart> lstShoppingCart = await _db.ShoppingCarts
+            .Where(u => u.ApplicationUserId == user.Id).ToListAsync();
+
+          HttpContext.Session.SetInt32(SD.ssShoppingCartCount, lstShoppingCart.Count);
+
           _logger.LogInformation("User logged in.");
           return LocalRedirect(returnUrl);
         }

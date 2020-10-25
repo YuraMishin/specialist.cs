@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace ASPNetCoreMVC
 {
@@ -31,6 +32,14 @@ namespace ASPNetCoreMVC
         .AddDefaultUI()
         .AddEntityFrameworkStores<ApplicationDbContext>();
 
+      // add sessions
+      services.AddSession(options =>
+      {
+        options.Cookie.IsEssential = true;
+        options.IdleTimeout = TimeSpan.FromMinutes(30);
+        options.Cookie.HttpOnly = true;
+      });
+
       // add mvc services
       services.AddControllersWithViews();
       services.AddRazorPages();
@@ -52,10 +61,10 @@ namespace ASPNetCoreMVC
       }
       app.UseHttpsRedirection();
       app.UseStaticFiles();
-
+      app.UseCookiePolicy();
       app.UseRouting();
-
       app.UseAuthentication();
+      app.UseSession();
       app.UseAuthorization();
 
       app.UseEndpoints(endpoints =>

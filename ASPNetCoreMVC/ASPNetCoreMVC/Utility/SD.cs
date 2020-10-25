@@ -29,5 +29,7 @@ namespace ASPNetCoreMVC.Utility
     /// CustomerEnd user
     /// </summary>
     public const string CustomerEndUser = "Customer";
+
+    public const string ssShoppingCartCount = "ssCartCount";
   }
 }
