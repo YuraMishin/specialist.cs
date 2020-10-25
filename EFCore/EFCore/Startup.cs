@@ -22,7 +22,10 @@ namespace EFCore
 
       string conString = Configuration["ConnectionStrings:DefaultConnection"];
       services.AddDbContext<DataContext>(options =>
-        options.UseSqlServer(conString));
+      {
+        options.EnableSensitiveDataLogging(true);
+        options.UseSqlServer(conString);
+      });
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
