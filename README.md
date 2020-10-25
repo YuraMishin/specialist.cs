@@ -1,6 +1,8 @@
 # C#/.Net Developer
 
 ![Photo](https://github.com/YuraMishin/specialist.cs/blob/master/img/avatar.jpg)![Photo](https://github.com/YuraMishin/specialist.cs/blob/master/img/ms_logo.jpg)![Photo](https://github.com/YuraMishin/specialist.cs/blob/master/img/specialist.jpg)
+## Книги
++ [Andrew Troelsen. Pro C# 8 with .NET Core 3: Foundational Principles and Practices in Programming](https://www.amazon.com/Pro-NET-Core-Foundational-Programming/dp/1484257553/)
 ## Общее
 + [convertbinary.com/alphabet/](https://www.convertbinary.com/alphabet/)
 + [binarytranslator.com](https://www.binarytranslator.com/)
@@ -10,6 +12,7 @@
 + [carbon.now.sh](https://carbon.now.sh/)
 + [Таблица символов Юникода](https://unicode-table.com/ru/)
 + [Уроки по C# и платформе .NET Framework](https://professorweb.ru/)
++ [Plunker IDE](https://plnkr.co/)
 ## Microsoft
 + [Microsoft Documentation](https://docs.microsoft.com/en-us/)
 + [C# documentation](https://docs.microsoft.com/en-us/dotnet/csharp/)
@@ -42,6 +45,8 @@
 + [TinyMCE](https://www.tiny.cloud/)
 + [JQuery](https://code.jquery.com/)
 + [Angular](https://angular.io/)
++ [Angular. Quick start](https://github.com/angular/quickstart)
++ [Angular CLI](https://cli.angular.io/)
 + [React](https://en.reactjs.org/)
 + [Vue](https://vuejs.org/)
 + [BabelJS](https://babeljs.io/repl)
