@@ -1,6 +1,7 @@
 using DutchTreat.Data.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -32,17 +33,24 @@ namespace DutchTreat.Data
         _ctx.Products.AddRange(products);
 
         var order = _ctx.Orders.Where(o => o.Id == 1).FirstOrDefault();
-        if (order != null)
+        if (order == null)
         {
-          order.Items = new List<OrderItem>()
+          order = new Order()
           {
-            new OrderItem()
+            OrderDate = DateTime.Now,
+            OrderNumber = "12345",
+            Items = new List<OrderItem>()
             {
-              Product = products.First(),
-              Quantity = 5,
-              UnitPrice = products.First().Price
+              new OrderItem()
+              {
+                Product = products.First(),
+                Quantity = 5,
+                UnitPrice = products.First().Price
+              }
             }
           };
+
+          _ctx.Orders.Add(order);
         }
 
         _ctx.SaveChanges();
