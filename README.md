@@ -29,6 +29,8 @@
 + [ASP.Net Core Documentation](https://docs.microsoft.com/ru-ru/aspnet/core/?view=aspnetcore-3.1)
 + [Razor Pages with Entity Framework Core in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/data/ef-rp/intro?view=aspnetcore-3.1&tabs=visual-studio)
 ## Web-design
++ [The Modern JavaScript Tutorial](https://javascript.info/)
++ [TypeScript Documentation](https://www.typescriptlang.org/docs/handbook)
 + [NodeJS](https://nodejs.org/en/)
 + [Npm](https://www.npmjs.com/)
 + [Bower](https://bower.io/)
