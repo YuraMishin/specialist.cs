@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
   <title>Dutch Treat: @ViewBag.Title</title>
@@ -24,6 +24,25 @@
         <li class="nav-item">
           <a class="nav-link" asp-controller="App" asp-action="About">About</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" asp-controller="App" asp-action="Shop">Shop</a>
+        </li>
+        @if (User.Identity.IsAuthenticated)
+        {
+          <li class="nav-item">
+            <a class="nav-link" asp-controller="Account" asp-action="Logout">
+              Logout
+            </a>
+          </li>
+        }
+        else
+        {
+          <li class="nav-item">
+            <a class="nav-link" asp-controller="Account" asp-action="Login">
+              Login
+            </a>
+          </li>
+        }
       </ul>
     </div>
   </nav>
@@ -33,7 +52,7 @@
   @RenderBody()
 </section>
 <footer class="container">
-  <div class="text-center">Copyright 2017 Dutch Treat LLC</div>
+  <div class="text-center">Copyright 2020 Dutch Treat LLC</div>
 </footer>
 
 

@@ -8,6 +8,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Reflection;
+using System.Text;
+using DutchTreat.Data.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 
 namespace DutchTreat
 {
@@ -24,6 +28,25 @@ namespace DutchTreat
     // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
     public void ConfigureServices(IServiceCollection services)
     {
+      services.AddIdentity<StoreUser, IdentityRole>(cfg =>
+        {
+          cfg.User.RequireUniqueEmail = true;
+        })
+        .AddEntityFrameworkStores<DutchContext>();
+
+      services.AddAuthentication()
+        .AddCookie()
+        .AddJwtBearer(cfg =>
+        {
+          cfg.TokenValidationParameters = new TokenValidationParameters()
+          {
+            ValidIssuer = _config["Tokens:Issuer"],
+            ValidAudience = _config["Tokens:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]))
+          };
+
+        });
+
       services.AddDbContext<DutchContext>(cfg =>
       {
         cfg.UseSqlServer(
@@ -52,6 +75,9 @@ namespace DutchTreat
       app.UseNodeModules();
 
       app.UseRouting();
+
+      app.UseAuthentication();
+      app.UseAuthorization();
 
       app.UseEndpoints(cfg =>
       {

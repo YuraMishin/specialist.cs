@@ -3,14 +3,18 @@
     "Favorite": "blue"
   },
   "ConnectionStrings": {
-    "DutchConnectionString":
-      "server=(localdb)\\mssqllocaldb;Database=DutchTreatDb;Integrated Security=True;MultipleActiveResultSets=true;"
+    "DutchConnectionString": "server=(localdb)\\mssqllocaldb;Database=DutchTreatDb;Integrated Security=True;MultipleActiveResultSets=true;"
   },
   "Logging": {
     "LogLevel": {
       "Default": "Information",
       "Microsoft": "Warning"
     }
+  },
+  "Tokens": {
+    "Key": "a;lkjasdf;lkajsd;flkjas ;dflkja sd",
+    "Issuer": "http://localhost:5000",
+    "Audience": "users"
   }
 
 }
