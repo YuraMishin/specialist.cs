@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using DutchTreat.Data;
 using DutchTreat.Data.Entities;
 using DutchTreat.ViewModels;
@@ -89,7 +89,7 @@ namespace DutchTreat.Controllers
             await _userManager.FindByNameAsync(User.Identity.Name);
           newOrder.User = currentUser;
 
-          _repository.AddEntity(newOrder);
+          _repository.AddOrder(newOrder);
           if (_repository.SaveAll())
           {
             return Created($"/api/orders/{newOrder.Id}",
