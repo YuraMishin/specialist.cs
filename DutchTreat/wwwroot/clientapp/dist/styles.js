@@ -1,6 +1,6 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["styles"],{
 
-/***/ 2:
+/***/ 3:
 /*!************************************!*\
   !*** multi ./ClientApp/styles.css ***!
   \************************************/
@@ -72,13 +72,13 @@ ___CSS_LOADER_EXPORT___.push([module.i, "/* You can add global styles to this fi
 
 "use strict";
 
-
 /*
   MIT License http://www.opensource.org/licenses/mit-license.php
   Author Tobias Koppers @sokra
 */
 // css base code, injected by the css-loader
 // eslint-disable-next-line func-names
+
 module.exports = function (useSourceMap) {
   var list = []; // return the list of modules as css string
 
@@ -448,5 +448,5 @@ module.exports = function (list, options) {
 
 /***/ })
 
-},[[2,"runtime"]]]);
+},[[3,"runtime"]]]);
 //# sourceMappingURL=styles.js.map
