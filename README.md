@@ -14,6 +14,7 @@
 + [Уроки по C# и платформе .NET Framework](https://professorweb.ru/)
 + [Plunker IDE](https://plnkr.co/)
 + [Postman](https://www.postman.com/)
++ [Chocolatey](https://chocolatey.org/)
 ## Microsoft
 + [Microsoft Documentation](https://docs.microsoft.com/en-us/)
 + [C# documentation](https://docs.microsoft.com/en-us/dotnet/csharp/)
