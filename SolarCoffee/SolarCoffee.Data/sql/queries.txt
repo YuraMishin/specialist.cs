@@ -1,0 +1,6 @@
+﻿select *
+from "Products";
+
+insert into "Products" ("CreatedOn", "UpdatedOn", "Name", "Description", "Price", "IsTaxable", "IsArchived")
+VALUES (now(), now(), 'text1', 'text1', 100, true, false),
+       (now(), now(), 'text2', 'text2', 200, true, false);
