@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SolarCoffee.Services.Product;
+using SolarCoffee.Web.Serialization;
 
 namespace SolarCoffee.Web.Controllers
 {
@@ -17,12 +19,22 @@ namespace SolarCoffee.Web.Controllers
       _productService = productService;
     }
 
-    [HttpGet("/api/products")]
+    [HttpGet("/api/product")]
     public ActionResult GetProduct()
     {
       _logger.LogInformation("Getting all products");
       var products = _productService.GetAllProducts();
-      return Ok(products);
+      var productViewModels = products
+        .Select(ProductMapper.SerializeProductModel);
+      return Ok(productViewModels);
+    }
+
+    [HttpPatch("/api/product/{id}")]
+    public ActionResult ArchiveProduct(int id)
+    {
+      _logger.LogInformation("Archiving product");
+      var archiveResult = _productService.ArciveProduct(id);
+      return Ok(archiveResult);
     }
   }
 }
