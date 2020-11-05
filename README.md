@@ -1,9 +1,11 @@
 # C#/.Net Developer
 
 ![Photo](https://github.com/YuraMishin/specialist.cs/blob/master/img/avatar.jpg)![Photo](https://github.com/YuraMishin/specialist.cs/blob/master/img/ms_logo.jpg)![Photo](https://github.com/YuraMishin/specialist.cs/blob/master/img/specialist.jpg)
-## Книги
+## Books
 + [Andrew Troelsen. Pro C# 8 with .NET Core 3: Foundational Principles and Practices in Programming](https://www.amazon.com/Pro-NET-Core-Foundational-Programming/dp/1484257553/)
-## Общее
+## IT
++ [Stack Overflow Annual Developer Survey](https://insights.stackoverflow.com/survey/)
++ [LibHunt](https://www.libhunt.com/)
 + [convertbinary.com/alphabet/](https://www.convertbinary.com/alphabet/)
 + [binarytranslator.com](https://www.binarytranslator.com/)
 + [Язык программирования C# и платформа .NET](https://metanit.com/sharp/)
@@ -30,6 +32,7 @@
 + [ASP.Net Core Documentation](https://docs.microsoft.com/ru-ru/aspnet/core/?view=aspnetcore-3.1)
 + [Razor Pages with Entity Framework Core in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/data/ef-rp/intro?view=aspnetcore-3.1&tabs=visual-studio)
 ## Web-design
++ [Web Technology Surveys](https://w3techs.com/)
 + [The Modern JavaScript Tutorial](https://javascript.info/)
 + [TypeScript Documentation](https://www.typescriptlang.org/docs/handbook)
 + [NodeJS](https://nodejs.org/en/)
@@ -53,13 +56,18 @@
 + [Angular. Quick start](https://github.com/angular/quickstart)
 + [Angular CLI](https://cli.angular.io/)
 + [React](https://en.reactjs.org/)
++ [React Docs](https://reactjs.org/docs/getting-started.html)
++ [React CLI](https://create-react-app.dev/docs/getting-started/)
 + [Vue](https://vuejs.org/)
++ [Vue 3 Docs](https://v3.vuejs.org/guide/installation.html)
++ [Vue CLI](https://cli.vuejs.org/)
 + [BabelJS](https://babeljs.io/repl)
 + [Zondicons](https://www.zondicons.com/)
 + [EmotionJS](https://github.com/emotion-js/emotion)
 + [Json2TS](http://json2ts.com/)
 + [lodash](https://lodash.com/)
 + [Gulp](https://gulpjs.com/)
++ [axios](https://github.com/axios/axios)
 ## Database and SQL
 + [Microsoft SQL Server Express](https://www.microsoft.com/en-Us/download/details.aspx?id=55994)
 + [PostgreSQL](https://www.postgresql.org/download/)
