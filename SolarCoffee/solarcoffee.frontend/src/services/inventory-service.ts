@@ -16,7 +16,7 @@ export class InventoryService {
     return result.data;
   }
 
-  public async updateInventoryQuaantity(shipment: IShipment) {
+  public async updateInventoryQuantity(shipment: IShipment) {
     const result = await axios.patch(`${this.API_URL}/inventory/`, shipment);
     return result.data;
   }

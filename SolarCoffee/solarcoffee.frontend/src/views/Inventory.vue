@@ -26,7 +26,7 @@
           <span v-else>No</span>
         </td>
         <td>
-          <div class="lni lni-cross-circle product-archive" @click="archiveProduct(item.product.id)">X</div>
+          <div class="lni lni-cross-circle product-archive" @click="archiveProduct(item.product.id)"></div>
         </td>
       </tr>
     </table>
@@ -66,7 +66,7 @@ export default class Inventory extends Vue {
   async saveNewProduct(newProduct: IProduct) {
     await productService.save(newProduct);
     this.isNewProductVisible = false;
-    await this.initialize;
+    await this.initialize();
   }
 
   applyColor(current: number, target: number) {
@@ -92,7 +92,7 @@ export default class Inventory extends Vue {
   }
 
   async saveNewShipment(shipment: IShipment) {
-    await inventoryService.updateInventoryQuaantity(shipment);
+    await inventoryService.updateInventoryQuantity(shipment);
     this.isShipmentVisible = false;
     await this.initialize();
   }
