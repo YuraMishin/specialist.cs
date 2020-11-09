@@ -9,4 +9,9 @@ insert into "ProductInventories"("CreatedOn", "UpdatedOn", "QuantityOnHand", "Id
 VALUES (now(), now(), 20, 24, 1),
        (now(), now(), 20, 24, 2);
 
+insert into "CustomerAddresses"("CreatedOn", "UpdatedOn", "AddressLine1", "AddressLine2", "City", "State", "PostalCode",
+                                "Country")
+VALUES (now(), now(), 'Line 1', 'Line 2', 'Moscow', 'MM', '123', 'Russia');
 
+insert into "Customers"("CreatedOn", "UpdatedOn", "FirstName", "LastName", "PrimaryAddressId")
+VALUES (now(), now(), 'Yura', 'Mishin', 1);

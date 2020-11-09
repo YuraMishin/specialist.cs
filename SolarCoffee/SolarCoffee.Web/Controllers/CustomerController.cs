@@ -47,7 +47,7 @@ namespace SolarCoffee.Web.Controllers
         {
           Id = customer.Id,
           FirstName = customer.FirstName,
-          Lastname = customer.LastName,
+          LastName = customer.LastName,
           PrimaryAddress =
             CustomerMapper.MapCustomerAddress(customer.PrimaryAddress),
           CreatedOn = customer.CreatedOn,
