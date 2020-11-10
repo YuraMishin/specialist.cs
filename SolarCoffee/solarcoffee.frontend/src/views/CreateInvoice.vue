@@ -59,6 +59,61 @@
       </div>
     </div>
     <div class="invoice-step" v-if="invoiceStep === 3">
+      <h2>Step 3: Review and Submit</h2>
+      <solar-button @button:click="submitInvoice">Submit Invoice</solar-button>
+      <hr/>
+      <div class="invoice-step-detail" id="invoice" ref="invoice">
+        <div class="invoice-logo">
+          <img id="imgLogo" alt="Solar Coffee logo" src="../assets/images/solar_coffee_logo.png">
+          <h3>Address 1</h3>
+          <h3>Address 2</h3>
+          <h3>USA</h3>
+          <div class="invoice-order-list" v-if="lineItems.length">
+            <div class="invoice-header">
+              <h3>Invoice: {{ new Date() | humanizeDate}}</h3>
+              <h3>Customer: {{ this.selectedCustomer.firstName + " " + this.selectedCustomer.lastName }}</h3>
+              <h3>Address: {{ this.selectedCustomer.primaryAddress.addressLine1 }}</h3>
+              <h3 v-if="this.selectedCustomer.primaryAddress.addressLine2">
+                {{ this.selectedCustomer.primaryAddress.addressLine2 }}
+              </h3>
+              <h3>
+                {{ this.selectedCustomer.primaryAddress.city }}
+                {{ this.selectedCustomer.primaryAddress.state }}
+                {{ this.selectedCustomer.primaryAddress.postalCode }}
+              </h3>
+              <h3>{{ this.selectedCustomer.primaryAddress.country }}</h3>
+            </div>
+            <table class="table">
+              <thead>
+              <tr>
+                <th>Product</th>
+                <th>Description</th>
+                <th>Qty.</th>
+                <th>Price</th>
+                <th>Subtotal</th>
+              </tr>
+              </thead>
+              <tr v-for="lineItem in lineItems" :key="`index_${lineItem.product.id}`">
+                <td> {{ lineItem.product.name }}</td>
+                <td> {{ lineItem.product.description }}</td>
+                <td> {{ lineItem.quantity }}</td>
+                <td> {{ lineItem.product.price }}</td>
+                <td> {{ lineItem.product.price * lineItem.quantity | price }}</td>
+              </tr>
+              <tr>
+                <th colspan="4"></th>
+                <th>Grand Total</th>
+              </tr>
+              <tfoot>
+              <tr>
+                <td colspan="4" class="due">Balance due upon receipt</td>
+                <td class="price-final">{{ runningTotal | price }}</td>
+              </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
     <hr/>
     <div class="invoice-steps-actions">
@@ -78,6 +133,9 @@
   import {InventoryService} from "@/services/inventory-service";
   import InvoiceService from "@/services/invoice-service";
   import SolarButton from "@/components/SolarButton.vue";
+  // noinspection TypeScriptCheckImport
+  import jsPDF from 'jspdf';
+  import html2canvas from 'html2canvas';
 
   const customerService = new CustomerService();
   const inventoryService = new InventoryService();
@@ -100,6 +158,30 @@
     inventory: IProductInventory[] = [];
     lineItems: ILineItem[] = [];
     newItem: ILineItem = {product: undefined, quantity: 0};
+
+    async submitInvoice(): Promise<void> {
+      this.invoice = {
+        customer: this.selectedCustomerId,
+        lineItems: this.lineItems
+      };
+
+      await invoiceService.makeNewInvoice(this.invoice);
+      this.downloadPdf();
+      await this.$router.push("/orders");
+    }
+
+    downloadPdf() {
+      const pdf = new jsPDF("p", "pt", "a4", true);
+      const invoice = document.getElementById('invoice');
+      const width = this.$refs.invoice.clientWidth;
+      const height = this.$refs.invoice.clientHeight;
+
+      html2canvas(invoice).then(canvas => {
+        const image = canvas.toDataURL("image/png");
+        pdf.addImage(image, "PNG", 0, 0, width * 0.55, height * 0.55);
+        pdf.save("invoice");
+      });
+    }
 
     addLineItem() {
       const newItem: ILineItem = {
@@ -130,6 +212,10 @@
 
     finalizeOrder() {
       this.invoiceStep = 3;
+    }
+
+    get selectedCustomer() {
+      return this.customers.find(c => c.id == this.selectedCustomerId);
     }
 
     get canGoNext() {
