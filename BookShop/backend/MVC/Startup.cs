@@ -22,9 +22,13 @@ namespace MVC
     public void ConfigureServices(IServiceCollection services)
     {
       // DB connection
-      services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseSqlServer(
-          Configuration.GetConnectionString("DefaultConnection")));
+      services.AddDbContext<ApplicationDbContext>(
+        option =>
+        {
+          option.EnableDetailedErrors();
+          option.UseNpgsql(
+            Configuration.GetConnectionString("bookshop.dev"));
+        });
 
       services.AddDefaultIdentity<IdentityUser>(options =>
           options.SignIn.RequireConfirmedAccount = true)
