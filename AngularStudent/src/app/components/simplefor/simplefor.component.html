@@ -1,0 +1,20 @@
+<div>
+  <button
+    class="btn btn-primary"
+    (click)="showSecret = !showSecret"
+  >Display Details
+  </button>
+  <p *ngIf="showSecret">Secret Password = tuna</p>
+  <hr/>
+  <button
+    class="btn btn-primary"
+    (click)="onToggleAddNumber()"
+  >Add Number
+  </button>
+  <div
+    *ngFor="let num of numbers; let i = index"
+    [ngStyle]="{backgroundColor: i % 2 === 0 ? 'yellow':'aqua'}"
+    [ngClass]="{'white-text': i % 2 === 0}"
+  >{{num}}</div>
+
+</div>

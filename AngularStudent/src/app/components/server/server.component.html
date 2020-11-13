@@ -1,0 +1,18 @@
+<div>
+  <h3>Server Component</h3>
+  <input
+    type="text"
+    class="form-control"
+    [(ngModel)]="serverName"
+  />
+  <p>{{serverName}}</p>
+
+  <button
+    class="btn btn-primary"
+    [disabled]="!allowNewServer"
+    (click)="onClickCreateServer()"
+  >
+    Add Server
+  </button>
+  <p *ngFor="let server of servers">{{server}}</p>
+</div>
