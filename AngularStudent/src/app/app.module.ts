@@ -8,6 +8,7 @@ import {ServerComponent} from "./components/server/server.component";
 import { ButtonDisabledComponent } from './components/button-disabled/button-disabled.component';
 import { SimpleusernameComponent } from './components/simpleusername/simpleusername.component';
 import { SimpleforComponent } from './components/simplefor/simplefor.component';
+import { SimplehelloworldComponent } from './components/simplehelloworld/simplehelloworld.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { SimpleforComponent } from './components/simplefor/simplefor.component';
     ServerComponent,
     ButtonDisabledComponent,
     SimpleusernameComponent,
-    SimpleforComponent
+    SimpleforComponent,
+    SimplehelloworldComponent
   ],
   imports: [
     BrowserModule,
