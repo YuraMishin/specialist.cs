@@ -73,6 +73,7 @@
 + [MomentJS](https://momentjs.com/)
 + [jsPDF](https://parall.ax/products/jspdf)
 + [Apexcharts](https://apexcharts.com/)
++ [Placeholder.com](https://placeholder.com/)
 ## Database and SQL
 + [Microsoft SQL Server Express](https://www.microsoft.com/en-Us/download/details.aspx?id=55994)
 + [PostgreSQL](https://www.postgresql.org/download/)

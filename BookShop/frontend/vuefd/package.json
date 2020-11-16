@@ -1,12 +1,11 @@
 {
-  "name": "vuefrontend",
+  "name": "vue3",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
-    "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -21,7 +20,6 @@
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
     "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-e2e-cypress": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-plugin-typescript": "~4.5.0",
@@ -40,44 +38,5 @@
     "sass-loader": "^8.0.2",
     "typescript": "~3.9.3",
     "vue-jest": "^5.0.0-0"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/vue3-essential",
-      "eslint:recommended",
-      "@vue/typescript/recommended",
-      "@vue/prettier",
-      "@vue/prettier/@typescript-eslint"
-    ],
-    "parserOptions": {
-      "ecmaVersion": 2020
-    },
-    "rules": {},
-    "overrides": [
-      {
-        "files": [
-          "**/__tests__/*.{j,t}s?(x)",
-          "**/tests/unit/**/*.spec.{j,t}s?(x)"
-        ],
-        "env": {
-          "jest": true
-        }
-      }
-    ]
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ],
-  "jest": {
-    "preset": "@vue/cli-plugin-unit-jest/presets/typescript-and-babel",
-    "transform": {
-      "^.+\\.vue$": "vue-jest"
-    }
   }
 }
