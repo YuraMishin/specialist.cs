@@ -1,7 +1,7 @@
-﻿using MVC.Models;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Diagnostics;
+using MVC.Models;
 
 namespace MVC.Areas.Customer.Controllers
 {
