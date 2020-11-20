@@ -56,6 +56,7 @@
 + [Angular](https://angular.io/)
 + [Angular. Quick start](https://github.com/angular/quickstart)
 + [Angular CLI](https://cli.angular.io/)
++ [Augury](https://augury.rangle.io/)
 + [React](https://en.reactjs.org/)
 + [React Docs](https://reactjs.org/docs/getting-started.html)
 + [React CLI](https://create-react-app.dev/docs/getting-started/)

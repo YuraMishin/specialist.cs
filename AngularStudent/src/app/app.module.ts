@@ -4,20 +4,32 @@ import {FormsModule} from '@angular/forms';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {ServerComponent} from "./components/server/server.component";
-import { ButtonDisabledComponent } from './components/button-disabled/button-disabled.component';
-import { SimpleusernameComponent } from './components/simpleusername/simpleusername.component';
-import { SimpleforComponent } from './components/simplefor/simplefor.component';
-import { SimplehelloworldComponent } from './components/simplehelloworld/simplehelloworld.component';
+import { SimpledatabindingComponent } from './components/simpledatabinding/simpledatabinding.component';
+import { CockpitComponent } from './components/simpledatabinding/cockpit/cockpit.component';
+import { ServerElementComponent } from './components/simpledatabinding/server-element/server-element.component';
+// import {A6AppComponent} from "./assignments/A6/a6-app.component";
+// import {HeaderComponent} from './assignments/A6/header/header.component';
+// import { RecipesComponent } from './assignments/A6/recipes/recipes.component';
+// import { RecipeListComponent } from './assignments/A6/recipes/recipe-list/recipe-list.component';
+// import { RecipeDetailComponent } from './assignments/A6/recipes/recipe-detail/recipe-detail.component';
+// import { RecipeItemComponent } from './assignments/A6/recipes/recipe-list/recipe-item/recipe-item.component';
+// import { ShoppingListComponent } from './assignments/A6/shopping-list/shopping-list.component';
+// import { ShoppingEditComponent } from './assignments/A6/shopping-list/shopping-edit/shopping-edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ServerComponent,
-    ButtonDisabledComponent,
-    SimpleusernameComponent,
-    SimpleforComponent,
-    SimplehelloworldComponent
+    SimpledatabindingComponent,
+    CockpitComponent,
+    ServerElementComponent,
+    // A6AppComponent,
+    // HeaderComponent,
+    // RecipesComponent,
+    // RecipeListComponent,
+    // RecipeDetailComponent,
+    // RecipeItemComponent,
+    // ShoppingListComponent,
+    // ShoppingEditComponent
   ],
   imports: [
     BrowserModule,
