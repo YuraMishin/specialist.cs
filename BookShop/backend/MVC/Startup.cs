@@ -1,9 +1,12 @@
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using MVC.Data;
 
@@ -54,6 +57,14 @@ namespace MVC
 
       app.UseHttpsRedirection();
       app.UseStaticFiles();
+
+      // add support folder node_modules
+      app.UseStaticFiles(new StaticFileOptions()
+      {
+        FileProvider = new PhysicalFileProvider(
+          Path.Combine(Directory.GetCurrentDirectory(), @"node_modules")),
+        RequestPath = new PathString("/node_modules")
+      });
 
       app.UseRouting();
 
