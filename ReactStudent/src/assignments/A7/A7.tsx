@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import UserInput from "./UserInput/UserInput";
 import UserOutput from "./UserOutput/UserOutput";
 
-class Task1 extends Component {
+class A7 extends Component {
   state = {
     username: 'Super Yura'
   }
@@ -27,4 +27,4 @@ class Task1 extends Component {
   }
 }
 
-export default Task1;
+export default A7;
