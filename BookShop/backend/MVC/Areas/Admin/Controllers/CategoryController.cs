@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using MVC.Data;
+using MVC.Data.Repositories;
 
 namespace MVC.Areas.Admin.Controllers
 {
@@ -12,17 +11,17 @@ namespace MVC.Areas.Admin.Controllers
   public class CategoryController : Controller
   {
     /// <summary>
-    /// DbContext
+    /// Category Repository
     /// </summary>
-    private readonly ApplicationDbContext _db;
+    private readonly ICategoryRepository _categoryRepository;
 
     /// <summary>
     /// Constructor
     /// </summary>
-    /// <param name="db">Db Context</param>
-    public CategoryController(ApplicationDbContext db)
+    /// <param name="categoryRepository">Category Repository</param>
+    public CategoryController(ICategoryRepository categoryRepository)
     {
-      this._db = db;
+      _categoryRepository = categoryRepository;
     }
 
     /// <summary>
@@ -32,7 +31,7 @@ namespace MVC.Areas.Admin.Controllers
     /// <returns>IActionResult</returns>
     public async Task<IActionResult> Index()
     {
-      var categories = await _db.Categories.ToListAsync();
+      var categories = await _categoryRepository.RetrieveAllCategories();
 
       return View(categories);
     }

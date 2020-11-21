@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using MVC.Data;
+using MVC.Data.Repositories;
 
 namespace MVC
 {
@@ -32,6 +33,12 @@ namespace MVC
           option.UseNpgsql(
             Configuration.GetConnectionString("bookshop.dev"));
         });
+
+      #region Dependency Injections
+
+      services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+      #endregion
 
       services.AddDefaultIdentity<IdentityUser>(options =>
           options.SignIn.RequireConfirmedAccount = true)
