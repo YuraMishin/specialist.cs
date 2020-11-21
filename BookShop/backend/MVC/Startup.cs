@@ -10,6 +10,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using MVC.Data;
 using MVC.Data.Repositories;
+using MVC.Services;
 
 namespace MVC
 {
@@ -37,6 +38,7 @@ namespace MVC
       #region Dependency Injections
 
       services.AddScoped<ICategoryRepository, CategoryRepository>();
+      services.AddScoped<ICategoryService, CategoryService>();
 
       #endregion
 

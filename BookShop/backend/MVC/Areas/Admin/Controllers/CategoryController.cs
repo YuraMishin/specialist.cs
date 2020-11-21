@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MVC.Data.Repositories;
+using MVC.Services;
 
 namespace MVC.Areas.Admin.Controllers
 {
@@ -13,15 +14,15 @@ namespace MVC.Areas.Admin.Controllers
     /// <summary>
     /// Category Repository
     /// </summary>
-    private readonly ICategoryRepository _categoryRepository;
+    private readonly ICategoryService _categoryService;
 
     /// <summary>
     /// Constructor
     /// </summary>
-    /// <param name="categoryRepository">Category Repository</param>
-    public CategoryController(ICategoryRepository categoryRepository)
+    /// <param name="categoryService">Category Service</param>
+    public CategoryController(ICategoryService categoryService)
     {
-      _categoryRepository = categoryRepository;
+      _categoryService = categoryService;
     }
 
     /// <summary>
@@ -31,7 +32,11 @@ namespace MVC.Areas.Admin.Controllers
     /// <returns>IActionResult</returns>
     public async Task<IActionResult> Index()
     {
-      var categories = await _categoryRepository.RetrieveAllCategories();
+      var categories = await _categoryService.RetrieveAllCategories();
+      if (categories == null)
+      {
+        return NotFound();
+      }
 
       return View(categories);
     }
