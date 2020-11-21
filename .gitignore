@@ -1,3 +1,4 @@
+*.ldb
 Manual
 *.db
 package-lock.json

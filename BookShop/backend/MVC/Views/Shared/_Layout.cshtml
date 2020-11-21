@@ -5,9 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>@ViewData["Title"] - MVC</title>
   <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+  <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
   <link rel="stylesheet" href="~/css/site.css"/>
 </head>
-<body>
+<body class="search-background">
 <header>
   <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
     <div class="container">
@@ -31,12 +32,11 @@
               CMS
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropDownMenuLink">
-              <a
-                class="dropdown-item"
-                asp-action="Index"
-                asp-controller="Home"
-                asp-area="Customer">
-                Home
+              <a class="dropdown-item"
+                 asp-action="Index"
+                 asp-controller="Category"
+                 asp-area="Admin">
+                Category
               </a>
             </div>
           </li>

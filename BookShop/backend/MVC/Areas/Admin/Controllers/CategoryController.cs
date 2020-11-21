@@ -1,8 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using MVC.Controllers;
 using MVC.Data;
 
 namespace MVC.Areas.Admin.Controllers
@@ -28,14 +26,15 @@ namespace MVC.Areas.Admin.Controllers
     }
 
     /// <summary>
-    /// Method retrieves all categories
+    /// Method retrieves all categories.
+    /// GET: /admin/category/
     /// </summary>
     /// <returns>IActionResult</returns>
     public async Task<IActionResult> Index()
     {
       var categories = await _db.Categories.ToListAsync();
 
-      return Json(categories);
+      return View(categories);
     }
   }
 }
