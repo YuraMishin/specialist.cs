@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using MVC.Data.Repositories;
+using MVC.Data;
+using MVC.Models;
 using MVC.Services;
 
 namespace MVC.Areas.Admin.Controllers
@@ -12,6 +13,11 @@ namespace MVC.Areas.Admin.Controllers
   public class CategoryController : Controller
   {
     /// <summary>
+    /// DbContext
+    /// </summary>
+    private readonly ApplicationDbContext _db;
+
+    /// <summary>
     /// Category Repository
     /// </summary>
     private readonly ICategoryService _categoryService;
@@ -20,9 +26,14 @@ namespace MVC.Areas.Admin.Controllers
     /// Constructor
     /// </summary>
     /// <param name="categoryService">Category Service</param>
-    public CategoryController(ICategoryService categoryService)
+    /// <param name="db">DbContext</param>
+    public CategoryController(
+      ICategoryService categoryService,
+      ApplicationDbContext db
+    )
     {
       _categoryService = categoryService;
+      _db = db;
     }
 
     /// <summary>
@@ -40,6 +51,7 @@ namespace MVC.Areas.Admin.Controllers
 
       return View(categories);
     }
+
     /// <summary>
     /// Method displays Create UI.
     /// GET: /admin/category/create
@@ -48,6 +60,26 @@ namespace MVC.Areas.Admin.Controllers
     public IActionResult Create()
     {
       return View();
+    }
+
+    /// <summary>
+    /// Method saves category.
+    /// POST: /admin/category/store
+    /// </summary>
+    /// <param name="category">Category</param>
+    /// <returns>IActionResult</returns>
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Store(Category category)
+    {
+      if (ModelState.IsValid)
+      {
+        _db.Categories.Add(category);
+        await _db.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
+      }
+
+      return View("Create", category);
     }
   }
 }
