@@ -40,5 +40,14 @@ namespace MVC.Areas.Admin.Controllers
 
       return View(categories);
     }
+    /// <summary>
+    /// Method displays Create UI.
+    /// GET: /admin/category/create
+    /// </summary>
+    /// <returns></returns>
+    public IActionResult Create()
+    {
+      return View();
+    }
   }
 }
