@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -44,7 +45,9 @@ namespace MVC.Data.Repositories
     {
       try
       {
-        return await _db.Categories.ToListAsync();
+        return await _db.Categories
+          .OrderBy(category => category.Name)
+          .ToListAsync();
       }
       catch (Exception ex)
       {
