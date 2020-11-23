@@ -145,5 +145,32 @@ namespace MVC.Areas.Admin.Controllers
 
       return View(category);
     }
+
+    /// <summary>
+    /// Method deletes category.
+    /// POST: /admin/category/delete?id=foo
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(int? id)
+    {
+      if (id == null)
+      {
+        return NotFound();
+      }
+
+      var category = await _db.Categories.FindAsync(id);
+      if (category == null)
+      {
+        return View();
+      }
+
+      _db.Categories.Remove(category);
+      await _db.SaveChangesAsync();
+
+      return RedirectToAction(nameof(Index));
+    }
   }
 }
