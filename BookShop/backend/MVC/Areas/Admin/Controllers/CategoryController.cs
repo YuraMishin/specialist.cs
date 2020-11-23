@@ -172,5 +172,27 @@ namespace MVC.Areas.Admin.Controllers
 
       return RedirectToAction(nameof(Index));
     }
+
+    /// <summary>
+    /// Method shows UI to read category details.
+    /// GET: /admin/category/details?id=foo
+    /// </summary>
+    /// <param name="id">Id</param>
+    /// <returns>IActionResult</returns>
+    public async Task<IActionResult> Details(int? id)
+    {
+      if (id == null)
+      {
+        return NotFound();
+      }
+
+      var category = await _db.Categories.FindAsync(id);
+      if (category == null)
+      {
+        return NotFound();
+      }
+
+      return View(category);
+    }
   }
 }
