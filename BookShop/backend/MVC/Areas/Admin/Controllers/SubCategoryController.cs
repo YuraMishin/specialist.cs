@@ -132,5 +132,37 @@ namespace MVC.Areas.Admin.Controllers
         select subCategory).ToListAsync();
       return Json(new SelectList(subCategories, "Id", "Name"));
     }
+    /// <summary>
+    /// Method displays Edit subcategory UI
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public async Task<IActionResult> Edit(int? id)
+    {
+      if (id == null)
+      {
+        return NotFound();
+      }
+
+      var subCategory =
+        await _db.SubCategories.SingleOrDefaultAsync(m => m.Id == id);
+      if (subCategory == null)
+      {
+        return NotFound();
+      }
+
+      var model = new SubCategoryAndCategoryViewModel
+      {
+        CategoryList = await _db.Categories.ToListAsync(),
+        SubCategory = subCategory,
+        SubCategoryList = await _db.SubCategories
+          .OrderBy(p => p.Name)
+          .Select(p => p.Name)
+          .Distinct()
+          .ToListAsync()
+      };
+
+      return View(model);
+    }
   }
 }
