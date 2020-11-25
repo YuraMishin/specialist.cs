@@ -136,7 +136,7 @@ namespace MVC.Areas.Admin.Controllers
 
     /// <summary>
     /// Method displays Edit subcategory UI.
-    /// GET: /admin/subcategory/edit?id
+    /// GET: /admin/subcategory/edit/id
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
@@ -211,6 +211,30 @@ namespace MVC.Areas.Admin.Controllers
       };
 
       return View("Edit", modelVM);
+    }
+
+    /// <summary>
+    /// Method displays subcategory details UI .
+    /// GET: /admin/subcategory/details/id
+    /// </summary>
+    /// <param name="id">Id</param>
+    /// <returns>IActionResult</returns>
+    public async Task<IActionResult> Details(int? id)
+    {
+      if (id == null)
+      {
+        return NotFound();
+      }
+
+      var subCategory = await _db.SubCategories
+        .Include(s => s.Category)
+        .SingleOrDefaultAsync(m => m.Id == id);
+      if (subCategory == null)
+      {
+        return NotFound();
+      }
+
+      return View(subCategory);
     }
   }
 }
