@@ -1,7 +1,13 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVC.Data;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using MVC.Models;
+using MVC.ViewModels;
 
 namespace MVC.Areas.Admin.Controllers
 {
@@ -15,6 +21,12 @@ namespace MVC.Areas.Admin.Controllers
     /// DbContext
     /// </summary>
     private readonly ApplicationDbContext _db;
+
+    /// <summary>
+    /// Status message
+    /// </summary>
+    [TempData]
+    public string StatusMessage { get; set; }
 
     /// <summary>
     /// Constructor
@@ -37,6 +49,88 @@ namespace MVC.Areas.Admin.Controllers
         .ToListAsync();
 
       return View(subCategories);
+    }
+
+    /// <summary>
+    /// Method displays Create SubCategory UI.
+    /// GET: /admin/subcategory/create
+    /// </summary>
+    /// <returns></returns>
+    public async Task<IActionResult> Create()
+    {
+      var model = new SubCategoryAndCategoryViewModel
+      {
+        CategoryList = await _db.Categories.ToListAsync(),
+        SubCategory = new SubCategory(),
+        SubCategoryList = await _db.SubCategories
+          .OrderBy(p => p.Name)
+          .Select(p => p.Name)
+          .Distinct()
+          .ToListAsync()
+      };
+
+      return View(model);
+    }
+
+    /// <summary>
+    /// Method creates Subcategory.
+    /// POST: /admin/subcategory/store
+    /// </summary>
+    /// <param name="model">Model</param>
+    /// <returns>IActionResult</returns>
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Store(
+      SubCategoryAndCategoryViewModel model)
+    {
+      if (ModelState.IsValid)
+      {
+        var doesSCExists = _db.SubCategories.Include(s => s.Category)
+          .Where(s =>
+            s.Name == model.SubCategory.Name &&
+            s.Category.Id == model.SubCategory.CategoryId);
+
+        if (doesSCExists.Any())
+        {
+          var categoryName = doesSCExists.First().Category.Name;
+          StatusMessage =
+            String.Format(
+              $"Error: Sub Category exists under {categoryName} category. Please use another name.");
+        }
+        else
+        {
+          _db.SubCategories.Add(model.SubCategory);
+          await _db.SaveChangesAsync();
+
+          return RedirectToAction(nameof(Index));
+        }
+      }
+
+      var modelVM = new SubCategoryAndCategoryViewModel()
+      {
+        CategoryList = await _db.Categories.ToListAsync(),
+        SubCategory = model.SubCategory,
+        SubCategoryList = await _db.SubCategories.OrderBy(p => p.Name)
+          .Select(p => p.Name)
+          .ToListAsync(),
+        StatusMessage = StatusMessage
+      };
+      return View("Create", modelVM);
+    }
+
+    /// <summary>
+    /// Method retrieves sub categories
+    /// </summary>
+    /// <param name="id">Category Id</param>
+    /// <returns>JSON</returns>
+    [ActionName("GetSubCategory")]
+    public async Task<IActionResult> GetSubCategory(int id)
+    {
+      var subCategories = new List<SubCategory>();
+      subCategories = await (from subCategory in _db.SubCategories
+        where subCategory.CategoryId == id
+        select subCategory).ToListAsync();
+      return Json(new SelectList(subCategories, "Id", "Name"));
     }
   }
 }
