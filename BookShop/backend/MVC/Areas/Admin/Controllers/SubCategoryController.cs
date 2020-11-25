@@ -236,5 +236,28 @@ namespace MVC.Areas.Admin.Controllers
 
       return View(subCategory);
     }
+
+    /// <summary>
+    /// Method displays subcategory delete UI.
+    /// GET: /admin/subcategory/delete/id
+    /// </summary>
+    /// <param name="id">Id</param>
+    /// <returns>IActionResult</returns>
+    public async Task<IActionResult> Delete(int? id)
+    {
+      if (id == null)
+      {
+        return NotFound();
+      }
+
+      var subCategory = await _db.SubCategories.Include(s => s.Category)
+        .SingleOrDefaultAsync(m => m.Id == id);
+      if (subCategory == null)
+      {
+        return NotFound();
+      }
+
+      return View(subCategory);
+    }
   }
 }
