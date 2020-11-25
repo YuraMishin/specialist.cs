@@ -3,7 +3,10 @@
   ViewData["Title"] = "Delete";
 }
 <h2 class="text-info">Sub Category Delete</h2>
-<form method="post">
+<form
+  method="post"
+  asp-action="Delete"
+  >
   <div class="border backgroundWhite">
     <input type="hidden" asp-for="Id"/>
     <fieldset disabled>
