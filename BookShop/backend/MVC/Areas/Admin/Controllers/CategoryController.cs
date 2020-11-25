@@ -84,7 +84,7 @@ namespace MVC.Areas.Admin.Controllers
 
     /// <summary>
     /// Method shows UI to edit category.
-    /// GET: /admin/category/edit?id=foo
+    /// GET: /admin/category/edit/id
     /// </summary>
     /// <param name="id">Id</param>
     /// <returns>IActionResult</returns>
@@ -126,7 +126,7 @@ namespace MVC.Areas.Admin.Controllers
 
     /// <summary>
     /// Method shows UI to delete category.
-    /// GET: /admin/category/delete?id=foo
+    /// GET: /admin/category/delete/id
     /// </summary>
     /// <param name="id">Id</param>
     /// <returns>IActionResult</returns>
@@ -148,7 +148,7 @@ namespace MVC.Areas.Admin.Controllers
 
     /// <summary>
     /// Method deletes category.
-    /// POST: /admin/category/delete?id=foo
+    /// POST: /admin/category/delete/id
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
@@ -175,7 +175,7 @@ namespace MVC.Areas.Admin.Controllers
 
     /// <summary>
     /// Method shows UI to read category details.
-    /// GET: /admin/category/details?id=foo
+    /// GET: /admin/category/details/id
     /// </summary>
     /// <param name="id">Id</param>
     /// <returns>IActionResult</returns>
