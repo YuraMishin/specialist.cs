@@ -119,7 +119,8 @@ namespace MVC.Areas.Admin.Controllers
     }
 
     /// <summary>
-    /// Method retrieves sub categories
+    /// Method retrieves sub categories.
+    /// GET: /admin/subcategory/getsubcategory
     /// </summary>
     /// <param name="id">Category Id</param>
     /// <returns>JSON</returns>
@@ -132,8 +133,10 @@ namespace MVC.Areas.Admin.Controllers
         select subCategory).ToListAsync();
       return Json(new SelectList(subCategories, "Id", "Name"));
     }
+
     /// <summary>
-    /// Method displays Edit subcategory UI
+    /// Method displays Edit subcategory UI.
+    /// GET: /admin/subcategory/edit?id
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
@@ -163,6 +166,51 @@ namespace MVC.Areas.Admin.Controllers
       };
 
       return View(model);
+    }
+
+    /// <summary>
+    /// Method updates Subcategory.
+    /// POST: /admin/subcategory/edit
+    /// <param name="model">SubCategoryAndCategoryViewModel</param>
+    /// <returns>IActionResult</returns>
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(SubCategoryAndCategoryViewModel model)
+    {
+      if (ModelState.IsValid)
+      {
+        var doesSCExists = _db.SubCategories.Include(s => s.Category)
+          .Where(s =>
+            s.Name == model.SubCategory.Name &&
+            s.Category.Id == model.SubCategory.CategoryId);
+        if (doesSCExists.Any())
+        {
+          var categoryName = doesSCExists.First().Category.Name;
+          StatusMessage =
+            String.Format(
+              $"Error: Sub Category exists under {categoryName} category. Please use another name.");
+        }
+        else
+        {
+          var subCatFromDb =
+            await _db.SubCategories.FindAsync(model.SubCategory.Id);
+          subCatFromDb.Name = model.SubCategory.Name;
+          await _db.SaveChangesAsync();
+          return RedirectToAction(nameof(Index));
+        }
+      }
+
+      var modelVM = new SubCategoryAndCategoryViewModel()
+      {
+        CategoryList = await _db.Categories.ToListAsync(),
+        SubCategory = model.SubCategory,
+        SubCategoryList = await _db.SubCategories.OrderBy(p => p.Name)
+          .Select(p => p.Name)
+          .ToListAsync(),
+        StatusMessage = StatusMessage
+      };
+
+      return View("Edit", modelVM);
     }
   }
 }
