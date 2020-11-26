@@ -36,13 +36,19 @@
                  asp-action="Index"
                  asp-controller="Category"
                  asp-area="Admin">
-                Category
+                Categories
               </a>
               <a asp-action="Index"
                  asp-controller="SubCategory"
                  asp-area="Admin"
                  class="dropdown-item">
-                Sub Category
+                Sub Categories
+              </a>
+              <a asp-action="Index"
+                 asp-controller="Book"
+                 asp-area="Admin"
+                 class="dropdown-item">
+                Books
               </a>
             </div>
           </li>
@@ -63,6 +69,7 @@
     &copy; 2020 - BookShop
   </div>
 </footer>
+<script src="https://cdn.tiny.cloud/1/ef9gc2yqkveqimt3dpnjpl5cdju4shgu08kwuq96wncfx0qw/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
