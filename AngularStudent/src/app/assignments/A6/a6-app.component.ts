@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./a6-app.component.scss']
 })
 export class A6AppComponent implements OnInit {
+  loadedFeature = 'recipe';
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onNavigate(feature: string) {
+    this.loadedFeature = feature;
   }
 
 }
