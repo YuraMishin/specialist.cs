@@ -76,10 +76,33 @@ namespace MVC.Areas.Admin.Controllers
 
           coupon.Picture = p1;
         }
+
         _db.Coupons.Add(coupon);
         await _db.SaveChangesAsync();
 
         return RedirectToAction(nameof(Index));
+      }
+
+      return View(coupon);
+    }
+
+    /// <summary>
+    /// Method shows UI to edit coupon.
+    /// GET: /admin/coupon/edit/id
+    /// </summary>
+    /// <param name="id">id</param>
+    /// <returns>IActionResult</returns>
+    public async Task<IActionResult> Edit(int? id)
+    {
+      if (id == null)
+      {
+        return NotFound();
+      }
+
+      var coupon = await _db.Coupons.SingleOrDefaultAsync(m => m.Id == id);
+      if (coupon == null)
+      {
+        return NotFound();
       }
 
       return View(coupon);
