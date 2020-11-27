@@ -133,5 +133,35 @@ namespace MVC.Areas.Admin.Controllers
       await _db.SaveChangesAsync();
       return RedirectToAction(nameof(Index));
     }
+
+    /// <summary>
+    /// Method shows edit book UI
+    /// </summary>
+    /// <param name="id">Id</param>
+    /// <returns>IActionResult</returns>
+    public async Task<IActionResult> Edit(int? id)
+    {
+      if (id == null)
+      {
+        return NotFound();
+      }
+
+      BookVM.Book = await _db.Books
+        .Include(m => m.Category)
+        .Include(m => m.SubCategory)
+        .SingleOrDefaultAsync(m => m.Id == id);
+
+      if (BookVM.Book == null)
+      {
+        return NotFound();
+      }
+
+      BookVM.SubCategories = await _db
+        .SubCategories
+        .Where(s => s.CategoryId == BookVM.Book.CategoryId)
+        .ToListAsync();
+
+      return View(BookVM);
+    }
   }
 }
