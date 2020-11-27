@@ -1,0 +1,128 @@
+@model MVC.ViewModels.BookViewModel
+@using MVC.Extensions
+@{
+  ViewData["Title"] = "Create";
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-info">Create Book</h2>
+<form method="post" enctype="multipart/form-data">
+  <div class="border backgroundWhite">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group row">
+      <div class="col-2">
+        <label asp-for="Book.Name" class="col-form-label"></label>
+      </div>
+      <div class="col-5">
+        <input asp-for="Book.Name" class="form-control"/>
+      </div>
+      <span asp-validation-for="Book.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group row">
+      <div class="col-2">
+        <label asp-for="Book.Description" class="col-form-label"></label>
+      </div>
+      <div class="col-5">
+        @Html.TextAreaFor(m => m.Book.Description)
+      </div>
+      <span asp-validation-for="Book.Description" class="text-danger"></span>
+    </div>
+    <div class="form-group row">
+      <div class="col-2">
+        <label asp-for="Book.Price" class="col-form-label"></label>
+      </div>
+      <div class="col-5">
+        <input asp-for="Book.Price" class="form-control"/>
+      </div>
+      <span asp-validation-for="Book.Price" class="text-danger"></span>
+    </div>
+    <div class="form-group row">
+      <div class="col-2">
+        <label asp-for="Book.Image" class="col-form-label"></label>
+      </div>
+      <div class="col-5">
+        <input type="file" name="files" multiple class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-2">
+        <label asp-for="Book.CategoryId" class="col-form-label"></label>
+      </div>
+      <div class="col-5">
+        <select asp-for="@Model.Book.CategoryId"
+                id="CategoryId"
+                asp-items="Model.Categories.ToSelectListItem(Model.Book.CategoryId)"
+                class="form-control">
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-2">
+        <label asp-for="Book.SubCategoryId" class="col-form-label"></label>
+      </div>
+      <div class="col-5">
+        <select asp-for="@Model.Book.SubCategoryId"
+                name="SubCategoryId"
+                id="SubCategoryId"
+                asp-items="@(new SelectList(string.Empty, "Id", "Name"))"
+                class="form-control">
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-2">
+        <label asp-for="Book.Age" class="col-form-label"></label>
+      </div>
+      <div class="col-5">
+        <select asp-for="Book.Age"
+                asp-items="Html.GetEnumSelectList<Book.EAge>()"
+                class="form-control">
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-5 offset-2">
+        <partial name="_CreateAndBackToListButton"/>
+      </div>
+    </div>
+  </div>
+</form>
+
+@section Scripts
+{
+  @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
+  @* tinymce *@
+  <script>
+    tinymce.init({
+      selector: 'textarea',
+      plugins: 'lists',
+      menubar: 'file edit format'
+    });
+  </script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      getSubCategory();
+      $('#CategoryId').change(function() {
+        getSubCategory();
+      });
+    });
+
+    function getSubCategory() {
+      var url = '@Url.Content("~/")' + "Admin/SubCategory/GetSubCategory";
+      var ddlSource = '#CategoryId';
+      $.getJSON(url,
+        { id: $(ddlSource).val() },
+        function(data) {
+          var items = '';
+          $('#SubCategoryId').empty();
+          $.each(data,
+            function(i, subcategory) {
+              items += "<option value='" + subcategory.value + "'>" + subcategory.text + "</option>";
+            });
+          $('#SubCategoryId').html(items);
+        });
+    };
+  </script>
+}
