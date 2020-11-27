@@ -26,6 +26,11 @@ namespace MVC.Data
     /// </summary>
     public DbSet<Book> Books { get; set; }
 
+    /// <summary>
+    /// Coupons table
+    /// </summary>
+    public DbSet<Coupon> Coupons { get; set; }
+
     #endregion
 
     /// <summary>
