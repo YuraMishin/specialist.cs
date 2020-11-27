@@ -170,6 +170,7 @@ namespace MVC.Areas.Admin.Controllers
       {
         return NotFound();
       }
+
       var coupon = await _db.Coupons
         .FirstOrDefaultAsync(m => m.Id == id);
       if (coupon == null)
@@ -192,13 +193,31 @@ namespace MVC.Areas.Admin.Controllers
       {
         return NotFound();
       }
+
       var coupon = await _db.Coupons.SingleOrDefaultAsync(m => m.Id == id);
       if (coupon == null)
       {
         return NotFound();
       }
-      
+
       return View(coupon);
+    }
+
+    /// <summary>
+    /// Method removes coupon.
+    /// POST: /admin/coupon/delete/id
+    /// </summary>
+    /// <param name="id">id</param>
+    /// <returns>IActionResult</returns>
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeletePost(int id)
+    {
+      var coupons = await _db.Coupons.SingleOrDefaultAsync(m => m.Id == id);
+      _db.Coupons.Remove(coupons);
+      await _db.SaveChangesAsync();
+
+      return RedirectToAction(nameof(Index));
     }
   }
 }
