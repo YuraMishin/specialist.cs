@@ -179,5 +179,26 @@ namespace MVC.Areas.Admin.Controllers
 
       return View(coupon);
     }
+
+    /// <summary>
+    /// Method shows UI to delete coupon.
+    /// GET: /admin/coupon/delete/id
+    /// </summary>
+    /// <param name="id">id</param>
+    /// <returns>IActionResult</returns>
+    public async Task<IActionResult> Delete(int? id)
+    {
+      if (id == null)
+      {
+        return NotFound();
+      }
+      var coupon = await _db.Coupons.SingleOrDefaultAsync(m => m.Id == id);
+      if (coupon == null)
+      {
+        return NotFound();
+      }
+      
+      return View(coupon);
+    }
   }
 }
