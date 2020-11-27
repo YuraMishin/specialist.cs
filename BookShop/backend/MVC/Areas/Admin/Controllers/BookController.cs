@@ -284,5 +284,37 @@ namespace MVC.Areas.Admin.Controllers
 
       return View(BookVM);
     }
+
+    /// <summary>
+    /// Method removes book.
+    /// POST: /admin/book/delete/id
+    /// </summary>
+    /// <param name="id">Id</param>
+    /// <returns>IActionResult</returns>
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(int? id)
+    {
+      if (id == null)
+      {
+        return NotFound();
+      }
+
+      string webRootPath = _hostingEnvironment.WebRootPath;
+      var book = await _db.Books.FindAsync(id);
+      if (book != null)
+      {
+        var imagePath =
+          Path.Combine(webRootPath, book.Image.TrimStart('\\'));
+        if (System.IO.File.Exists(imagePath))
+        {
+          System.IO.File.Delete(imagePath);
+        }
+        _db.Books.Remove(book);
+        await _db.SaveChangesAsync();
+      }
+
+      return RedirectToAction(nameof(Index));
+    }
   }
 }
