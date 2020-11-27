@@ -1,7 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.IO;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVC.Data;
+using MVC.Models;
 
 namespace MVC.Areas.Admin.Controllers
 {
@@ -44,6 +46,43 @@ namespace MVC.Areas.Admin.Controllers
     public IActionResult Create()
     {
       return View();
+    }
+
+    /// <summary>
+    /// Method creates a coupon.
+    /// POST: /admin/coupon/create
+    /// </summary>
+    /// <param name="coupon">Coupon</param>
+    /// <returns>IActionResult</returns>
+    [HttpPost, ActionName("Create")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> CreatePost(Coupon coupon)
+    {
+      if (ModelState.IsValid)
+      {
+        // image save
+        var files = HttpContext.Request.Form.Files;
+        if (files.Count > 0)
+        {
+          byte[] p1 = null;
+          using (var fs1 = files[0].OpenReadStream())
+          {
+            using (var ms1 = new MemoryStream())
+            {
+              fs1.CopyTo(ms1);
+              p1 = ms1.ToArray();
+            }
+          }
+
+          coupon.Picture = p1;
+        }
+        _db.Coupons.Add(coupon);
+        await _db.SaveChangesAsync();
+
+        return RedirectToAction(nameof(Index));
+      }
+
+      return View(coupon);
     }
   }
 }
