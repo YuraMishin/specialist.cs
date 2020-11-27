@@ -136,7 +136,7 @@ namespace MVC.Areas.Admin.Controllers
 
     /// <summary>
     /// Method shows edit book UI.
-    /// GET: /admin/book/edit
+    /// GET: /admin/book/edit/id
     /// </summary>
     /// <param name="id">Id</param>
     /// <returns>IActionResult</returns>
@@ -167,7 +167,7 @@ namespace MVC.Areas.Admin.Controllers
 
     /// <summary>
     /// Method updates book.
-    /// POST: /admin/book/edit
+    /// POST: /admin/book/edit/id
     /// </summary>
     /// <param name="id">id</param>
     /// <returns>IActionResult</returns>
@@ -234,11 +234,38 @@ namespace MVC.Areas.Admin.Controllers
     }
 
     /// <summary>
-    /// Method shows book details UI
+    /// Method shows book details UI.
+    /// GET: /admin/book/details/id
     /// </summary>
     /// <param name="id">Id</param>
     /// <returns>IActionResult</returns>
     public async Task<IActionResult> Details(int? id)
+    {
+      if (id == null)
+      {
+        return NotFound();
+      }
+
+      BookVM.Book = await _db.Books
+        .Include(m => m.Category)
+        .Include(m => m.SubCategory)
+        .SingleOrDefaultAsync(m => m.Id == id);
+
+      if (BookVM.Book == null)
+      {
+        return NotFound();
+      }
+
+      return View(BookVM);
+    }
+
+    /// <summary>
+    /// Method shows UI to delete book.
+    /// GET: /admin/book/delete/id
+    /// </summary>
+    /// <param name="id">Id</param>
+    /// <returns>IActionResult</returns>
+    public async Task<IActionResult> Delete(int? id)
     {
       if (id == null)
       {
