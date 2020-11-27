@@ -29,8 +29,8 @@ namespace MVC.Migrations
         {
           "Book1",
           "Desc1",
-          "Child",
-          "pic",
+          "0",
+          @"\img\1.png",
           1,
           1,
           1
