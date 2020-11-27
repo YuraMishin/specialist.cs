@@ -35,5 +35,15 @@ namespace MVC.Areas.Admin.Controllers
       var coupons = await _db.Coupons.ToListAsync();
       return View(coupons);
     }
+
+    /// <summary>
+    /// Method shows UI to create a coupon.
+    /// GET: /admin/coupon/create
+    /// </summary>
+    /// <returns>IActionResult</returns>
+    public IActionResult Create()
+    {
+      return View();
+    }
   }
 }

@@ -27,6 +27,7 @@ namespace MVC.Models
     /// <summary>
     /// Coupon type
     /// </summary>
+    [Display(Name = "Coupon Type")]
     [Required]
     public string CouponType { get; set; }
 
@@ -48,6 +49,7 @@ namespace MVC.Models
     /// Minimum amount
     /// </summary>
     [Required]
+    [Display(Name = "Minimum Amount")]
     public double MinimumAmount { get; set; }
 
     /// <summary>
@@ -58,6 +60,7 @@ namespace MVC.Models
     /// <summary>
     /// Active status
     /// </summary>
+    [Display(Name = "Is Active")]
     public bool IsActive { get; set; }
   }
 }
