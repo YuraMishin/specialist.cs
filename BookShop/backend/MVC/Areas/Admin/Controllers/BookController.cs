@@ -135,7 +135,8 @@ namespace MVC.Areas.Admin.Controllers
     }
 
     /// <summary>
-    /// Method shows edit book UI
+    /// Method shows edit book UI.
+    /// GET: /admin/book/edit
     /// </summary>
     /// <param name="id">Id</param>
     /// <returns>IActionResult</returns>
@@ -162,6 +163,74 @@ namespace MVC.Areas.Admin.Controllers
         .ToListAsync();
 
       return View(BookVM);
+    }
+
+    /// <summary>
+    /// Method edits book.
+    /// GET: /admin/book/edit
+    /// </summary>
+    /// <param name="id">id</param>
+    /// <returns>IActionResult</returns>
+    [HttpPost, ActionName("Edit")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> EditPOST(int? id)
+    {
+      if (id == null)
+      {
+        return NotFound();
+      }
+
+      BookVM.Book.SubCategoryId = Convert
+        .ToInt32(Request.Form["SubCategoryId"].ToString());
+      if (!ModelState.IsValid)
+      {
+        BookVM.Categories = await _db.Categories.ToListAsync();
+        BookVM.SubCategories = await _db.SubCategories
+          .Where(s => s.CategoryId == BookVM.Book.CategoryId)
+          .ToListAsync();
+
+        return View(BookVM);
+      }
+
+      // img saving
+      var webRootPath = _hostingEnvironment.WebRootPath;
+      var files = HttpContext.Request.Form.Files;
+      var bookFromDb =
+        await _db.Books.FindAsync(BookVM.Book.Id);
+      if (files.Any())
+      {
+        var uploads = Path.Combine(webRootPath, "img");
+        var extension_new = Path.GetExtension(files[0].FileName);
+        var imagePath = Path.Combine(
+          webRootPath,
+          bookFromDb.Image.TrimStart('\\'));
+        if (System.IO.File.Exists(imagePath))
+        {
+          System.IO.File.Delete(imagePath);
+        }
+
+        using (var filesStream
+          = new FileStream(
+            Path.Combine(uploads, BookVM.Book.Id + extension_new),
+            FileMode.Create))
+        {
+          files[0].CopyTo(filesStream);
+        }
+
+        bookFromDb.Image =
+          @"\img\" + BookVM.Book.Id + extension_new;
+      }
+
+      bookFromDb.Name = BookVM.Book.Name;
+      bookFromDb.Description = BookVM.Book.Description;
+      bookFromDb.Price = BookVM.Book.Price;
+      bookFromDb.Age = BookVM.Book.Age;
+      bookFromDb.CategoryId = BookVM.Book.CategoryId;
+      bookFromDb.SubCategoryId = BookVM.Book.SubCategoryId;
+
+      await _db.SaveChangesAsync();
+
+      return RedirectToAction(nameof(Index));
     }
   }
 }
