@@ -166,8 +166,8 @@ namespace MVC.Areas.Admin.Controllers
     }
 
     /// <summary>
-    /// Method edits book.
-    /// GET: /admin/book/edit
+    /// Method updates book.
+    /// POST: /admin/book/edit
     /// </summary>
     /// <param name="id">id</param>
     /// <returns>IActionResult</returns>
@@ -231,6 +231,31 @@ namespace MVC.Areas.Admin.Controllers
       await _db.SaveChangesAsync();
 
       return RedirectToAction(nameof(Index));
+    }
+
+    /// <summary>
+    /// Method shows book details UI
+    /// </summary>
+    /// <param name="id">Id</param>
+    /// <returns>IActionResult</returns>
+    public async Task<IActionResult> Details(int? id)
+    {
+      if (id == null)
+      {
+        return NotFound();
+      }
+
+      BookVM.Book = await _db.Books
+        .Include(m => m.Category)
+        .Include(m => m.SubCategory)
+        .SingleOrDefaultAsync(m => m.Id == id);
+
+      if (BookVM.Book == null)
+      {
+        return NotFound();
+      }
+
+      return View(BookVM);
     }
   }
 }
