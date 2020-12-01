@@ -35,6 +35,12 @@ namespace MVC
             Configuration.GetConnectionString("bookshop.dev"));
         });
 
+      // Identity
+      services.AddIdentity<IdentityUser, IdentityRole>()
+        .AddDefaultTokenProviders()
+        .AddDefaultUI()
+        .AddEntityFrameworkStores<ApplicationDbContext>();
+
       #region Dependency Injections
 
       services.AddScoped<ICategoryRepository, CategoryRepository>();
@@ -42,9 +48,8 @@ namespace MVC
 
       #endregion
 
-      services.AddDefaultIdentity<IdentityUser>(options =>
-          options.SignIn.RequireConfirmedAccount = true)
-        .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
       services.AddControllersWithViews();
       services.AddRazorPages().AddRazorRuntimeCompilation();
     }

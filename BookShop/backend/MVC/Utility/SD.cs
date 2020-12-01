@@ -9,5 +9,20 @@ namespace MVC.Utility
     /// Default Food Image
     /// </summary>
     public const string DefaultBookImage = "default_book.png";
+
+    /// <summary>
+    /// Manager user
+    /// </summary>
+    public const string ManagerUser = "Manager";
+
+    /// <summary>
+    /// FrontDesk user
+    /// </summary>
+    public const string FrontDeskUser = "FrontDesk";
+
+    /// <summary>
+    /// CustomerEnd user
+    /// </summary>
+    public const string CustomerEndUser = "Customer";
   }
 }

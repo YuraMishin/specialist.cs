@@ -31,6 +31,11 @@ namespace MVC.Data
     /// </summary>
     public DbSet<Coupon> Coupons { get; set; }
 
+    /// <summary>
+    /// Extends AspNetUsers table
+    /// </summary>
+    public DbSet<ApplicationUser> ApplicationUser { get; set; }
+
     #endregion
 
     /// <summary>

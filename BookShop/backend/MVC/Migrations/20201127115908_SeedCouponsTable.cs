@@ -2,16 +2,25 @@
 
 namespace MVC.Migrations
 {
-    public partial class SeedCouponsTable : Migration
+  /// <summary>
+  /// Class implements SeedCouponsTable table seeder
+  /// </summary>
+  public partial class SeedCouponsTable : Migration
+  {
+    /// <summary>
+    /// Method seeds Books table
+    /// </summary>
+    /// <param name="migrationBuilder">MigrationBuilder</param>
+    protected override void Up(MigrationBuilder migrationBuilder)
     {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
-
-        }
-
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-
-        }
     }
+
+    /// <summary>
+    /// Method removes current migration
+    /// </summary>
+    /// <param name="migrationBuilder">MigrationBuilder</param>
+    protected override void Down(MigrationBuilder migrationBuilder)
+    {
+    }
+  }
 }
