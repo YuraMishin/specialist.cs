@@ -20,7 +20,11 @@ namespace MVC.Migrations
       migrationBuilder.InsertData(
         table: "Categories",
         columns: new[] {"Name"},
-        values: new object[] {"Adventures"});
+        values: new object[,]
+        {
+          {"Adventure"},
+          {"Fantasy"}
+        });
     }
 
     /// <summary>
@@ -36,7 +40,11 @@ namespace MVC.Migrations
       migrationBuilder.DeleteData(
         table: "Categories",
         keyColumn: "Name",
-        keyValue: "Adventures");
+        keyValue: "Adventure");
+      migrationBuilder.DeleteData(
+        table: "Categories",
+        keyColumn: "Name",
+        keyValue: "Fantasy");
     }
   }
 }

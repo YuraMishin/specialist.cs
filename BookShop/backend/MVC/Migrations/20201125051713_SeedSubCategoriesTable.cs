@@ -16,7 +16,11 @@ namespace MVC.Migrations
       migrationBuilder.InsertData(
         table: "SubCategories",
         columns: new[] {"Name", "CategoryId"},
-        values: new object[] {"Space", 1});
+        values: new object[,]
+        {
+          {"Space", 1},
+          {"Magic", 2}
+        });
     }
 
     /// <summary>
@@ -29,6 +33,10 @@ namespace MVC.Migrations
         table: "SubCategories",
         keyColumn: "Name",
         keyValue: "Space");
+      migrationBuilder.DeleteData(
+        table: "SubCategories",
+        keyColumn: "Name",
+        keyValue: "Magic");
     }
   }
 }

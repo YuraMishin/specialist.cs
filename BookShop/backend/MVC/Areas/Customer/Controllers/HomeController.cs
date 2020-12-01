@@ -1,24 +1,62 @@
 ﻿using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using MVC.Data;
 using MVC.Models;
+using MVC.ViewModels;
 
 namespace MVC.Areas.Customer.Controllers
 {
+  /// <summary>
+  /// Class implements Customer controller
+  /// </summary>
   [Area("Customer")]
   public class HomeController : Controller
   {
+    /// <summary>
+    /// Logger
+    /// </summary>
     private readonly ILogger<HomeController> _logger;
 
-    public HomeController(ILogger<HomeController> logger)
+    /// <summary>
+    /// Db Context
+    /// </summary>
+    private readonly ApplicationDbContext _db;
+
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="logger">ILogger</param>
+    public HomeController(ILogger<HomeController> logger,
+      ApplicationDbContext db)
     {
       _logger = logger;
+      _db = db;
     }
 
-    public IActionResult Index()
+    /// <summary>
+    /// Method displays index Customer UI.
+    /// GET: /customer/
+    /// </summary>
+    /// <returns>IActionResult</returns>
+    public async Task<IActionResult> Index()
     {
-      _logger.LogInformation("App is ready");
-      return View();
+      var IndexVM = new IndexViewModel()
+      {
+        Books = await _db.Books
+          .Include(m => m.Category)
+          .Include(m => m.SubCategory)
+          .ToListAsync(),
+        Categories = await _db.Categories.ToListAsync(),
+        Coupons = await _db.Coupons
+          .Where(c => c.IsActive == true)
+          .ToListAsync()
+      };
+
+      return View(IndexVM);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None,

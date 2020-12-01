@@ -25,15 +25,26 @@ namespace MVC.Migrations
           "SubCategoryId",
           "Price"
         },
-        values: new object[]
+        values: new object[,]
         {
-          "Book1",
-          "Desc1",
-          "0",
-          @"\img\1.png",
-          1,
-          1,
-          1
+          {
+            "Book1",
+            "Desc1",
+            "1",
+            @"\img\1.png",
+            1,
+            1,
+            1
+          },
+          {
+            "Book2",
+            "Desc2",
+            "0",
+            @"\img\1.png",
+            2,
+            2,
+            1
+          }
         });
     }
 
@@ -47,6 +58,10 @@ namespace MVC.Migrations
         table: "Books",
         keyColumn: "Name",
         keyValue: "Book1");
+      migrationBuilder.DeleteData(
+        table: "Books",
+        keyColumn: "Name",
+        keyValue: "Book2");
     }
   }
 }
