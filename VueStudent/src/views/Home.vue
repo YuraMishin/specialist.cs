@@ -1,16 +1,17 @@
 <template>
   <div>
     <h1>Vue Student</h1>
-    <SimpleRef/>
+    <Main/>
+
   </div>
 </template>
 
 <script lang="ts">
   import {Options, Vue} from "vue-class-component";
-  import SimpleRef from "@/components/SimpleRef.vue"
+  import Main from "@/assignments/MyResources/Main.vue";
 
   @Options({
-    components: {SimpleRef}
+    components: {Main}
   })
   export default class Home extends Vue {
   }
