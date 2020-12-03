@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,7 @@ namespace MVC.Areas.Admin.Controllers
   /// <summary>
   /// Class implements Book Controller
   /// </summary>
+  [Authorize(Roles = SD.ManagerUser)]
   [Area("Admin")]
   public class BookController : Controller
   {

@@ -5,12 +5,15 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using MVC.Utility;
 
 namespace MVC.Areas.Admin.Controllers
 {
   /// <summary>
   /// Class implements UserController
   /// </summary>
+  [Authorize(Roles = SD.ManagerUser)]
   [Area("Admin")]
   public class UserController : Controller
   {

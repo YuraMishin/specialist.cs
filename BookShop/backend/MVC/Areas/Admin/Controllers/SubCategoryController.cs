@@ -5,8 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVC.Data;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MVC.Models;
+using MVC.Utility;
 using MVC.ViewModels;
 
 namespace MVC.Areas.Admin.Controllers
@@ -14,6 +16,7 @@ namespace MVC.Areas.Admin.Controllers
   /// <summary>
   /// Class implements SubCategory Controller
   /// </summary>
+  [Authorize(Roles = SD.ManagerUser)]
   [Area("Admin")]
   public class SubCategoryController : Controller
   {

@@ -1,16 +1,19 @@
 ﻿using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVC.Data;
 using MVC.Models;
+using MVC.Utility;
 
 namespace MVC.Areas.Admin.Controllers
 {
   /// <summary>
   /// Class implements Coupon Controller
   /// </summary>
+  [Authorize(Roles = SD.ManagerUser)]
   [Area("Admin")]
   public class CouponController : Controller
   {

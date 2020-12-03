@@ -8,7 +8,7 @@ namespace MVC.Migrations
   public partial class SeedSubCategoriesTable : Migration
   {
     /// <summary>
-    /// Method seeds Categories table
+    /// Method seeds SubCategories table
     /// </summary>
     /// <param name="migrationBuilder">MigrationBuilder</param>
     protected override void Up(MigrationBuilder migrationBuilder)

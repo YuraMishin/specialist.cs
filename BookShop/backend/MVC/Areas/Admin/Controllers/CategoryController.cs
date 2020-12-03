@@ -1,14 +1,17 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MVC.Data;
 using MVC.Models;
 using MVC.Services;
+using MVC.Utility;
 
 namespace MVC.Areas.Admin.Controllers
 {
   /// <summary>
   /// Class implements Category Controller
   /// </summary>
+  [Authorize(Roles = SD.ManagerUser)]
   [Area("Admin")]
   public class CategoryController : Controller
   {

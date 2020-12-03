@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using MVC.Utility;
 
 namespace MVC.Migrations
 {
@@ -9,7 +10,7 @@ namespace MVC.Migrations
   public partial class SeedAspNetUsersTable : Migration
   {
     /// <summary>
-    /// Method seeds Books table
+    /// Method seeds User table
     /// </summary>
     /// <param name="migrationBuilder">MigrationBuilder</param>
     protected override void Up(MigrationBuilder migrationBuilder)
@@ -40,29 +41,54 @@ namespace MVC.Migrations
           "StreetAddress",
           "Discriminator"
         },
-        values: new object[]
+        values: new object[,]
         {
-          Guid.NewGuid().ToString(),
-          "admin@mail.ru",
-          "ADMIN@MAIL.RU",
-          "admin@mail.ru",
-          "ADMIN@MAIL.RU",
-          false,
-          "AQAAAAEAACcQAAAAEGp985ti8w68abeaVk41JUTgzYrD+Xn3hhuVTdfv/F14S5/6iScuT6jzIj1rCxE0Xw==",
-          Guid.NewGuid().ToString(),
-          Guid.NewGuid().ToString(),
-          "1",
-          false,
-          false,
-          null,
-          true,
-          0,
-          "1",
-          "1",
-          "1",
-          "1",
-          "1",
-          "ApplicationUser"
+          {
+            Guid.NewGuid().ToString(),
+            SD.AdminEmail,
+            SD.AdminEmail.ToUpper(),
+            SD.AdminEmail,
+            SD.AdminEmail.ToUpper(),
+            false,
+            "AQAAAAEAACcQAAAAEGp985ti8w68abeaVk41JUTgzYrD+Xn3hhuVTdfv/F14S5/6iScuT6jzIj1rCxE0Xw==",
+            Guid.NewGuid().ToString(),
+            Guid.NewGuid().ToString(),
+            "1",
+            false,
+            false,
+            null,
+            true,
+            0,
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "ApplicationUser"
+          },
+          {
+            Guid.NewGuid().ToString(),
+            SD.UserEmail,
+            SD.UserEmail.ToUpper(),
+            SD.UserEmail,
+            SD.UserEmail.ToUpper(),
+            false,
+            "AQAAAAEAACcQAAAAEGp985ti8w68abeaVk41JUTgzYrD+Xn3hhuVTdfv/F14S5/6iScuT6jzIj1rCxE0Xw==",
+            Guid.NewGuid().ToString(),
+            Guid.NewGuid().ToString(),
+            "1",
+            false,
+            false,
+            null,
+            true,
+            0,
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "ApplicationUser"
+          }
         });
     }
 
@@ -75,7 +101,12 @@ namespace MVC.Migrations
       migrationBuilder.DeleteData(
         table: "AspNetUsers",
         keyColumn: "UserName",
-        keyValue: "admin@mail.ru");
+        keyValue: SD.AdminEmail);
+
+      migrationBuilder.DeleteData(
+        table: "AspNetUsers",
+        keyColumn: "UserName",
+        keyValue: SD.UserEmail);
     }
   }
 }

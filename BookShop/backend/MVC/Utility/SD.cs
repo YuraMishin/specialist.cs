@@ -11,6 +11,16 @@ namespace MVC.Utility
     public const string DefaultBookImage = "default_book.png";
 
     /// <summary>
+    /// Admin email
+    /// </summary>
+    public const string AdminEmail = "admin@mail.ru";
+
+    /// <summary>
+    /// User email
+    /// </summary>
+    public const string UserEmail = "user@mail.ru";
+
+    /// <summary>
     /// Manager user
     /// </summary>
     public const string ManagerUser = "Manager";
