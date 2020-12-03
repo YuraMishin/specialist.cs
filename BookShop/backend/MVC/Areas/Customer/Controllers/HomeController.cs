@@ -1,12 +1,15 @@
 ﻿using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MVC.Data;
 using MVC.Models;
+using MVC.Utility;
 using MVC.ViewModels;
 
 namespace MVC.Areas.Customer.Controllers
@@ -57,6 +60,18 @@ namespace MVC.Areas.Customer.Controllers
           .ToListAsync()
       };
 
+      var claimsIdentity = (ClaimsIdentity) User.Identity;
+      var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+      if (claim != null)
+      {
+        var cnt = _db.ShoppingCarts
+          .Where(u => u.ApplicationUserId == claim.Value)
+          .ToList()
+          .Count;
+        HttpContext.Session.SetInt32(SD.ssShoppingCartCount, cnt);
+      }
+
       return View(IndexVM);
     }
 
@@ -82,6 +97,66 @@ namespace MVC.Areas.Customer.Controllers
       };
 
       return View(cartObj);
+    }
+
+    /// <summary>
+    /// Method add book to shopping cart.
+    /// POST: /customer/home/details/id
+    /// </summary>
+    /// <param name="CartObject">CartObject</param>
+    /// <returns>IActionResult</returns>
+    [Authorize]
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Details(ShoppingCart CartObject)
+    {
+      CartObject.Id = 0;
+      if (ModelState.IsValid)
+      {
+        var claimsIdentity = (ClaimsIdentity) this.User.Identity;
+        var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+        CartObject.ApplicationUserId = claim.Value;
+
+        ShoppingCart cartFromDb = await _db.ShoppingCarts
+          .Where(c => c.ApplicationUserId == CartObject.ApplicationUserId
+                      && c.BookId == CartObject.BookId)
+          .FirstOrDefaultAsync();
+
+        if (cartFromDb == null)
+        {
+          await _db.ShoppingCarts.AddAsync(CartObject);
+        }
+        else
+        {
+          cartFromDb.Count = cartFromDb.Count + CartObject.Count;
+        }
+
+        await _db.SaveChangesAsync();
+
+        var count = _db.ShoppingCarts
+          .Where(c => c.ApplicationUserId == CartObject.ApplicationUserId)
+          .ToList()
+          .Count();
+        HttpContext.Session.SetInt32(SD.ssShoppingCartCount, count);
+
+        return RedirectToAction("Index");
+      }
+      else
+      {
+        var bookItemFromDb = await _db.Books
+          .Include(m => m.Category)
+          .Include(m => m.SubCategory)
+          .Where(m => m.Id == CartObject.BookId)
+          .FirstOrDefaultAsync();
+
+        ShoppingCart cartObj = new ShoppingCart()
+        {
+          Book = bookItemFromDb,
+          BookId = bookItemFromDb.Id
+        };
+
+        return View(cartObj);
+      }
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None,

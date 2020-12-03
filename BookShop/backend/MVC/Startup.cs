@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -41,13 +42,20 @@ namespace MVC
         .AddDefaultUI()
         .AddEntityFrameworkStores<ApplicationDbContext>();
 
+      // add sessions
+      services.AddSession(options =>
+      {
+        options.Cookie.IsEssential = true;
+        options.IdleTimeout = TimeSpan.FromMinutes(30);
+        options.Cookie.HttpOnly = true;
+      });
+
       #region Dependency Injections
 
       services.AddScoped<ICategoryRepository, CategoryRepository>();
       services.AddScoped<ICategoryService, CategoryService>();
 
       #endregion
-
 
 
       services.AddControllersWithViews();
@@ -71,6 +79,7 @@ namespace MVC
 
       app.UseHttpsRedirection();
       app.UseStaticFiles();
+      app.UseCookiePolicy();
 
       // add support folder node_modules
       app.UseStaticFiles(new StaticFileOptions()
@@ -83,6 +92,7 @@ namespace MVC
       app.UseRouting();
 
       app.UseAuthentication();
+      app.UseSession();
       app.UseAuthorization();
 
       app.UseEndpoints(endpoints =>

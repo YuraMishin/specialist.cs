@@ -34,5 +34,10 @@ namespace MVC.Utility
     /// CustomerEnd user
     /// </summary>
     public const string CustomerEndUser = "Customer";
+
+    /// <summary>
+    /// Shopping cart count
+    /// </summary>
+    public const string ssShoppingCartCount = "ssCartCount";
   }
 }
