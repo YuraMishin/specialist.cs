@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -39,7 +40,7 @@ namespace MVC.Areas.Customer.Controllers
 
     /// <summary>
     /// Method displays index Customer UI.
-    /// GET: /customer/
+    /// GET: /customer/home/
     /// </summary>
     /// <returns>IActionResult</returns>
     public async Task<IActionResult> Index()
@@ -57,6 +58,30 @@ namespace MVC.Areas.Customer.Controllers
       };
 
       return View(IndexVM);
+    }
+
+    /// <summary>
+    /// Method displays Book Details UI.
+    /// GET: /customer/home/details/id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    [Authorize]
+    public async Task<IActionResult> Details(int id)
+    {
+      var bookFromDb = await _db.Books
+        .Include(m => m.Category)
+        .Include(m => m.SubCategory)
+        .Where(m => m.Id == id)
+        .FirstOrDefaultAsync();
+
+      ShoppingCart cartObj = new ShoppingCart()
+      {
+        Book = bookFromDb,
+        BookId = bookFromDb.Id
+      };
+
+      return View(cartObj);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None,
