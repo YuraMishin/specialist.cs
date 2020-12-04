@@ -82,18 +82,24 @@ namespace MVC.Areas.Customer.Controllers
       OrderDetailsCartVM.OrderHeader.OrderTotalOriginal =
         OrderDetailsCartVM.OrderHeader.OrderTotal;
 
-      if(HttpContext.Session.GetString(SD.ssCouponCode)!=null)
+      if (HttpContext.Session.GetString(SD.ssCouponCode) != null)
       {
-        OrderDetailsCartVM.OrderHeader.CouponCode = HttpContext.Session.GetString(SD.ssCouponCode);
-        var couponFromDb = await _db.Coupons.Where(c => c.Name.ToLower() == OrderDetailsCartVM.OrderHeader.CouponCode.ToLower()).FirstOrDefaultAsync();
-        OrderDetailsCartVM.OrderHeader.OrderTotal = SD.DiscountedPrice(couponFromDb, OrderDetailsCartVM.OrderHeader.OrderTotalOriginal);
+        OrderDetailsCartVM.OrderHeader.CouponCode =
+          HttpContext.Session.GetString(SD.ssCouponCode);
+        var couponFromDb = await _db.Coupons
+          .Where(c =>
+            c.Name.ToLower() ==
+            OrderDetailsCartVM.OrderHeader.CouponCode.ToLower())
+          .FirstOrDefaultAsync();
+        OrderDetailsCartVM.OrderHeader.OrderTotal = SD.DiscountedPrice(
+          couponFromDb, OrderDetailsCartVM.OrderHeader.OrderTotalOriginal);
       }
 
       return View(OrderDetailsCartVM);
     }
 
     /// <summary>
-    /// Method displays cart UI.
+    /// Method adds coupon.
     /// GET: /customer/cart/addcoupon
     /// </summary>
     /// <returns>IActionResult</returns>
@@ -106,6 +112,18 @@ namespace MVC.Areas.Customer.Controllers
 
       HttpContext.Session.SetString(SD.ssCouponCode,
         OrderDetailsCartVM.OrderHeader.CouponCode);
+
+      return RedirectToAction(nameof(Index));
+    }
+
+    /// <summary>
+    /// Method removes coupon.
+    /// GET: /customer/cart/removecoupon
+    /// </summary>
+    /// <returns>IActionResult</returns>
+    public IActionResult RemoveCoupon()
+    {
+      HttpContext.Session.SetString(SD.ssCouponCode, string.Empty);
 
       return RedirectToAction(nameof(Index));
     }
