@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MVC.Data;
@@ -7,6 +8,7 @@ using MVC.ViewModels;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using MVC.Models;
 
 namespace MVC.Areas.Customer.Controllers
 {
@@ -197,9 +199,62 @@ namespace MVC.Areas.Customer.Controllers
       return RedirectToAction(nameof(Index));
     }
 
+    /// <summary>
+    /// Method displays summary order UI.
+    /// GET: /customer/cart/summary
+    /// </summary>
+    /// <returns>IActionResult</returns>
     public async Task<IActionResult> Summary()
     {
-      return View(nameof(Index));
+      OrderDetailsCartVM = new OrderDetailsCartViewModel()
+      {
+        OrderHeader = new Models.OrderHeader()
+      };
+
+      OrderDetailsCartVM.OrderHeader.OrderTotal = 0;
+
+      var claimsIdentity = (ClaimsIdentity) User.Identity;
+      var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+      ApplicationUser applicationUser = await _db.ApplicationUser
+        .Where(c => c.Id == claim.Value).FirstOrDefaultAsync();
+      var cart =
+        _db.ShoppingCarts.Where(c => c.ApplicationUserId == claim.Value);
+      if (cart != null)
+      {
+        OrderDetailsCartVM.ListCart = cart.ToList();
+      }
+
+      foreach (var list in OrderDetailsCartVM.ListCart)
+      {
+        list.Book =
+          await _db.Books.FirstOrDefaultAsync(m => m.Id == list.BookId);
+        OrderDetailsCartVM.OrderHeader.OrderTotal =
+          OrderDetailsCartVM.OrderHeader.OrderTotal +
+          (list.Book.Price * list.Count);
+      }
+
+      OrderDetailsCartVM.OrderHeader.OrderTotalOriginal =
+        OrderDetailsCartVM.OrderHeader.OrderTotal;
+      OrderDetailsCartVM.OrderHeader.PickupName = applicationUser.Name;
+      OrderDetailsCartVM.OrderHeader.PhoneNumber = applicationUser.PhoneNumber;
+      OrderDetailsCartVM.OrderHeader.PickUpTime = DateTime.Now;
+
+
+      if (HttpContext.Session.GetString(SD.ssCouponCode) != null)
+      {
+        OrderDetailsCartVM.OrderHeader.CouponCode =
+          HttpContext.Session.GetString(SD.ssCouponCode);
+        var couponFromDb = await _db.Coupons
+          .Where(c =>
+            c.Name.ToLower() ==
+            OrderDetailsCartVM.OrderHeader.CouponCode.ToLower())
+          .FirstOrDefaultAsync();
+        OrderDetailsCartVM.OrderHeader.OrderTotal = SD.DiscountedPrice(
+          couponFromDb, OrderDetailsCartVM.OrderHeader.OrderTotalOriginal);
+      }
+
+
+      return View(OrderDetailsCartVM);
     }
   }
 }
