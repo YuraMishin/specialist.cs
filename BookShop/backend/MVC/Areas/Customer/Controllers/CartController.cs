@@ -129,7 +129,7 @@ namespace MVC.Areas.Customer.Controllers
     }
 
     /// <summary>
-    /// Method increases count.
+    /// Method increases count
     /// GET: /customer/cart/plus
     /// </summary>
     /// <returns>IActionResult</returns>
@@ -139,6 +139,35 @@ namespace MVC.Areas.Customer.Controllers
         await _db.ShoppingCarts.FirstOrDefaultAsync(c => c.Id == cartId);
       cart.Count += 1;
       await _db.SaveChangesAsync();
+
+      return RedirectToAction(nameof(Index));
+    }
+
+    /// <summary>
+    /// Method decreases count
+    /// GET: /customer/cart/minus
+    /// </summary>
+    /// <returns>IActionResult</returns>
+    public async Task<IActionResult> Minus(int cartId)
+    {
+      var cart =
+        await _db.ShoppingCarts.FirstOrDefaultAsync(c => c.Id == cartId);
+      if (cart.Count == 1)
+      {
+        _db.ShoppingCarts.Remove(cart);
+        await _db.SaveChangesAsync();
+
+        var cnt = _db.ShoppingCarts
+          .Where(u => u.ApplicationUserId == cart.ApplicationUserId)
+          .ToList()
+          .Count;
+        HttpContext.Session.SetInt32(SD.ssShoppingCartCount, cnt);
+      }
+      else
+      {
+        cart.Count -= 1;
+        await _db.SaveChangesAsync();
+      }
 
       return RedirectToAction(nameof(Index));
     }
