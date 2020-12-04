@@ -127,5 +127,20 @@ namespace MVC.Areas.Customer.Controllers
 
       return RedirectToAction(nameof(Index));
     }
+
+    /// <summary>
+    /// Method increases count.
+    /// GET: /customer/cart/plus
+    /// </summary>
+    /// <returns>IActionResult</returns>
+    public async Task<IActionResult> Plus(int cartId)
+    {
+      var cart =
+        await _db.ShoppingCarts.FirstOrDefaultAsync(c => c.Id == cartId);
+      cart.Count += 1;
+      await _db.SaveChangesAsync();
+
+      return RedirectToAction(nameof(Index));
+    }
   }
 }
