@@ -34,7 +34,7 @@ namespace MVC.Migrations
             @"\img\1.png",
             1,
             1,
-            1
+            100
           },
           {
             "Book2",

@@ -5,6 +5,7 @@ using MVC.Data;
 using MVC.Utility;
 using MVC.ViewModels;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace MVC.Areas.Customer.Controllers
@@ -81,7 +82,32 @@ namespace MVC.Areas.Customer.Controllers
       OrderDetailsCartVM.OrderHeader.OrderTotalOriginal =
         OrderDetailsCartVM.OrderHeader.OrderTotal;
 
+      if(HttpContext.Session.GetString(SD.ssCouponCode)!=null)
+      {
+        OrderDetailsCartVM.OrderHeader.CouponCode = HttpContext.Session.GetString(SD.ssCouponCode);
+        var couponFromDb = await _db.Coupons.Where(c => c.Name.ToLower() == OrderDetailsCartVM.OrderHeader.CouponCode.ToLower()).FirstOrDefaultAsync();
+        OrderDetailsCartVM.OrderHeader.OrderTotal = SD.DiscountedPrice(couponFromDb, OrderDetailsCartVM.OrderHeader.OrderTotalOriginal);
+      }
+
       return View(OrderDetailsCartVM);
+    }
+
+    /// <summary>
+    /// Method displays cart UI.
+    /// GET: /customer/cart/addcoupon
+    /// </summary>
+    /// <returns>IActionResult</returns>
+    public IActionResult AddCoupon()
+    {
+      if (OrderDetailsCartVM.OrderHeader.CouponCode == null)
+      {
+        OrderDetailsCartVM.OrderHeader.CouponCode = "";
+      }
+
+      HttpContext.Session.SetString(SD.ssCouponCode,
+        OrderDetailsCartVM.OrderHeader.CouponCode);
+
+      return RedirectToAction(nameof(Index));
     }
   }
 }

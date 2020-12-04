@@ -1,3 +1,6 @@
+using System;
+using MVC.Models;
+
 namespace MVC.Utility
 {
   /// <summary>
@@ -41,7 +44,12 @@ namespace MVC.Utility
     public const string ssShoppingCartCount = "ssCartCount";
 
     /// <summary>
-    /// Method convert string to raw html
+    /// CouponCode
+    /// </summary>
+    public const string ssCouponCode = "ssCouponCode";
+
+    /// <summary>
+    /// Method converts string to raw html
     /// </summary>
     /// <param name="source">String</param>
     /// <returns>String</returns>
@@ -74,6 +82,49 @@ namespace MVC.Utility
       }
 
       return new string(array, 0, arrayIndex);
+    }
+
+    /// <summary>
+    /// Method calculates discounted price
+    /// </summary>
+    /// <param name="couponFromDb">Coupon from Db</param>
+    /// <param name="originalOrderTotal">Original Order Total</param>
+    /// <returns>double</returns>
+    public static double DiscountedPrice(Coupon couponFromDb,
+      double originalOrderTotal)
+    {
+      if (couponFromDb == null)
+      {
+        return originalOrderTotal;
+      }
+      else
+      {
+        if (couponFromDb.MinimumAmount > originalOrderTotal)
+        {
+          return originalOrderTotal;
+        }
+        else
+        {
+          //everything is valid
+          if (Convert.ToInt32(couponFromDb.CouponType) ==
+              (int) Coupon.ECouponType.Dollar)
+          {
+            //$10 off $100
+            return Math.Round(originalOrderTotal - couponFromDb.Discount, 2);
+          }
+
+          if (Convert.ToInt32(couponFromDb.CouponType) ==
+              (int) Coupon.ECouponType.Percent)
+          {
+            //10% off $100
+            return Math.Round(
+              originalOrderTotal -
+              (originalOrderTotal * couponFromDb.Discount / 100), 2);
+          }
+        }
+      }
+
+      return originalOrderTotal;
     }
   }
 }
