@@ -42,9 +42,9 @@ namespace MVC.Data
     public DbSet<ShoppingCart> ShoppingCarts { get; set; }
 
     /// <summary>
-    /// OrderHeader table
+    /// OrderHeaders table
     /// </summary>
-    public DbSet<OrderHeader> OrderHeader { get; set; }
+    public DbSet<OrderHeader> OrderHeaders { get; set; }
 
     /// <summary>
     /// OrderDetails table

@@ -34,6 +34,7 @@ namespace MVC.Areas.Customer.Controllers
     /// Constructor
     /// </summary>
     /// <param name="logger">ILogger</param>
+    /// <param name="db">DbContext</param>
     public HomeController(ILogger<HomeController> logger,
       ApplicationDbContext db)
     {
