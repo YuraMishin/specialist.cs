@@ -75,6 +75,8 @@
 + [jsPDF](https://parall.ax/products/jspdf)
 + [Apexcharts](https://apexcharts.com/)
 + [Placeholder.com](https://placeholder.com/)
++ [jQuery Timepicker](https://timepicker.co/)
++ [jQuery Datepicker](https://jqueryui.com/datepicker/)
 ## Database and SQL
 + [Microsoft SQL Server Express](https://www.microsoft.com/en-Us/download/details.aspx?id=55994)
 + [PostgreSQL](https://www.postgresql.org/download/)
