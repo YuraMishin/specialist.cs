@@ -41,6 +41,16 @@ namespace MVC.Data
     /// </summary>
     public DbSet<ShoppingCart> ShoppingCarts { get; set; }
 
+    /// <summary>
+    /// OrderHeader table
+    /// </summary>
+    public DbSet<OrderHeader> OrderHeader { get; set; }
+
+    /// <summary>
+    /// OrderDetails table
+    /// </summary>
+    public DbSet<OrderDetails> OrderDetails { get; set; }
+
     #endregion
 
     /// <summary>
