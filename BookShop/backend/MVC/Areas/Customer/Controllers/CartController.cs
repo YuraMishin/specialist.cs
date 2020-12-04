@@ -129,9 +129,10 @@ namespace MVC.Areas.Customer.Controllers
     }
 
     /// <summary>
-    /// Method increases count
-    /// GET: /customer/cart/plus
+    /// Method increases count.
+    /// GET: /customer/cart/plus/cartId
     /// </summary>
+    /// <param name="cartId">CartId</param>
     /// <returns>IActionResult</returns>
     public async Task<IActionResult> Plus(int cartId)
     {
@@ -144,9 +145,10 @@ namespace MVC.Areas.Customer.Controllers
     }
 
     /// <summary>
-    /// Method decreases count
-    /// GET: /customer/cart/minus
+    /// Method decreases count.
+    /// GET: /customer/cart/minus/cartId
     /// </summary>
+    /// <param name="cartId">CartId</param>
     /// <returns>IActionResult</returns>
     public async Task<IActionResult> Minus(int cartId)
     {
@@ -170,6 +172,34 @@ namespace MVC.Areas.Customer.Controllers
       }
 
       return RedirectToAction(nameof(Index));
+    }
+
+    /// <summary>
+    /// Method removes book from cart.
+    /// GET: /customer/cart/remove/cartId
+    /// </summary>
+    /// <param name="cartId">CartId</param>
+    /// <returns>IActionResult</returns>
+    public async Task<IActionResult> Remove(int cartId)
+    {
+      var cart =
+        await _db.ShoppingCarts.FirstOrDefaultAsync(c => c.Id == cartId);
+
+      _db.ShoppingCarts.Remove(cart);
+      await _db.SaveChangesAsync();
+
+      var cnt = _db.ShoppingCarts
+        .Where(u => u.ApplicationUserId == cart.ApplicationUserId)
+        .ToList()
+        .Count;
+      HttpContext.Session.SetInt32(SD.ssShoppingCartCount, cnt);
+
+      return RedirectToAction(nameof(Index));
+    }
+
+    public async Task<IActionResult> Summary()
+    {
+      return View(nameof(Index));
     }
   }
 }
