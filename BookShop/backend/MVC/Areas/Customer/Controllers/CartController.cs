@@ -12,6 +12,7 @@ namespace MVC.Areas.Customer.Controllers
   /// <summary>
   /// Class implements Cart controller
   /// </summary>
+  [Area("Customer")]
   public class CartController : Controller
   {
     /// <summary>
