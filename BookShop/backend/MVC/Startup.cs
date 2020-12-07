@@ -12,6 +12,8 @@ using Microsoft.Extensions.Hosting;
 using MVC.Data;
 using MVC.Data.Repositories;
 using MVC.Services;
+using MVC.Utility;
+using Stripe;
 
 namespace MVC
 {
@@ -41,6 +43,9 @@ namespace MVC
         .AddDefaultTokenProviders()
         .AddDefaultUI()
         .AddEntityFrameworkStores<ApplicationDbContext>();
+
+      // Stripe
+      services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
 
       // add sessions
       services.AddSession(options =>
@@ -76,6 +81,10 @@ namespace MVC
         // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
         app.UseHsts();
       }
+
+      // Stripe
+      StripeConfiguration.SetApiKey(
+        Configuration.GetSection("Stripe")["SecretKey"]);
 
       app.UseHttpsRedirection();
       app.UseStaticFiles();
