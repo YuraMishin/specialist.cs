@@ -8,8 +8,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>@ViewData["Title"] - MVC</title>
   <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css"/>
-  <link rel="stylesheet" href="~/css/jquery-ui.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.css" />
+  <link rel="stylesheet" href="~/css/jquery-ui.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.css"/>
   <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
   <link rel="stylesheet" href="~/css/site.css"/>
 </head>
@@ -73,6 +73,16 @@
             </li>
             <!-- Dropdown -->
           }
+
+          @if (User.IsInRole(SD.ManagerUser) || User.IsInRole(SD.CustomerEndUser))
+          {
+            <li class="nav-item">
+              <a asp-area="Customer" asp-controller="Order" asp-action="OrderHistory" class="nav-link">
+                Order History
+              </a>
+            </li>
+          }
+
           @if (HttpContextAccessor.HttpContext.Session.GetInt32(@SD.ssShoppingCartCount) != null)
           {
             <li style="color: white">
