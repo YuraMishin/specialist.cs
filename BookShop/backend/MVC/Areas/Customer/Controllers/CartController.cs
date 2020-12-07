@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -255,6 +256,89 @@ namespace MVC.Areas.Customer.Controllers
 
 
       return View(OrderDetailsCartVM);
+    }
+
+    /// <summary>
+    /// Method displays places order.
+    /// POST: /customer/cart/summary
+    /// </summary>
+    /// <returns>IActionResult</returns>
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    [ActionName("Summary")]
+    public async Task<IActionResult> SummaryPost()
+    {
+      var claimsIdentity = (ClaimsIdentity) User.Identity;
+      var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+      OrderDetailsCartVM.ListCart = await _db.ShoppingCarts
+        .Where(c => c.ApplicationUserId == claim.Value).ToListAsync();
+
+      OrderDetailsCartVM.OrderHeader.PaymentStatus = SD.PaymentStatusPending;
+      OrderDetailsCartVM.OrderHeader.OrderDate = DateTime.Now;
+      OrderDetailsCartVM.OrderHeader.UserId = claim.Value;
+      OrderDetailsCartVM.OrderHeader.Status = SD.PaymentStatusPending;
+      OrderDetailsCartVM.OrderHeader.PickUpTime = Convert.ToDateTime(
+        OrderDetailsCartVM.OrderHeader.PickUpDate.ToShortDateString() + " " +
+        OrderDetailsCartVM.OrderHeader.PickUpTime.ToShortTimeString());
+
+      List<OrderDetails> orderDetailsList = new List<OrderDetails>();
+      _db.OrderHeaders.Add(OrderDetailsCartVM.OrderHeader);
+      await _db.SaveChangesAsync();
+
+      OrderDetailsCartVM.OrderHeader.OrderTotalOriginal = 0;
+
+
+      foreach (var item in OrderDetailsCartVM.ListCart)
+      {
+        item.Book =
+          await _db.Books.FirstOrDefaultAsync(m => m.Id == item.BookId);
+        OrderDetails orderDetails = new OrderDetails
+        {
+          BookId = item.BookId,
+          OrderId = OrderDetailsCartVM.OrderHeader.Id,
+          Description = item.Book.Description,
+          Name = item.Book.Name,
+          Price = item.Book.Price,
+          Count = item.Count
+        };
+        OrderDetailsCartVM.OrderHeader.OrderTotalOriginal +=
+          orderDetails.Count * orderDetails.Price;
+        _db.OrderDetails.Add(orderDetails);
+      }
+
+      if (HttpContext.Session.GetString(SD.ssCouponCode) != null)
+      {
+        OrderDetailsCartVM.OrderHeader.CouponCode =
+          HttpContext.Session.GetString(SD.ssCouponCode);
+        var couponFromDb = await _db.Coupons
+          .Where(c =>
+            c.Name.ToLower() ==
+            OrderDetailsCartVM.OrderHeader.CouponCode.ToLower())
+          .FirstOrDefaultAsync();
+        OrderDetailsCartVM.OrderHeader.OrderTotal = SD.DiscountedPrice(
+          couponFromDb,
+          OrderDetailsCartVM.OrderHeader.OrderTotalOriginal);
+      }
+      else
+      {
+        OrderDetailsCartVM.OrderHeader.OrderTotal =
+          OrderDetailsCartVM.OrderHeader.OrderTotalOriginal;
+      }
+
+      OrderDetailsCartVM.OrderHeader.CouponCodeDiscount =
+        OrderDetailsCartVM.OrderHeader.OrderTotalOriginal -
+        OrderDetailsCartVM.OrderHeader.OrderTotal;
+
+      _db.ShoppingCarts.RemoveRange(OrderDetailsCartVM.ListCart);
+      HttpContext.Session.SetInt32(SD.ssShoppingCartCount, 0);
+      await _db.SaveChangesAsync();
+
+
+      return RedirectToAction("Confirm", "Order", new
+      {
+        id = OrderDetailsCartVM.OrderHeader.Id
+      });
     }
   }
 }

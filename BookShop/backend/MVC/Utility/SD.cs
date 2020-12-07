@@ -126,5 +126,45 @@ namespace MVC.Utility
 
       return originalOrderTotal;
     }
+
+    /// <summary>
+    /// Status Submitted
+    /// </summary>
+    public const string StatusSubmitted = "Submitted";
+
+    /// <summary>
+    /// Status InProcess
+    /// </summary>
+    public const string StatusInProcess = "Being Prepared";
+
+    /// <summary>
+    /// Status Ready
+    /// </summary>
+    public const string StatusReady = "Ready for Pickup";
+
+    /// <summary>
+    /// Status Completed
+    /// </summary>
+    public const string StatusCompleted = "Completed";
+
+    /// <summary>
+    /// Status Cancelled
+    /// </summary>
+    public const string StatusCancelled = "Cancelled";
+
+    /// <summary>
+    /// Payment Status Pending
+    /// </summary>
+    public const string PaymentStatusPending = "Pending";
+
+    /// <summary>
+    /// Payment Status Approved
+    /// </summary>
+    public const string PaymentStatusApproved = "Approved";
+
+    /// <summary>
+    /// Payment Status Rejected
+    /// </summary>
+    public const string PaymentStatusRejected = "Rejected";
   }
 }
