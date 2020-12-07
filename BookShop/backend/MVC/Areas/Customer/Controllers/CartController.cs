@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MVC.Data;
+using MVC.Models;
 using MVC.Utility;
 using MVC.ViewModels;
-using System.Linq;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
-using MVC.Models;
 using Stripe;
 
 namespace MVC.Areas.Customer.Controllers
@@ -49,7 +49,7 @@ namespace MVC.Areas.Customer.Controllers
     {
       OrderDetailsCartVM = new OrderDetailsCartViewModel()
       {
-        OrderHeader = new Models.OrderHeader()
+        OrderHeader = new OrderHeader()
       };
 
       OrderDetailsCartVM.OrderHeader.OrderTotal = 0;
@@ -210,7 +210,7 @@ namespace MVC.Areas.Customer.Controllers
     {
       OrderDetailsCartVM = new OrderDetailsCartViewModel()
       {
-        OrderHeader = new Models.OrderHeader()
+        OrderHeader = new OrderHeader()
       };
 
       OrderDetailsCartVM.OrderHeader.OrderTotal = 0;
@@ -260,7 +260,7 @@ namespace MVC.Areas.Customer.Controllers
     }
 
     /// <summary>
-    /// Method displays places order.
+    /// Method implements place order feature.
     /// POST: /customer/cart/summary
     /// </summary>
     /// <returns>IActionResult</returns>

@@ -1,10 +1,12 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVC.Data;
+using MVC.Models;
 using MVC.ViewModels;
 
 namespace MVC.Areas.Customer.Controllers
@@ -52,6 +54,39 @@ namespace MVC.Areas.Customer.Controllers
       };
 
       return View(orderDetailsViewModel);
+    }
+
+    /// <summary>
+    /// Method displays order history UI.
+    /// GET: /customer/order/orderhistory
+    /// </summary>
+    /// <returns>IActionResult</returns>
+    [Authorize]
+    public async Task<IActionResult> OrderHistory()
+    {
+      var claimsIdentity = (ClaimsIdentity) User.Identity;
+      var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+      List<OrderDetailsViewModel> orderList = new List<OrderDetailsViewModel>();
+
+      List<OrderHeader> OrderHeaderList = await _db.OrderHeaders
+        .Include(o => o.ApplicationUser)
+        .Where(u => u.UserId == claim.Value)
+        .ToListAsync();
+
+      foreach (OrderHeader item in OrderHeaderList)
+      {
+        OrderDetailsViewModel individual = new OrderDetailsViewModel
+        {
+          OrderHeader = item,
+          OrderDetails = await _db.OrderDetails
+            .Where(o => o.OrderId == item.Id)
+            .ToListAsync()
+        };
+        orderList.Add(individual);
+      }
+
+      return View(orderList);
     }
   }
 }
