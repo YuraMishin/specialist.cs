@@ -10,6 +10,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using MVC.Models;
+using Stripe;
 
 namespace MVC.Areas.Customer.Controllers
 {
@@ -266,7 +267,10 @@ namespace MVC.Areas.Customer.Controllers
     [HttpPost]
     [ValidateAntiForgeryToken]
     [ActionName("Summary")]
-    public async Task<IActionResult> SummaryPost()
+    public async Task<IActionResult> SummaryPost(
+      string stripeEmail,
+      string stripeToken
+    )
     {
       var claimsIdentity = (ClaimsIdentity) User.Identity;
       var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
@@ -334,11 +338,56 @@ namespace MVC.Areas.Customer.Controllers
       HttpContext.Session.SetInt32(SD.ssShoppingCartCount, 0);
       await _db.SaveChangesAsync();
 
-
-      return RedirectToAction("Confirm", "Order", new
+      //Stripe Logic
+      if (stripeToken != null)
       {
-        id = OrderDetailsCartVM.OrderHeader.Id
-      });
+        var customers = new CustomerService();
+        var charges = new ChargeService();
+
+        var customer = customers.Create(new CustomerCreateOptions
+        {
+          Email = stripeEmail,
+          SourceToken = stripeToken
+        });
+
+        var charge = charges.Create(new ChargeCreateOptions
+        {
+          Amount =
+            Convert.ToInt32(OrderDetailsCartVM.OrderHeader.OrderTotal * 100),
+          Description = "Order ID : " + OrderDetailsCartVM.OrderHeader.Id,
+          Currency = "usd",
+          CustomerId = customer.Id
+        });
+
+        OrderDetailsCartVM.OrderHeader.TransactionId =
+          charge.BalanceTransactionId;
+        if (charge.Status.ToLower() == "succeeded")
+        {
+          //email for successful order
+
+          OrderDetailsCartVM.OrderHeader.PaymentStatus =
+            SD.PaymentStatusApproved;
+          OrderDetailsCartVM.OrderHeader.Status = SD.StatusSubmitted;
+        }
+        else
+        {
+          OrderDetailsCartVM.OrderHeader.PaymentStatus =
+            SD.PaymentStatusRejected;
+        }
+      }
+      else
+      {
+        OrderDetailsCartVM.OrderHeader.PaymentStatus = SD.PaymentStatusRejected;
+      }
+      // /Stripe Logic
+
+      await _db.SaveChangesAsync();
+
+      return RedirectToAction("Index", "Home");
+      // return RedirectToAction("Confirm", "Order", new
+      // {
+      //   id = OrderDetailsCartVM.OrderHeader.Id
+      // });
     }
   }
 }
