@@ -30,7 +30,7 @@ namespace MVC.Areas.Customer.Controllers
     }
 
     /// <summary>
-    /// Method displays todo UI.
+    /// Method displays order confirm UI.
     /// GET: /customer/confirm/id
     /// </summary>
     /// <param name="id">Id</param>
