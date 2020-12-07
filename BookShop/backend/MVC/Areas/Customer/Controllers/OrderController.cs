@@ -111,5 +111,15 @@ namespace MVC.Areas.Customer.Controllers
 
       return PartialView("_IndividualOrderDetails", orderDetailsViewModel);
     }
+
+    /// <summary>
+    /// Method redirects to the main page.
+    /// GET: /customer/order/create/
+    /// </summary>
+    /// <returns>ActionResult</returns>
+    public ActionResult Create()
+    {
+      return RedirectToAction("Index", "Home");
+    }
   }
 }
