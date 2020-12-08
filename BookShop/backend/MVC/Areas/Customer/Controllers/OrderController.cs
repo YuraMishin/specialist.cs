@@ -143,5 +143,17 @@ namespace MVC.Areas.Customer.Controllers
     {
       return RedirectToAction("Index", "Home");
     }
+
+    /// <summary>
+    /// Method retrieves order status.
+    /// GET: /customer/order/getorderstatus/id
+    /// </summary>
+    /// <param name="Id">Id</param>
+    /// <returns></returns>
+    public IActionResult GetOrderStatus(int Id)
+    {
+      return PartialView("_OrderStatus", _db.OrderHeaders.Where(m => m.Id == Id).FirstOrDefault().Status);
+
+    }
   }
 }

@@ -1,0 +1,20 @@
+﻿@model string
+@using MVC.Utility
+<div style="width:100%">
+  @if (Model == SD.StatusSubmitted)
+  {
+    <img src="~/img/OrderPlaced.png" width="100%"/>
+  }
+  @if (Model == SD.StatusInProcess)
+  {
+    <img src="~/img/InBoxing.png" width="100%"/>
+  }
+  @if (Model == SD.StatusReady)
+  {
+    <img src="~/img/ReadyForPickup.png" width="100%"/>
+  }
+  @if (Model == SD.StatusCompleted)
+  {
+    <img src="~/img/completed.png" width="100%"/>
+  }
+</div>
