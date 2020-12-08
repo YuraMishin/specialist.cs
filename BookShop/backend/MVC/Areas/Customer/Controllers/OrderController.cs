@@ -23,6 +23,11 @@ namespace MVC.Areas.Customer.Controllers
     private ApplicationDbContext _db;
 
     /// <summary>
+    /// Page size for pagination
+    /// </summary>
+    private int PageSize = 10;
+
+    /// <summary>
     /// Constructor
     /// </summary>
     /// <param name="db">DbContext</param>
@@ -58,16 +63,20 @@ namespace MVC.Areas.Customer.Controllers
 
     /// <summary>
     /// Method displays order history UI.
-    /// GET: /customer/order/orderhistory
+    /// GET: /customer/order/orderhistory/productPage
     /// </summary>
+    /// <param name="productPage">Product page</param>
     /// <returns>IActionResult</returns>
     [Authorize]
-    public async Task<IActionResult> OrderHistory()
+    public async Task<IActionResult> OrderHistory(int productPage=1)
     {
       var claimsIdentity = (ClaimsIdentity) User.Identity;
       var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
-      List<OrderDetailsViewModel> orderList = new List<OrderDetailsViewModel>();
+      OrderListViewModel orderListVM = new OrderListViewModel()
+      {
+        Orders = new List<OrderDetailsViewModel>()
+      };
 
       List<OrderHeader> OrderHeaderList = await _db.OrderHeaders
         .Include(o => o.ApplicationUser)
@@ -83,10 +92,23 @@ namespace MVC.Areas.Customer.Controllers
             .Where(o => o.OrderId == item.Id)
             .ToListAsync()
         };
-        orderList.Add(individual);
+        orderListVM.Orders.Add(individual);
       }
 
-      return View(orderList);
+      var count = orderListVM.Orders.Count;
+      orderListVM.Orders = orderListVM.Orders.OrderByDescending(p => p.OrderHeader.Id)
+        .Skip((productPage - 1) * PageSize)
+        .Take(PageSize).ToList();
+
+      orderListVM.PagingInfo = new PagingInfo
+      {
+        CurrentPage = productPage,
+        ItemsPerPage = PageSize,
+        TotalItem = count,
+        urlParam = "/Customer/Order/OrderHistory?productPage=:"
+      };
+
+      return View(orderListVM);
     }
 
     /// <summary>
