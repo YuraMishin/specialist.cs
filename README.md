@@ -19,6 +19,8 @@
 + [Chocolatey](https://chocolatey.org/)
 + [Codepen.io](https://codepen.io/)
 + [Stripe](https://stripe.com/)
++ [SendGrid](https://app.sendgrid.com/)
++ [Mailtrap](https://mailtrap.io/)
 ## Microsoft
 + [Microsoft Documentation](https://docs.microsoft.com/en-us/)
 + [C# documentation](https://docs.microsoft.com/en-us/dotnet/csharp/)

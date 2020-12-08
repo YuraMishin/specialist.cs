@@ -9,6 +9,11 @@ namespace MVC.Utility
   public static class SD
   {
     /// <summary>
+    /// Application name
+    /// </summary>
+    public const string AppName = "Book Shop";
+
+    /// <summary>
     /// Default Food Image
     /// </summary>
     public const string DefaultBookImage = "default_book.png";

@@ -4,11 +4,13 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MVC.Data;
 using MVC.Models;
+using MVC.Services.Email;
 using MVC.Utility;
 using MVC.ViewModels;
 
@@ -30,16 +32,19 @@ namespace MVC.Areas.Customer.Controllers
     /// </summary>
     private readonly ApplicationDbContext _db;
 
+    private readonly IEmailSender _emailSender;
+
     /// <summary>
     /// Constructor
     /// </summary>
     /// <param name="logger">ILogger</param>
     /// <param name="db">DbContext</param>
     public HomeController(ILogger<HomeController> logger,
-      ApplicationDbContext db)
+      ApplicationDbContext db, IEmailSender emailSender)
     {
       _logger = logger;
       _db = db;
+      _emailSender = emailSender;
     }
 
     /// <summary>

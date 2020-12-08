@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using MVC.Data;
 using MVC.Data.Repositories;
 using MVC.Services;
+using MVC.Services.Email;
 using MVC.Utility;
 using Stripe;
 
@@ -46,6 +48,10 @@ namespace MVC
 
       // Stripe
       services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
+
+      //Mailtrap DI
+      services.AddSingleton<IEmailSender, EmailSender>();
+      services.Configure<EmailOptions>(Configuration.GetSection("Mailtrap"));
 
       //Facebook
       services.AddAuthentication().AddFacebook(facebookOptions =>
