@@ -23,7 +23,6 @@ namespace MVC.Areas.Identity.Pages.Account
   {
     private readonly SignInManager<IdentityUser> _signInManager;
     private readonly UserManager<IdentityUser> _userManager;
-    private readonly IEmailSender _emailSender;
     private readonly ILogger<ExternalLoginModel> _logger;
     private readonly RoleManager<IdentityRole> _roleManager;
 
