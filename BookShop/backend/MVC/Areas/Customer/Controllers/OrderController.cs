@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVC.Data;
 using MVC.Models;
+using MVC.Utility;
 using MVC.ViewModels;
 
 namespace MVC.Areas.Customer.Controllers
@@ -68,7 +69,7 @@ namespace MVC.Areas.Customer.Controllers
     /// <param name="productPage">Product page</param>
     /// <returns>IActionResult</returns>
     [Authorize]
-    public async Task<IActionResult> OrderHistory(int productPage=1)
+    public async Task<IActionResult> OrderHistory(int productPage = 1)
     {
       var claimsIdentity = (ClaimsIdentity) User.Identity;
       var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
@@ -96,7 +97,8 @@ namespace MVC.Areas.Customer.Controllers
       }
 
       var count = orderListVM.Orders.Count;
-      orderListVM.Orders = orderListVM.Orders.OrderByDescending(p => p.OrderHeader.Id)
+      orderListVM.Orders = orderListVM.Orders
+        .OrderByDescending(p => p.OrderHeader.Id)
         .Skip((productPage - 1) * PageSize)
         .Take(PageSize).ToList();
 
@@ -148,12 +150,92 @@ namespace MVC.Areas.Customer.Controllers
     /// Method retrieves order status.
     /// GET: /customer/order/getorderstatus/id
     /// </summary>
-    /// <param name="Id">Id</param>
+    /// <param name="id">Id</param>
     /// <returns></returns>
-    public IActionResult GetOrderStatus(int Id)
+    public IActionResult GetOrderStatus(int id)
     {
-      return PartialView("_OrderStatus", _db.OrderHeaders.Where(m => m.Id == Id).FirstOrDefault().Status);
+      var data = _db.OrderHeaders
+        .Where(m => m.Id == id).FirstOrDefault()
+        .Status;
 
+      return PartialView("_OrderStatus", data);
+    }
+
+    /// <summary>
+    /// Method displays manage order UI.
+    /// GET: /customer/order/manageorder/id
+    /// </summary>
+    /// <param name="productPage"></param>
+    /// <returns>IActionResult</returns>
+    [Authorize(Roles = SD.FrontDeskUser + "," + SD.ManagerUser)]
+    public async Task<IActionResult> ManageOrder(int productPage = 1)
+    {
+      List<OrderDetailsViewModel> orderDetailsVM =
+        new List<OrderDetailsViewModel>();
+
+      List<OrderHeader> OrderHeaderList = await _db.OrderHeaders
+        .Where(o =>
+          o.Status == SD.StatusSubmitted || o.Status == SD.StatusInProcess)
+        .OrderByDescending(u => u.PickUpTime).ToListAsync();
+
+      foreach (OrderHeader item in OrderHeaderList)
+      {
+        OrderDetailsViewModel individual = new OrderDetailsViewModel
+        {
+          OrderHeader = item,
+          OrderDetails = await _db.OrderDetails.Where(o => o.OrderId == item.Id)
+            .ToListAsync()
+        };
+        orderDetailsVM.Add(individual);
+      }
+
+      return View(
+        orderDetailsVM.OrderBy(o => o.OrderHeader.PickUpTime).ToList());
+    }
+
+    /// <summary>
+    /// Method implements order prepare status feature.
+    /// GET: /customer/order/orderprepare/orderid
+    /// </summary>
+    /// <param name="OrderId">Order Id</param>
+    /// <returns>IActionResult</returns>
+    [Authorize(Roles = SD.FrontDeskUser + "," + SD.ManagerUser)]
+    public async Task<IActionResult> OrderPrepare(int OrderId)
+    {
+      OrderHeader orderHeader = await _db.OrderHeaders.FindAsync(OrderId);
+      orderHeader.Status = SD.StatusInProcess;
+      await _db.SaveChangesAsync();
+      return RedirectToAction("ManageOrder", "Order");
+    }
+
+    /// <summary>
+    /// Method implements order ready status feature.
+    /// GET: /customer/order/orderready/orderid
+    /// </summary>
+    /// <param name="OrderId"></param>
+    /// <returns>IActionResult</returns>
+    [Authorize(Roles = SD.FrontDeskUser + "," + SD.ManagerUser)]
+    public async Task<IActionResult> OrderReady(int OrderId)
+    {
+      OrderHeader orderHeader = await _db.OrderHeaders.FindAsync(OrderId);
+      orderHeader.Status = SD.StatusReady;
+      await _db.SaveChangesAsync();
+      return RedirectToAction("ManageOrder", "Order");
+    }
+
+    /// <summary>
+    /// Method implements order cancel status feature.
+    /// GET: /customer/order/ordercamcel/orderid
+    /// </summary>
+    /// <param name="OrderId">OrderId</param>
+    /// <returns>IActionResult</returns>
+    [Authorize(Roles = SD.FrontDeskUser + "," + SD.ManagerUser)]
+    public async Task<IActionResult> OrderCancel(int OrderId)
+    {
+      OrderHeader orderHeader = await _db.OrderHeaders.FindAsync(OrderId);
+      orderHeader.Status = SD.StatusCancelled;
+      await _db.SaveChangesAsync();
+      return RedirectToAction("ManageOrder", "Order");
     }
   }
 }
