@@ -47,6 +47,13 @@ namespace MVC
       // Stripe
       services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
 
+      //Facebook
+      services.AddAuthentication().AddFacebook(facebookOptions =>
+      {
+        facebookOptions.AppId = "405799037521243";
+        facebookOptions.AppSecret = "13d905d92df4df38e2f3de1fed66a359";
+      });
+
       // add sessions
       services.AddSession(options =>
       {
@@ -101,6 +108,7 @@ namespace MVC
       app.UseRouting();
 
       app.UseAuthentication();
+
       app.UseSession();
       app.UseAuthorization();
 
