@@ -30,7 +30,6 @@
             <li class="nav-item">
               <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
             </li>
-            <!-- Dropdown -->
             <li class="nav-item dropdown text-white-50">
               <a class="nav-link dropdown-toggle" href="#"
                  id="navbarDropDownMenuLink"
@@ -71,7 +70,6 @@
                 </a>
               </div>
             </li>
-            <!-- Dropdown -->
           }
 
           @if (User.IsInRole(SD.ManagerUser) || User.IsInRole(SD.CustomerEndUser))
