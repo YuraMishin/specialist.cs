@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVC.Data;
@@ -25,6 +26,8 @@ namespace MVC.Areas.Customer.Controllers
     /// </summary>
     private readonly ApplicationDbContext _db;
 
+    private readonly IEmailSender _emailSender;
+
     /// <summary>
     /// OrderDetailsCart ViewModel
     /// </summary>
@@ -35,9 +38,11 @@ namespace MVC.Areas.Customer.Controllers
     /// Constructor
     /// </summary>
     /// <param name="db">DbContext</param>
-    public CartController(ApplicationDbContext db)
+    /// <param name="emailSender">IEmailSender</param>
+    public CartController(ApplicationDbContext db, IEmailSender emailSender)
     {
       _db = db;
+      _emailSender = emailSender;
     }
 
     /// <summary>
@@ -364,6 +369,11 @@ namespace MVC.Areas.Customer.Controllers
         if (charge.Status.ToLower() == "succeeded")
         {
           //email for successful order
+          var emailTo = _db.Users.Where(u => u.Id == claim.Value).FirstOrDefault().Email;
+          var subject = $"{SD.AppName} - Order Created {OrderDetailsCartVM.OrderHeader.Id.ToString()}";
+          var message = "Order has been submitted successfully.";
+
+          await _emailSender.SendEmailAsync(emailTo, subject, message);
 
           OrderDetailsCartVM.OrderHeader.PaymentStatus =
             SD.PaymentStatusApproved;
