@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using MVC.Data;
+using MVC.Data.DbInit;
 using MVC.Data.Repositories;
 using MVC.Services;
 using MVC.Services.Email;
@@ -39,6 +40,9 @@ namespace MVC
           option.UseNpgsql(
             Configuration.GetConnectionString("bookshop.dev"));
         });
+
+      //DB Seed
+      services.AddScoped<IDbInitializer, DbInitializer>();
 
       // Identity
       services.AddIdentity<IdentityUser, IdentityRole>()
@@ -88,7 +92,7 @@ namespace MVC
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IDbInitializer dbInitializer)
     {
       if (env.IsDevelopment())
       {
@@ -105,6 +109,8 @@ namespace MVC
       // Stripe
       StripeConfiguration.SetApiKey(
         Configuration.GetSection("Stripe")["SecretKey"]);
+      // Db Seed
+      dbInitializer.Initialize();
 
       app.UseHttpsRedirection();
       app.UseStaticFiles();

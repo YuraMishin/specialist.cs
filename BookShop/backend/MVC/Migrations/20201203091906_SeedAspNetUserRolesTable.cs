@@ -14,15 +14,15 @@ namespace MVC.Migrations
     /// <param name="migrationBuilder">MigrationBuilder</param>
     protected override void Up(MigrationBuilder migrationBuilder)
     {
-      migrationBuilder.Sql(
-        $@"insert into ""AspNetUserRoles"" (""UserId"", ""RoleId"")
-VALUES ((select ""Id"" from ""AspNetUsers"" where ""UserName"" = '{SD.AdminEmail}'),
-       (select ""Id"" from ""AspNetRoles"" where ""Name"" = '{SD.ManagerUser}'))");
-
-      migrationBuilder.Sql(
-        $@"insert into ""AspNetUserRoles"" (""UserId"", ""RoleId"")
-VALUES ((select ""Id"" from ""AspNetUsers"" where ""UserName"" = '{SD.UserEmail}'),
-       (select ""Id"" from ""AspNetRoles"" where ""Name"" = '{SD.CustomerEndUser}'))");
+//       migrationBuilder.Sql(
+//         $@"insert into ""AspNetUserRoles"" (""UserId"", ""RoleId"")
+// VALUES ((select ""Id"" from ""AspNetUsers"" where ""UserName"" = '{SD.AdminEmail}'),
+//        (select ""Id"" from ""AspNetRoles"" where ""Name"" = '{SD.ManagerUser}'))");
+//
+//       migrationBuilder.Sql(
+//         $@"insert into ""AspNetUserRoles"" (""UserId"", ""RoleId"")
+// VALUES ((select ""Id"" from ""AspNetUsers"" where ""UserName"" = '{SD.UserEmail}'),
+//        (select ""Id"" from ""AspNetRoles"" where ""Name"" = '{SD.CustomerEndUser}'))");
     }
 
 
@@ -32,7 +32,7 @@ VALUES ((select ""Id"" from ""AspNetUsers"" where ""UserName"" = '{SD.UserEmail}
     /// <param name="migrationBuilder">MigrationBuilder</param>
     protected override void Down(MigrationBuilder migrationBuilder)
     {
-      migrationBuilder.Sql($@"DELETE FROM ""AspNetUserRoles""");
+      // migrationBuilder.Sql($@"DELETE FROM ""AspNetUserRoles""");
     }
   }
 }

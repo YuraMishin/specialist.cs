@@ -15,36 +15,36 @@ namespace MVC.Migrations
     /// <param name="migrationBuilder">MigrationBuilder</param>
     protected override void Up(MigrationBuilder migrationBuilder)
     {
-      migrationBuilder.InsertData(
-        table: "AspNetRoles",
-        columns: new[]
-        {
-          "Id",
-          "Name",
-          "NormalizedName",
-          "ConcurrencyStamp"
-        },
-        values: new object[,]
-        {
-          {
-            Guid.NewGuid().ToString(),
-            SD.ManagerUser,
-            SD.ManagerUser.ToUpper(),
-            Guid.NewGuid().ToString()
-          },
-          {
-            Guid.NewGuid().ToString(),
-            SD.CustomerEndUser,
-            SD.CustomerEndUser.ToUpper(),
-            Guid.NewGuid().ToString()
-          },
-          {
-            Guid.NewGuid().ToString(),
-            SD.FrontDeskUser,
-            SD.FrontDeskUser.ToUpper(),
-            Guid.NewGuid().ToString()
-          }
-        });
+      // migrationBuilder.InsertData(
+      //   table: "AspNetRoles",
+      //   columns: new[]
+      //   {
+      //     "Id",
+      //     "Name",
+      //     "NormalizedName",
+      //     "ConcurrencyStamp"
+      //   },
+      //   values: new object[,]
+      //   {
+      //     {
+      //       Guid.NewGuid().ToString(),
+      //       SD.ManagerUser,
+      //       SD.ManagerUser.ToUpper(),
+      //       Guid.NewGuid().ToString()
+      //     },
+      //     {
+      //       Guid.NewGuid().ToString(),
+      //       SD.CustomerEndUser,
+      //       SD.CustomerEndUser.ToUpper(),
+      //       Guid.NewGuid().ToString()
+      //     },
+      //     {
+      //       Guid.NewGuid().ToString(),
+      //       SD.FrontDeskUser,
+      //       SD.FrontDeskUser.ToUpper(),
+      //       Guid.NewGuid().ToString()
+      //     }
+      //   });
     }
 
     /// <summary>
@@ -53,18 +53,18 @@ namespace MVC.Migrations
     /// <param name="migrationBuilder">MigrationBuilder</param>
     protected override void Down(MigrationBuilder migrationBuilder)
     {
-      migrationBuilder.DeleteData(
-        table: "AspNetUsers",
-        keyColumn: "UserName",
-        keyValue: SD.FrontDeskUser);
-      migrationBuilder.DeleteData(
-        table: "AspNetUsers",
-        keyColumn: "UserName",
-        keyValue: SD.CustomerEndUser);
-      migrationBuilder.DeleteData(
-        table: "AspNetUsers",
-        keyColumn: "UserName",
-        keyValue: SD.ManagerUser);
+      // migrationBuilder.DeleteData(
+      //   table: "AspNetUsers",
+      //   keyColumn: "UserName",
+      //   keyValue: SD.FrontDeskUser);
+      // migrationBuilder.DeleteData(
+      //   table: "AspNetUsers",
+      //   keyColumn: "UserName",
+      //   keyValue: SD.CustomerEndUser);
+      // migrationBuilder.DeleteData(
+      //   table: "AspNetUsers",
+      //   keyColumn: "UserName",
+      //   keyValue: SD.ManagerUser);
     }
   }
 }
