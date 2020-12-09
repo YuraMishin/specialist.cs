@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVC.Data;
@@ -20,6 +21,11 @@ namespace MVC.Areas.Customer.Controllers
   public class OrderController : Controller
   {
     /// <summary>
+    /// IEmailSender
+    /// </summary>
+    private readonly IEmailSender _emailSender;
+
+    /// <summary>
     /// Db Context
     /// </summary>
     private ApplicationDbContext _db;
@@ -33,9 +39,11 @@ namespace MVC.Areas.Customer.Controllers
     /// Constructor
     /// </summary>
     /// <param name="db">DbContext</param>
-    public OrderController(ApplicationDbContext db)
+    /// <param name="emailSender">IEmailSender</param>
+    public OrderController(ApplicationDbContext db, IEmailSender emailSender)
     {
       _db = db;
+      _emailSender = emailSender;
     }
 
     /// <summary>
@@ -221,6 +229,15 @@ namespace MVC.Areas.Customer.Controllers
       OrderHeader orderHeader = await _db.OrderHeaders.FindAsync(OrderId);
       orderHeader.Status = SD.StatusReady;
       await _db.SaveChangesAsync();
+
+      //Email logic to notify user that order is ready for pickup
+      var emailTo = _db.Users.Where(u => u.Id == orderHeader.UserId)
+        .FirstOrDefault().Email;
+      var subject =
+        $"{SD.AppName} - Order #{orderHeader.Id.ToString()} is ready for pickup";
+      var message = "Order is ready for pickup.";
+      await _emailSender.SendEmailAsync(emailTo, subject, message);
+
       return RedirectToAction("ManageOrder", "Order");
     }
 
@@ -235,6 +252,15 @@ namespace MVC.Areas.Customer.Controllers
     {
       OrderHeader orderHeader = await _db.OrderHeaders.FindAsync(OrderId);
       orderHeader.Status = SD.StatusCancelled;
+
+      //Email logic to notify user that order is canceled
+      var emailTo = _db.Users.Where(u => u.Id == orderHeader.UserId)
+        .FirstOrDefault().Email;
+      var subject =
+        $"{SD.AppName} - Order #{orderHeader.Id.ToString()} is cancelled";
+      var message = "Order has been cancelled successfully.";
+      await _emailSender.SendEmailAsync(emailTo, subject, message);
+
       await _db.SaveChangesAsync();
       return RedirectToAction("ManageOrder", "Order");
     }
@@ -365,6 +391,15 @@ namespace MVC.Areas.Customer.Controllers
     {
       OrderHeader orderHeader = await _db.OrderHeaders.FindAsync(orderId);
       orderHeader.Status = SD.StatusCompleted;
+
+      //Email logic to notify user that order is completed
+      var emailTo = _db.Users.Where(u => u.Id == orderHeader.UserId)
+        .FirstOrDefault().Email;
+      var subject =
+        $"{SD.AppName} - Order #{orderHeader.Id.ToString()} is completed";
+      var message = "Order has been completed successfully.";
+      await _emailSender.SendEmailAsync(emailTo, subject, message);
+
       await _db.SaveChangesAsync();
       return RedirectToAction("OrderPickup", "Order");
     }

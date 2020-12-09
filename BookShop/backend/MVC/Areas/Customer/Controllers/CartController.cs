@@ -370,7 +370,7 @@ namespace MVC.Areas.Customer.Controllers
         {
           //email for successful order
           var emailTo = _db.Users.Where(u => u.Id == claim.Value).FirstOrDefault().Email;
-          var subject = $"{SD.AppName} - Order Created {OrderDetailsCartVM.OrderHeader.Id.ToString()}";
+          var subject = $"{SD.AppName} - Order #{OrderDetailsCartVM.OrderHeader.Id.ToString()} is created";
           var message = "Order has been submitted successfully.";
 
           await _emailSender.SendEmailAsync(emailTo, subject, message);
