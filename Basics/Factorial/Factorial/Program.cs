@@ -1,4 +1,4 @@
-namespace RomanToNumeral
+namespace Factorial
 {
   /// <summary>
   /// Class Program.

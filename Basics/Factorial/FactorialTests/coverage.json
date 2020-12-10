@@ -1,0 +1,47 @@
+{
+  "Factorial.dll": {
+    "D:\\IT\\csharp\\projects\\specialist.cs\\Basics\\Factorial\\Factorial\\Factorial.cs": {
+      "Factorial.Factorial": {
+        "System.Int32 Factorial.Factorial::Get(System.Int32)": {
+          "Lines": {
+            "15": 11,
+            "16": 11,
+            "17": 5,
+            "18": 5,
+            "21": 6,
+            "22": 11
+          },
+          "Branches": [
+            {
+              "Line": 16,
+              "Offset": 10,
+              "EndOffset": 12,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 5
+            },
+            {
+              "Line": 16,
+              "Offset": 10,
+              "EndOffset": 17,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 6
+            }
+          ]
+        }
+      }
+    },
+    "D:\\IT\\csharp\\projects\\specialist.cs\\Basics\\Factorial\\Factorial\\Program.cs": {
+      "Factorial.Program": {
+        "System.Void Factorial.Program::Main()": {
+          "Lines": {
+            "13": 0,
+            "14": 0
+          },
+          "Branches": []
+        }
+      }
+    }
+  }
+}

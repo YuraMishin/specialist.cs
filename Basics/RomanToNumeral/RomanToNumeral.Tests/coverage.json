@@ -1,0 +1,110 @@
+{
+  "RomanToNumeral.dll": {
+    "D:\\IT\\csharp\\projects\\specialist.cs\\Basics\\RomanToNumeral\\RomanToNumeral\\Program.cs": {
+      "RomanToNumeral.Program": {
+        "System.Void RomanToNumeral.Program::Main()": {
+          "Lines": {
+            "13": 0,
+            "14": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "D:\\IT\\csharp\\projects\\specialist.cs\\Basics\\RomanToNumeral\\RomanToNumeral\\RomanNumeral.cs": {
+      "RomanToNumeral.RomanNumeral": {
+        "System.Int32 RomanToNumeral.RomanNumeral::Parse(System.String)": {
+          "Lines": {
+            "31": 3,
+            "32": 3,
+            "33": 16,
+            "34": 5,
+            "35": 5,
+            "36": 1,
+            "37": 1,
+            "38": 1,
+            "40": 4,
+            "41": 4,
+            "42": 4,
+            "43": 5,
+            "45": 3,
+            "46": 3
+          },
+          "Branches": [
+            {
+              "Line": 33,
+              "Offset": 109,
+              "EndOffset": 7,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 5
+            },
+            {
+              "Line": 35,
+              "Offset": 17,
+              "EndOffset": 19,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 2
+            },
+            {
+              "Line": 35,
+              "Offset": 17,
+              "EndOffset": 42,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 3
+            },
+            {
+              "Line": 35,
+              "Offset": 45,
+              "EndOffset": 47,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 1
+            },
+            {
+              "Line": 35,
+              "Offset": 45,
+              "EndOffset": 71,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 4
+            },
+            {
+              "Line": 33,
+              "Offset": 109,
+              "EndOffset": 111,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 3
+            }
+          ]
+        },
+        "System.Boolean RomanToNumeral.RomanNumeral::IsSubtractive(System.Char,System.Char)": {
+          "Lines": {
+            "55": 2,
+            "56": 2,
+            "57": 2
+          },
+          "Branches": []
+        },
+        "System.Void RomanToNumeral.RomanNumeral::.cctor()": {
+          "Lines": {
+            "14": 1,
+            "15": 1,
+            "16": 1,
+            "17": 1,
+            "18": 1,
+            "19": 1,
+            "20": 1,
+            "21": 1,
+            "22": 1,
+            "23": 1
+          },
+          "Branches": []
+        }
+      }
+    }
+  }
+}
