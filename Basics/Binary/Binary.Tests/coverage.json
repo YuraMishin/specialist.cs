@@ -1,0 +1,140 @@
+{
+  "Binary.dll": {
+    "D:\\IT\\csharp\\projects\\specialist.cs\\Basics\\Binary\\Binary\\Solution.cs": {
+      "Binary.Solution": {
+        "System.String Binary.Solution::PrintBinary(System.Byte,System.Int32)": {
+          "Lines": {
+            "18": 1,
+            "19": 1,
+            "20": 1,
+            "21": 18,
+            "22": 8,
+            "23": 8,
+            "24": 8,
+            "25": 8,
+            "26": 8,
+            "28": 1,
+            "29": 1
+          },
+          "Branches": [
+            {
+              "Line": 21,
+              "Offset": 79,
+              "EndOffset": 36,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 8
+            },
+            {
+              "Line": 21,
+              "Offset": 79,
+              "EndOffset": 81,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            }
+          ]
+        },
+        "System.String Binary.Solution::PrintBinary(System.Int16,System.Int32)": {
+          "Lines": {
+            "38": 1,
+            "39": 1,
+            "40": 1,
+            "41": 34,
+            "42": 16,
+            "43": 16,
+            "44": 16,
+            "45": 16,
+            "46": 16,
+            "48": 1,
+            "49": 1
+          },
+          "Branches": [
+            {
+              "Line": 41,
+              "Offset": 79,
+              "EndOffset": 36,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 16
+            },
+            {
+              "Line": 41,
+              "Offset": 79,
+              "EndOffset": 81,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            }
+          ]
+        },
+        "System.String Binary.Solution::PrintBinary(System.Int32,System.Int32)": {
+          "Lines": {
+            "58": 1,
+            "59": 1,
+            "60": 1,
+            "61": 66,
+            "62": 32,
+            "63": 32,
+            "64": 32,
+            "65": 32,
+            "66": 32,
+            "68": 1,
+            "69": 1
+          },
+          "Branches": [
+            {
+              "Line": 61,
+              "Offset": 79,
+              "EndOffset": 36,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 32
+            },
+            {
+              "Line": 61,
+              "Offset": 79,
+              "EndOffset": 81,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            }
+          ]
+        },
+        "System.String Binary.Solution::PrintBinary(System.Int64,System.Int32)": {
+          "Lines": {
+            "78": 1,
+            "79": 1,
+            "80": 1,
+            "81": 130,
+            "82": 64,
+            "83": 64,
+            "84": 64,
+            "85": 64,
+            "86": 64,
+            "88": 1,
+            "89": 1
+          },
+          "Branches": [
+            {
+              "Line": 81,
+              "Offset": 78,
+              "EndOffset": 36,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 64
+            },
+            {
+              "Line": 81,
+              "Offset": 78,
+              "EndOffset": 80,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            }
+          ]
+        }
+      }
+    }
+  }
+}

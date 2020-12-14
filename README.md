@@ -1,22 +1,39 @@
 # C#/.Net Developer
 
 ![Photo](https://github.com/YuraMishin/specialist.cs/blob/master/img/avatar.jpg)![Photo](https://github.com/YuraMishin/specialist.cs/blob/master/img/ms_logo.jpg)![Photo](https://github.com/YuraMishin/specialist.cs/blob/master/img/specialist.jpg)
-## Books
+## Education
 + [Andrew Troelsen. Pro C# 8 with .NET Core 3: Foundational Principles and Practices in Programming](https://www.amazon.com/Pro-NET-Core-Foundational-Programming/dp/1484257553/)
++ [Язык программирования C# и платформа .NET](https://metanit.com/sharp/)
++ [Уроки по C# и платформе .NET Framework](https://professorweb.ru/)
 ## Workflow
 + [Cmder | Console Emulator](https://cmder.net/)
-
++ [.Net Core](https://dotnet.microsoft.com/download)
++ [Visual Studio](https://visualstudio.microsoft.com/ru/downloads/)
++ [Visual Studio Code](https://code.visualstudio.com/download)
++ [Rider](https://www.jetbrains.com/rider/)
++ [NuGet package manager](https://www.nuget.org/)
+## TDD
++ [NUnit](https://nunit.org/)
++ [xUnit](https://xunit.net/)
++ [Unit testing C# in .NET Core using dotnet test and xUnit](https://docs.microsoft.com/en-US/dotnet/core/testing/unit-testing-with-dotnet-test)
++ [Getting Started with xUnit.net](https://xunit.net/docs/getting-started/netcore/cmdline)
++ [Создание юнит-тестов](https://metanit.com/sharp/aspnet5/22.3.php)
++ [Quick introduction to xUnit.net](https://www.meziantou.net/quick-introduction-to-xunitdotnet.htm)
++ [Fluent Assertions](https://fluentassertions.com/introduction)
+## GIT
++ [Git](https://git-scm.com/)
++ [Git Documentation](https://git-scm.com/doc)
++ [Git Flight rules](https://github.com/k88hudson/git-flight-rules)
++ [GitHowTo](https://githowto.com/ru)
 ## IT
 + [Stack Overflow Annual Developer Survey](https://insights.stackoverflow.com/survey/)
 + [LibHunt](https://www.libhunt.com/)
 + [convertbinary.com/alphabet/](https://www.convertbinary.com/alphabet/)
 + [binarytranslator.com](https://www.binarytranslator.com/)
-+ [Язык программирования C# и платформа .NET](https://metanit.com/sharp/)
 + [ASCII Code](https://www.ascii-code.com/)
 + [pastebin.com](https://pastebin.com/)
 + [carbon.now.sh](https://carbon.now.sh/)
 + [Таблица символов Юникода](https://unicode-table.com/ru/)
-+ [Уроки по C# и платформе .NET Framework](https://professorweb.ru/)
 + [Plunker IDE](https://plnkr.co/)
 + [Postman](https://www.postman.com/)
 + [Chocolatey](https://chocolatey.org/)
@@ -28,15 +45,9 @@
 + [Microsoft Documentation](https://docs.microsoft.com/en-us/)
 + [C# documentation](https://docs.microsoft.com/en-us/dotnet/csharp/)
 + [.Net Documentation](https://docs.microsoft.com/en-us/dotnet/api/)
-+ [NUnit](https://nunit.org/)
-+ [xUnit](https://xunit.net/)
 + [Custom date and time format strings](https://docs.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings)
 + [Identify and customize keyboard shortcuts in Visual Studio](https://docs.microsoft.com/en-us/visualstudio/ide/identifying-and-customizing-keyboard-shortcuts-in-visual-studio?view=vs-2019)
 + [Document your code with XML comments](https://docs.microsoft.com/en-us/dotnet/csharp/codedoc)
-+ [NuGet package manager](https://www.nuget.org/)
-+ [.Net Core](https://dotnet.microsoft.com/download)
-+ [Visual Studio](https://visualstudio.microsoft.com/ru/downloads/)
-+ [Visual Studio Code](https://code.visualstudio.com/download)
 + [ASP.Net Core Documentation](https://docs.microsoft.com/ru-ru/aspnet/core/?view=aspnetcore-3.1)
 + [Razor Pages with Entity Framework Core in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/data/ef-rp/intro?view=aspnetcore-3.1&tabs=visual-studio)
 ## Web-design
