@@ -1,0 +1,16 @@
+{
+  "OddEven.dll": {
+    "D:\\IT\\csharp\\projects\\specialist.cs\\Basics\\OddEven\\OddEven\\Solution.cs": {
+      "OddEven.Solution": {
+        "System.Boolean OddEven.Solution::IsOdd(System.Int32)": {
+          "Lines": {
+            "9": 1,
+            "10": 1,
+            "11": 1
+          },
+          "Branches": []
+        }
+      }
+    }
+  }
+}

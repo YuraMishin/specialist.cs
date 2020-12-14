@@ -14,6 +14,7 @@ create:
 	dotnet sln add ./$(name).Tests
 	dotnet add ./$(name).Tests reference ./$(name)
 	dotnet add $(name).Tests package coverlet.msbuild
+	dotnet add $(name).Tests package FluentAssertions
 
 test:
 	dotnet test /p:CollectCoverage=true
