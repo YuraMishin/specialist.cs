@@ -63,5 +63,19 @@ namespace ArrayMaxMinSumAvg.Tests
 
       Assert.Equal(expected, actual, 2);
     }
+
+    /// <summary>
+    /// Tests GetSum() method
+    /// </summary>
+    [Fact]
+    public void GetSum_InputArrayAndPredicate_Return6()
+    {
+      Solution solution = new Solution();
+      int[] ints = { 2, 1, 3 };
+      int expected = 6;
+      int actual = solution.GetSum(ints, num => num != 0);
+
+      Assert.Equal(expected, actual);
+    }
   }
 }

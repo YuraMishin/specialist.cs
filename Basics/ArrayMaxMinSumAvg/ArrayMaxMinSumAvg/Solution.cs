@@ -1,3 +1,5 @@
+using System;
+
 namespace ArrayMaxMinSumAvg
 {
   /// <summary>
@@ -53,6 +55,26 @@ namespace ArrayMaxMinSumAvg
       foreach (var item in arr)
       {
         sum += item;
+      }
+      return sum;
+    }
+
+    /// <summary>
+    /// Method computes the sum.
+    /// Uses Predicate
+    /// </summary>
+    /// <param name="arr">Array</param>
+    /// <param name="predicate">Predicate</param>
+    /// <returns>int</returns>
+    public int GetSum(int[] arr, Predicate<int> predicate)
+    {
+      int sum = 0;
+      foreach (var item in arr)
+      {
+        if (predicate(item))
+        {
+          sum += item;
+        }
       }
       return sum;
     }
