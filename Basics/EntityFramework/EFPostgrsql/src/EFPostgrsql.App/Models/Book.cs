@@ -42,6 +42,11 @@ namespace EFPostgrsql.App.Models
     public string Description { get; set; }
 
     /// <summary>
+    /// Book Age
+    /// </summary>
+    public BookAge BookAge { get; set; }
+
+    /// <summary>
     /// Full Price
     /// </summary>
     [Range(1, Int32.MaxValue, ErrorMessage = "Price should be greater than $1")]
