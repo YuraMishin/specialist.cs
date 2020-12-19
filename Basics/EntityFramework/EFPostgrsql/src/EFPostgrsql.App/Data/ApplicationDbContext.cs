@@ -18,6 +18,11 @@ namespace EFPostgrsql.App.Data
     /// </summary>
     public DbSet<Book> Books { get; set; }
 
+    /// <summary>
+    /// Authors table
+    /// </summary>
+    public DbSet<Author> Authors { get; set; }
+
     #endregion
 
     /// <summary>
