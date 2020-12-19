@@ -23,6 +23,11 @@ namespace EFPostgrsql.App.Data
     /// </summary>
     public DbSet<Author> Authors { get; set; }
 
+    /// <summary>
+    /// Tags table
+    /// </summary>
+    public DbSet<Tag> Tags { get; set; }
+
     #endregion
 
     /// <summary>
