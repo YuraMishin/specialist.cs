@@ -46,5 +46,11 @@ namespace EFPostgrsql.App.Models
     /// </summary>
     [Range(1, Int32.MaxValue, ErrorMessage = "Price should be greater than $1")]
     public double FullPrice { get; set; }
+
+    /// <summary>
+    /// Link to Authors table.
+    /// Many-to-One
+    /// </summary>
+    public Author Author { get; set; }
   }
 }
