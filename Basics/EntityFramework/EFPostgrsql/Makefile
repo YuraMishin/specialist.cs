@@ -21,3 +21,12 @@ create:
 
 test:
 	dotnet test /p:CollectCoverage=true
+
+add-migration:
+	dotnet ef migrations add $(name) --project .\src\EFPostgrsql.App
+
+clean:
+	dotnet ef database update 0 --project .\src\EFPostgrsql.App
+
+up:
+	dotnet ef database update --project .\src\EFPostgrsql.App

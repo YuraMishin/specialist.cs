@@ -1,6 +1,7 @@
-using System;
+using EFPostgrsql.App.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System;
 
 namespace EFPostgrsql.App.Data
 {
@@ -11,6 +12,11 @@ namespace EFPostgrsql.App.Data
   public class ApplicationDbContext : DbContext
   {
     #region DB Tables
+
+    /// <summary>
+    /// Books table
+    /// </summary>
+    public DbSet<Book> Books { get; set; }
 
     #endregion
 
