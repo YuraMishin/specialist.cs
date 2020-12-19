@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -57,5 +58,11 @@ namespace EFPostgrsql.App.Models
     /// Many-to-One
     /// </summary>
     public Author Author { get; set; }
+
+    /// <summary>
+    /// Link to Tags table.
+    /// Many-to-Many
+    /// </summary>
+    public IList<Tag> Tags { get; set; }
   }
 }
