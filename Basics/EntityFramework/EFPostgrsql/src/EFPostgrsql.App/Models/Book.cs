@@ -29,11 +29,11 @@ namespace EFPostgrsql.App.Models
     public DateTime UpdatedOn { get; set; }
 
     /// <summary>
-    /// Title
+    /// Name
     /// </summary>
     [Required]
     [StringLength(50)]
-    public string Title { get; set; }
+    public string Name { get; set; }
 
     /// <summary>
     /// Description
