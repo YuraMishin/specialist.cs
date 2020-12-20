@@ -48,11 +48,6 @@ namespace EFPostgrsql.App.Models
     public Category Category { get; set; }
 
     /// <summary>
-    /// Date Published
-    /// </summary>
-    public DateTime? DatePublished { get; set; }
-
-    /// <summary>
     /// Book Age
     /// </summary>
     public BookAge BookAge { get; set; }
