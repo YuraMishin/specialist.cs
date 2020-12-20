@@ -25,6 +25,9 @@ test:
 add-migration:
 	dotnet ef migrations add $(name) --project .\src\EFPostgrsql.App
 
+remove:
+	dotnet ef migrations remove --project .\src\EFPostgrsql.App
+
 clean:
 	dotnet ef database update 0 --project .\src\EFPostgrsql.App
 

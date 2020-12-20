@@ -28,6 +28,11 @@ namespace EFPostgrsql.App.Data
     /// </summary>
     public DbSet<Tag> Tags { get; set; }
 
+    /// <summary>
+    /// Categories table
+    /// </summary>
+    public DbSet<Category> Categories { get; set; }
+
     #endregion
 
     /// <summary>
