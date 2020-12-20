@@ -43,6 +43,11 @@ namespace EFPostgrsql.App.Models
     public string Description { get; set; }
 
     /// <summary>
+    /// Category
+    /// </summary>
+    public Category Category { get; set; }
+
+    /// <summary>
     /// Book Age
     /// </summary>
     public BookAge BookAge { get; set; }
