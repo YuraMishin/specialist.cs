@@ -33,3 +33,6 @@ clean:
 
 up:
 	dotnet ef database update --project .\src\EFPostgrsql.App
+
+back:
+	dotnet ef database update ${name} --project .\src\EFPostgrsql.App
