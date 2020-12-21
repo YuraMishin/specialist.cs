@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -8,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using MVC.Data;
 using MVC.Data.DbInit;
 using MVC.Data.Repositories;
@@ -15,10 +18,6 @@ using MVC.Services;
 using MVC.Services.Email;
 using MVC.Utility;
 using Stripe;
-using System;
-using System.Diagnostics;
-using System.IO;
-using Microsoft.Extensions.Logging;
 
 namespace MVC
 {
@@ -112,15 +111,14 @@ namespace MVC
     /// <param name="app">IApplicationBuilder</param>
     /// <param name="env">IWebHostEnvironment</param>
     /// <param name="dbInitializer">IDbInitializer</param>
-    /// <param name="loggerFactory">ILoggerFactory</param>
+    /// <param name="logger">ILogger</param>
     public void Configure(
       IApplicationBuilder app,
       IWebHostEnvironment env,
       IDbInitializer dbInitializer,
-      ILoggerFactory loggerFactory
+      ILogger<Startup> logger
     )
     {
-      var logger = loggerFactory.CreateLogger("Logger");
       logger.LogInformation("BookShop is running");
 
       if (env.IsDevelopment())
@@ -160,12 +158,15 @@ namespace MVC
       app.UseSession();
       app.UseAuthorization();
 
-      app.Use(async (context, next) =>
-      {
-        logger
-          .LogInformation($"Processing request: {context.Request.Path}");
-        await next();
-      });
+      // app.Use(async (context, next) =>
+      // {
+      //   logger
+      //     .LogInformation($"Processing request: {context.Request.Path}");
+      //   await next();
+      // });
+
+      // User's middleware
+      app.UseMiddleware<LoggingMiddleware>();
 
       app.UseEndpoints(endpoints =>
       {
