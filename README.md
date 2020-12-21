@@ -12,6 +12,7 @@
 + [Visual Studio Code](https://code.visualstudio.com/download)
 + [Rider](https://www.jetbrains.com/rider/)
 + [NuGet package manager](https://www.nuget.org/)
++ [Fiddler. Web debugging tool for logging HTTP/S traffic](https://www.telerik.com/fiddler)
 ## TDD
 + [NUnit](https://nunit.org/)
 + [xUnit](https://xunit.net/)

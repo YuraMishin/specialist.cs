@@ -1,5 +1,3 @@
-using System;
-using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -17,19 +15,36 @@ using MVC.Services;
 using MVC.Services.Email;
 using MVC.Utility;
 using Stripe;
+using System;
+using System.Diagnostics;
+using System.IO;
+using Microsoft.Extensions.Logging;
 
 namespace MVC
 {
+  /// <summary>
+  /// Class Startup
+  /// </summary>
   public class Startup
   {
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="configuration">IConfiguration</param>
     public Startup(IConfiguration configuration)
     {
       Configuration = configuration;
     }
 
+    /// <summary>
+    /// Configuration
+    /// </summary>
     public IConfiguration Configuration { get; }
 
-    // This method gets called by the runtime. Use this method to add services to the container.
+    /// <summary>
+    /// Method gets called by the runtime to add services to the container
+    /// </summary>
+    /// <param name="services">IServiceCollection</param>
     public void ConfigureServices(IServiceCollection services)
     {
       // DB connection
@@ -91,9 +106,23 @@ namespace MVC
       services.AddRazorPages().AddRazorRuntimeCompilation();
     }
 
-    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IDbInitializer dbInitializer)
+    /// <summary>
+    /// Method gets called by the runtime to configure the HTTP request pipeline
+    /// </summary>
+    /// <param name="app">IApplicationBuilder</param>
+    /// <param name="env">IWebHostEnvironment</param>
+    /// <param name="dbInitializer">IDbInitializer</param>
+    /// <param name="loggerFactory">ILoggerFactory</param>
+    public void Configure(
+      IApplicationBuilder app,
+      IWebHostEnvironment env,
+      IDbInitializer dbInitializer,
+      ILoggerFactory loggerFactory
+    )
     {
+      var logger = loggerFactory.CreateLogger("Logger");
+      logger.LogInformation("BookShop is running");
+
       if (env.IsDevelopment())
       {
         app.UseDeveloperExceptionPage();
@@ -130,6 +159,13 @@ namespace MVC
 
       app.UseSession();
       app.UseAuthorization();
+
+      app.Use(async (context, next) =>
+      {
+        logger
+          .LogInformation($"Processing request: {context.Request.Path}");
+        await next();
+      });
 
       app.UseEndpoints(endpoints =>
       {
