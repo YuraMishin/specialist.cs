@@ -1,4 +1,4 @@
-namespace EFPostgrsql.App.Models
+namespace EFPostgrsql.App.Core.Models
 {
   /// <summary>
   /// Enum BookAge.

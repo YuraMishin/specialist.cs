@@ -1,9 +1,9 @@
-using EFPostgrsql.App.Models;
+using EFPostgrsql.App.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 
-namespace EFPostgrsql.App.Data
+namespace EFPostgrsql.App.Persistence
 {
   /// <summary>
   /// Class ApplicationDbContext.
@@ -16,17 +16,17 @@ namespace EFPostgrsql.App.Data
     /// <summary>
     /// Books table
     /// </summary>
-    public DbSet<Book> Books { get; set; }
+    public virtual DbSet<Book> Books { get; set; }
 
     /// <summary>
     /// Authors table
     /// </summary>
-    public DbSet<Author> Authors { get; set; }
+    public virtual DbSet<Author> Authors { get; set; }
 
     /// <summary>
     /// Tags table
     /// </summary>
-    public DbSet<Tag> Tags { get; set; }
+    public virtual DbSet<Tag> Tags { get; set; }
 
     #endregion
 
