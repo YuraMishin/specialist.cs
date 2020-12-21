@@ -40,5 +40,13 @@ namespace EFPostgrsql.App.Models
     /// One-to-Many
     /// </summary>
     public IList<Book> Books { get; set; }
+
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    public Author()
+    {
+      Books = new List<Book>();
+    }
   }
 }

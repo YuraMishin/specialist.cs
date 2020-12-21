@@ -44,5 +44,14 @@ namespace EFPostgrsql.App.Data
       optionsBuilder.UseNpgsql(
         configuration.GetConnectionString("DefaultConnection"));
     }
+
+    /// <summary>
+    /// Method applies configuration using Fluent API
+    /// </summary>
+    /// <param name="modelBuilder"></param>
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+
+    }
   }
 }

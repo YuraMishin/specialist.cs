@@ -16,6 +16,7 @@ namespace EFPostgrsql.App.Models
     /// Id
     /// </summary>
     [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
     /// <summary>
@@ -31,6 +32,7 @@ namespace EFPostgrsql.App.Models
     /// <summary>
     /// Name
     /// </summary>
+    [Column("Name", TypeName = "varchar")]
     [Required]
     [StringLength(50)]
     public string Name { get; set; }
@@ -64,5 +66,13 @@ namespace EFPostgrsql.App.Models
     /// Many-to-Many
     /// </summary>
     public IList<Tag> Tags { get; set; }
+
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    public Book()
+    {
+      Tags = new List<Tag>();
+    }
   }
 }
