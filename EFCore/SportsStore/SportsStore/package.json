@@ -1,8 +1,0 @@
-{
-  "name": "sportsstore",
-  "version": "1.0.0",
-  "description": "",
-  "dependencies": {
-    "bootstrap": "^4.0.0"
-  }
-}

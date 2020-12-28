@@ -158,13 +158,6 @@ namespace MVC
       app.UseSession();
       app.UseAuthorization();
 
-      // app.Use(async (context, next) =>
-      // {
-      //   logger
-      //     .LogInformation($"Processing request: {context.Request.Path}");
-      //   await next();
-      // });
-
       // User's middleware
       app.UseMiddleware<LoggingMiddleware>();
 
